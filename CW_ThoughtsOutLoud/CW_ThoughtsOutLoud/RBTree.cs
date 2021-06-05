@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CW_ThoughtsOutLoud
 {
-	enum Colour // Перечислимый тип, отвечающий за цвет узла
+	public enum Colour // Перечислимый тип, отвечающий за цвет узла
 	{
 		Red, // Красный цвет
 		Black // Чёрный цвет
@@ -22,92 +22,92 @@ namespace CW_ThoughtsOutLoud
 		public byte month; // Целочисленное поле месяца
 	}
 
-	class RB
+	public class RBNode<TKey, TData> // Класс узла
 	{
-		public class Node // Класс узла
+		internal Colour color;            // Поле цвета
+		public RBNode<TKey, TData> left;               // Поле-узел слева
+		public RBNode<TKey, TData> right;              // Поле-узел справа
+		public RBNode<TKey, TData> parent;             // Поле-узел, являющийся родителем
+		public SingleLinkedList<TData> IndexesList { get; }         // Счётчик вставок узла с данным ключом в дерево
+		public Data data = new Data();  // Поле данных
+
+		// Конструктор узла
+		// Формальные параметры: ключ - числа day и month
+		// Входные данные: пусто
+		// Выходные данные: узел с заданным ключом
+		public RBNode(byte day, byte month)
 		{
-			public Colour color;            // Поле цвета
-			public Node left;               // Поле-узел слева
-			public Node right;              // Поле-узел справа
-			public Node parent;             // Поле-узел, являющийся родителем
-			public ushort count = 1;        // Счётчик вставок узла с данным ключом в дерево
-			public Data data = new Data();  // Поле данных
-
-			// Конструктор узла
-			// Формальные параметры: ключ - числа day и month
-			// Входные данные: пусто
-			// Выходные данные: узел с заданным ключом
-			public Node(byte day, byte month)
+			this.data.day = day;
+			this.data.month = month;
+			// Проверка ввода
+			if (day == 0 || day > 31 || month == 0 || month > 13 || (day > 29 && month == 2))
 			{
-				this.data.day = day;
-				this.data.month = month;
-				// Проверка ввода
-				if (day == 0 || day > 31 || month == 0 || month > 13 || (day > 29 && month == 2))
-				{
-					Console.WriteLine("Invalid data. Creating node 1.1");
-					this.data.day = 1;
-					this.data.month = 1;
-				}
+				Console.WriteLine("Invalid data. Creating node 1.1");
+				this.data.day = 1;
+				this.data.month = 1;
 			}
-
-			// Конструктор узла
-			// Формальные параметры: цвет узла color
-			// Входные данные: пусто
-			// Выходные данные: узел с заданным цветом
-			public Node(Colour color)
-			{
-				this.color = color;
-			}
-
-			// Конструктор узла
-			// Формальные параметры: ключ - числа day и month, цвет узла color
-			// Входные данные: пусто
-			// Выходные данные:  узел с заданным ключом и цветом
-			public Node(byte day, byte month, Colour color)
-			{
-				this.data.day = day;
-				this.data.month = month;
-				if (day == 0 || day > 31 || month == 0 || month > 13 || (day > 29 && month == 2))
-				{
-					Console.WriteLine("Invalid data. Creating node 1.1");
-					this.data.day = 1;
-					this.data.month = 1;
-				}
-				this.color = color;
-			}
-
-
-			// Проверяет, меньше ли ключ первого узла, чем ключ второго узла
-			// Формальные параметры: узел node2
-			// Входные данные: 2 узла
-			// Выходные данные: True или False
-			public bool IsLess(Node node2)
-			{
-				return (data.month < node2.data.month) || (data.month == node2.data.month && data.day < node2.data.day);
-			}
-
-			// Проверяет, больше ли ключ первого узла, чем ключ второго узла
-			// Формальные параметры: узел node2
-			// Входные данные: 2 узла
-			// Выходные данные: True или False
-			public bool IsMore(Node node2)
-			{
-				return (data.month > node2.data.month) || (data.month == node2.data.month && data.day > node2.data.day);
-			}
-
-			// Проверяет, равны ли ключи первого и второго узлов
-			// Формальные параметры: узел node2
-			// Входные данные: 2 узла
-			// Выходные данные: True или False
-			public bool IsEqual(Node node2)
-			{
-				return data.month == node2.data.month && data.day == node2.data.day;
-			}
-
 		}
 
-		private Node root; // Узел-корень дерева
-		private Node nil; // Пустой узел-лист дерева
+		// Конструктор узла
+		// Формальные параметры: цвет узла color
+		// Входные данные: пусто
+		// Выходные данные: узел с заданным цветом
+		public RBNode(Colour color)
+		{
+			this.color = color;
+		}
+
+		// Конструктор узла
+		// Формальные параметры: ключ - числа day и month, цвет узла color
+		// Входные данные: пусто
+		// Выходные данные:  узел с заданным ключом и цветом
+		public RBNode(byte day, byte month, Colour color)
+		{
+			this.data.day = day;
+			this.data.month = month;
+			if (day == 0 || day > 31 || month == 0 || month > 13 || (day > 29 && month == 2))
+			{
+				Console.WriteLine("Invalid data. Creating node 1.1");
+				this.data.day = 1;
+				this.data.month = 1;
+			}
+			this.color = color;
+		}
+
+
+		// Проверяет, меньше ли ключ первого узла, чем ключ второго узла
+		// Формальные параметры: узел node2
+		// Входные данные: 2 узла
+		// Выходные данные: True или False
+		public bool IsLess(RBNode node2)
+		{
+			return (data.month < node2.data.month) || (data.month == node2.data.month && data.day < node2.data.day);
+		}
+
+		// Проверяет, больше ли ключ первого узла, чем ключ второго узла
+		// Формальные параметры: узел node2
+		// Входные данные: 2 узла
+		// Выходные данные: True или False
+		public bool IsMore(RBNode node2)
+		{
+			return (data.month > node2.data.month) || (data.month == node2.data.month && data.day > node2.data.day);
+		}
+
+		// Проверяет, равны ли ключи первого и второго узлов
+		// Формальные параметры: узел node2
+		// Входные данные: 2 узла
+		// Выходные данные: True или False
+		public bool IsEqual(RBNode node2)
+		{
+			return data.month == node2.data.month && data.day == node2.data.day;
+		}
+
+	}
+
+	class RB
+	{
+		private RBNode root; // Узел-корень дерева
+		private RBNode nil; // Пустой узел-лист дерева
 
 
 		// Конструктор дерева
@@ -116,7 +116,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: инициализация чёрного узла nil, root = nil
 		public RB()
 		{
-			nil = new Node(Colour.Black);
+			nil = new RBNode(Colour.Black);
 			nil.parent = nil;
 			nil.left = nil;
 			nil.right = nil;
@@ -142,9 +142,9 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел X
 		// Входные данные: дерево
 		// Выходные данные: дерево с изменёнными связями около X
-		private void LeftRotate(Node X)
+		private void LeftRotate(RBNode X)
 		{
-			Node Y = X.right; // set Y
+			RBNode Y = X.right; // set Y
 			X.right = Y.left; // turn Y's left subtree into X's right subtree
 
 			if (Y.left != nil)
@@ -170,9 +170,9 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел X
 		// Входные данные: дерево
 		// Выходные данные: дерево с изменёнными связями около X
-		private void RightRotate(Node Y)
+		private void RightRotate(RBNode Y)
 		{
-			Node X = Y.left;
+			RBNode X = Y.left;
 			Y.left = X.right;
 
 			if (X.right != nil)
@@ -198,11 +198,11 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: поля структуры ключа day и month
 		// Входные данные: дерево
 		// Выходные данные: узел с заданным ключом
-		public Node Find(byte day, byte month)
+		public RBNode Find(byte day, byte month)
 		{
 			bool isFound = false;
-			Node temp = root;
-			Node node = new Node(day, month);
+			RBNode temp = root;
+			RBNode node = new RBNode(day, month);
 
 			while (!isFound)
 			{
@@ -226,9 +226,9 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: пусто
 		// Входные данные: дерево
 		// Выходные данные: узел с минимальным ключом
-		public Node FindMinimum()
+		public RBNode FindMinimum()
 		{
-			Node node = FindMinimum(root);
+			RBNode node = FindMinimum(root);
 			Console.WriteLine("Minimal node {0}.{1} in the tree was found.", node.data.day, node.data.month);
 			return node;
 		}
@@ -237,9 +237,9 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень node поддерева
 		// Входные данные: дерево
 		// Выходные данные: узел с минимальным ключом в поддереве
-		public Node FindMinimum(Node node)
+		public RBNode FindMinimum(RBNode node)
 		{
-			Node temp = node;
+			RBNode temp = node;
 
 			if (temp == nil)
 				return nil;
@@ -272,7 +272,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень поддерева, число пробелов n
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева по порядку
-		private void Display(Node current, int n)
+		private void Display(RBNode current, int n)
 		{
 			if (current != nil)
 			{
@@ -307,7 +307,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке КЛП
-		private void TraversalNLR(Node current)
+		private void TraversalNLR(RBNode current)
 		{
 			if (current != nil)
 			{
@@ -334,7 +334,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке ЛКП
-		private void TraversalLNR(Node current)
+		private void TraversalLNR(RBNode current)
 		{
 			if (current != nil)
 			{
@@ -361,7 +361,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке ПКЛ
-		private void TraversalRNL(Node current)
+		private void TraversalRNL(RBNode current)
 		{
 			if (current != nil)
 			{
@@ -388,7 +388,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке ЛПК
-		private void TraversalLRN(Node current)
+		private void TraversalLRN(RBNode current)
 		{
 			if (current != nil)
 			{
@@ -411,9 +411,9 @@ namespace CW_ThoughtsOutLoud
 				return;
 			}
 
-			Node Z = new Node(day, month);
-			Node Y = nil;
-			Node X = root;
+			RBNode Z = new RBNode(day, month);
+			RBNode Y = nil;
+			RBNode X = root;
 
 			while (X != nil)
 			{
@@ -460,13 +460,13 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: вставленный узел Z
 		// Входные данные: дерево
 		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
-		private void InsertFixUp(Node Z)
+		private void InsertFixUp(RBNode Z)
 		{
 			while (Z != root && Z.parent.color == Colour.Red)
 			{
 				if (Z.parent == Z.parent.parent.left)
 				{
-					Node Y = Z.parent.parent.right;
+					RBNode Y = Z.parent.parent.right;
 
 					if (Y.color == Colour.Red) // Case 1: uncle is red
 					{
@@ -491,7 +491,7 @@ namespace CW_ThoughtsOutLoud
 				}
 				else
 				{
-					Node X = Z.parent.parent.left;
+					RBNode X = Z.parent.parent.left;
 
 					if (X.color == Colour.Red) // Case 1
 					{
@@ -523,7 +523,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел X, узел Y
 		// Входные данные: дерево
 		// Выходные данные: дерево с изменёнными связями
-		private void Transplant(Node X, Node Y)
+		private void Transplant(RBNode X, RBNode Y)
 		{
 			if (X.parent == nil)
 				root = Y;
@@ -541,7 +541,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
 		public void Delete(byte day, byte month)
 		{
-			Node Z = Find(day, month);
+			RBNode Z = Find(day, month);
 			Delete(Z);
 		}
 
@@ -549,10 +549,10 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел Z дерева
 		// Входные данные: дерево
 		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
-		public void Delete(Node Z)
+		public void Delete(RBNode Z)
 		{
-			Node Y = Z;
-			Node X = nil;
+			RBNode Y = Z;
+			RBNode X = nil;
 			Colour SavedColor = Y.color;
 
 			if (Z.count > 1)
@@ -621,14 +621,14 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: текущий узел X
 		// Входные данные: дерево
 		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
-		private void DeleteFixUp(Node X)
+		private void DeleteFixUp(RBNode X)
 		{
 			while (X != root && X.color == Colour.Black)
 			{
-				Node Y = X.parent;
+				RBNode Y = X.parent;
 				if (X == Y.left)
 				{
-					Node W = Y.right;
+					RBNode W = Y.right;
 
 					if (W.color == Colour.Red)
 					{
@@ -662,7 +662,7 @@ namespace CW_ThoughtsOutLoud
 				}
 				else //mirror code from above with "right" & "left" exchanged
 				{
-					Node W = Y.left;
+					RBNode W = Y.left;
 
 					if (W.color == Colour.Red)
 					{
