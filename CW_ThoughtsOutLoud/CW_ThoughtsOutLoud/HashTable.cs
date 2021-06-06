@@ -1,137 +1,239 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace CW_ThoughtsOutLoud
-//{
-//	// Класс узла
-//	public class HTNode
-//	{
-//		public HTNode Next;   // Элемент, следующий за данным
-//		public int Key;     // Ключ - натуральное число
-//		public int Data;    // Данные - целочисленное число
+namespace CW_ThoughtsOutLoud
+{
+	// Класс узла ХТ
+	public class HTNode<TKey, TData> where TKey : IComparable
+	{
+		// Ключ - натуральное число
+		public TKey Key;
+		// Данные - целочисленное число
+		public TData Data;
+		// Метка, отвечающая за то, был ли элемент удалён
+		public bool wasDeleted = false;
 
-//		// Входные данные: целочислленый ключ, число-данные
-//		// Конструктор
-//		// Выходные данные: объект класса с данными ключом и данными
-//		public HTNode(int key, int data)
-//		{
-//			Key = key;
-//			Data = data;
-//		}
-//	}
+		// Входные данные: целочислленый ключ, число-данные
+		// Конструктор
+		// Выходные данные: объект класса с данными ключом и данными
+		public HTNode(TKey key, TData data)
+		{
+			Key = key;
+			Data = data;
+		}
+	}
 
-//	class HashTable
-//	{
-//		private const double HASH_CONST = 0.341;	// Константа для хеш-функции
-//		private SingleLinkedList<HTNode>[] items;				// Массив цепочек
-//		private int size;							// Размер хеш-таблицы (длина массива items)
+	// Класс ХТ
+	class HashTable<TKey, TData> where TKey : IComparable
+	{
+		// Константа для хеш-функции
+		private const double HASH_CONST = 0.341;
+		// Массив элементов
+		private HTNode<TKey, TData>[] items;
+		// Размер хеш-таблицы (длина массива items)
+		public int Size { get; private set; }
+		
 
-//		// Входные данные: размер хеш-таблицы
-//		// Конструктор по размеру
-//		// Выходные данные: хеш-таблица с заданной размерностью
-//		public HashTable(int size)
-//		{
-//			items = new RingLinkedList[size];
-//			this.size = size;
-//			for (int i = 0; i < this.size; i++)
-//			{
-//				items[i] = new RingLinkedList();
-//			}
-//		}
+		// Входные данные: размер хеш-таблицы
+		// Конструктор по размеру
+		// Выходные данные: хеш-таблица с заданной размерностью
+		public HashTable(int size)
+		{
+			Size = size;
+			items = new HTNode<TKey, TData>[Size];
+		}
 
-//		// Входные данные: объект класса
-//		// Метод, возвращающий размермерность хеш-таблицы
-//		// Выходные данные: размерность хеш-таблицы
-//		public int GetSize()
-//		{
-//			return size;
-//		}
+		// Входные данные: объект класса
+		// Очистка цепочек массива items
+		// Выходные данные: пустая хеш-таблица
+		public void Clear() => items = new HTNode<TKey, TData>[Size];
 
-//		// Входные данные: объект класса
-//		// Метод, возвращающий строку с информацией о таблице
-//		// Выходные данные: строка с информацией о всех элементах таблицы
-//		public string Info()
-//		{
-//			string result = string.Empty;
 
-//			for (int i = 0; i < size; i++)
-//			{
-//				result += "\t" + i + ":\n" + items[i].Info();
-//			}
+		// Входные данные: объект класса
+		// Метод, возвращающий строку с информацией о таблице
+		// Выходные данные: строка с информацией о всех элементах таблицы
+		public string Info()
+		{
+			string result = string.Empty;
 
-//			return result;
-//		}
+			for (int i = 0; i < Size; i++)
+			{
+				result += "\t" + i + ":\n" + items[i];
+			}
 
-//		// Входные данные: объект класса, целочисленный ключ, целое число-данные
-//		// Вставка элемента с заданным ключом и заданными данными
-//		// Выходные данные: хеш-таблица с вставленным элементом с переданными данными
-//		public void Insert(int key, int data)
-//		{
-//			var hashCode = GetHashCode(key);
-//			var newItem = new RBNode(key, data);
+			return result;
+		}
 
-//			// проверка дупликатов
-//			if (items[hashCode].Find(key) != null)
-//			{
-//				Console.WriteLine("Ключ " + key + " уже есть в таблице");
-//			}
-//			else
-//			{
-//				items[hashCode].Insert(newItem);
-//			}
-//		}
+		private void Rehash(int newSize)
+		{
+			int oldSize = Size;
+			var oldItems = items;
+			Size = newSize;
+			items = new HTNode<TKey, TData>[Size];
 
-//		// Входные данные: объект класса, целочисленный ключ
-//		// Удаление элемента по заданному ключу
-//		// Выходные данные: хеш-таблица без элемента с переданным ключом
-//		public bool Remove(int key)
-//		{
-//			var hashCode = GetHashCode(key);
-//			var itemsWithSameHashCode = items[hashCode];
-//			RBNode keyThere = itemsWithSameHashCode.Find(key);
+			for (int i = 0; i < oldSize; i++)
+			{
+				if (oldItems[i] != null && !oldItems[i].wasDeleted)
+				{
+					Insert(oldItems[i]);
+				}
+			}
+		}
 
-//			return itemsWithSameHashCode.Remove(keyThere);
-//		}
+		private void Rehash() => Rehash(Size);
 
-//		// Входные данные: объект класса, целочисленный ключ
-//		// Поиск данных элемента по заданному ключу
-//		// Выходные данные: данные элемента с данным ключом
-//		public int Search(int key)
-//		{
-//			var hashCode = GetHashCode(key);
-//			var resultItem = items[hashCode].Find(key);
-//			if (resultItem != null)
-//			{
-//				return items[hashCode].Find(key).Data;
-//			}
-//			else
-//			{
-//				Console.WriteLine("Элемента с ключом " + key + " не существует в таблице");
-//				return -1;
-//			}
-//		}
+		// Входные данные: объект класса, целочисленный ключ, целое число-данные
+		// Вставка элемента с заданным ключом и заданными данными
+		// Выходные данные: хеш-таблица с вставленным элементом с переданными данными
+		public void Insert(TKey key, TData data)
+		{
+			var hashCode = GetHashCode(key);
+			var newItem = new HTNode<TKey, TData>(key, data);
 
-//		// Входные данные: объект класса
-//		// Очистка цепочек массива items
-//		// Выходные данные: пустая хеш-таблица
-//		public void Clear()
-//		{
-//			for (int i = 0; i < size; i++)
-//			{
-//				items[i].Clear();
-//			}
-//		}
+			// проверка дупликатов
+			if (items[hashCode] == null || items[hashCode].wasDeleted)
+			{
+				items[hashCode] = newItem;
+			}
+			else if (items[hashCode].Key.Equals(newItem.Key))
+			{
+				Console.WriteLine("Ключ " + key + " уже есть в таблице");
+			}
+			else
+			{
+				for (int i = hashCode; i < Size; i++)
+				{
+					if (items[i] == null || items[hashCode].wasDeleted)
+					{
+						items[i] = newItem;
+						return;
+					}
+				}
+				for (int i = 0; i < hashCode; i++)
+				{
+					if (items[i] == null || items[hashCode].wasDeleted)
+					{
+						items[i] = newItem;
+						return;
+					}
+				}
+				Rehash(Size * 2);
+				Insert(key, data);
+			}
+		}
 
-//		// Входные данные: объект класса, ключ
-//		// Хеш-функция - мультипликативная
-//		// Выходные данные: целое число - хеш для ключа
-//		private int GetHashCode(int key)
-//		{
-//			return (int)(size * (key * HASH_CONST % 1));
-//		}
+		private void Insert(HTNode<TKey, TData> item)
+		{
+			var hashCode = GetHashCode(item.Key);
 
-//	}
-//}
+			// проверка дупликатов
+			if (items[hashCode] == null || items[hashCode].wasDeleted)
+			{
+				items[hashCode] = item;
+			}
+			else if (items[hashCode].Key.Equals(item.Key))
+			{
+				Console.WriteLine("Ключ " + item.Key + " уже есть в таблице");
+			}
+			else
+			{
+				for (int i = hashCode; i < Size; i++)
+				{
+					if (items[i] == null || items[hashCode].wasDeleted)
+					{
+						items[i] = item;
+						return;
+					}
+				}
+				for (int i = 0; i < hashCode; i++)
+				{
+					if (items[i] == null || items[hashCode].wasDeleted)
+					{
+						items[i] = item;
+						return;
+					}
+				}
+				Rehash(Size * 2);
+				Insert(item);
+			}
+		}
+
+		// Входные данные: объект класса, целочисленный ключ
+		// Удаление элемента по заданному ключу
+		// Выходные данные: хеш-таблица без элемента с переданным ключом
+		public bool Remove(TKey key)
+		{
+			var keyToRemove = Search(key);
+
+			if (keyToRemove == null)
+			{
+				return false;
+			}
+			else
+			{
+				keyToRemove.wasDeleted = true;
+				return true;
+			}
+		}
+
+		// Входные данные: объект класса, целочисленный ключ
+		// Поиск данных элемента по заданному ключу
+		// Выходные данные: данные элемента с данным ключом
+		public HTNode<TKey, TData> Search(TKey key)
+		{
+			var hashCode = GetHashCode(key);
+			HTNode<TKey, TData> result = null;
+
+			if (items[hashCode] == null)
+			{
+				Console.WriteLine("Элемента с ключом {0} нет в массиве", key);
+			}
+			else if (items[hashCode].Key.Equals(key))
+			{
+				return items[hashCode];
+			}
+			else
+			{
+				for (int i = hashCode; i < Size; i++)
+				{
+					if (items[i] == null)
+						return result;
+					if (items[i].Key.Equals(key))
+					{
+						if (!items[i].wasDeleted)
+							result = items[i];
+						return result;
+					}
+				}
+				if (result == null)
+				{
+					for (int i = 0; i < hashCode; i++)
+					{
+						if (items[i] == null)
+							return result;
+						if (items[i].Key.Equals(key))
+						{
+							if (!items[i].wasDeleted)
+								result = items[i];
+							return result;
+						}
+					}
+				}
+			}
+
+			return result;
+		}
+
+		// Входные данные: объект класса, ключ
+		// Хеш-функция - мультипликативная
+		// Выходные данные: целое число - хеш для ключа
+		private int GetHashCode(TKey key)
+		{
+			return (int)(Size * (int.Parse(key.ToString()) * HASH_CONST % 1));
+		}
+
+	}
+}

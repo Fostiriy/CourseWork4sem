@@ -17,7 +17,8 @@ namespace CW_ThoughtsOutLoud
 		Black // Чёрный цвет
 	}
 
-	public class RBNode<TKey, TData> where TKey:IComparable // Класс узла
+	// Класс узла дерева
+	public class RBNode<TKey, TData> where TKey:IComparable 
 	{
 		// Поле цвета
 		internal Colour color;
