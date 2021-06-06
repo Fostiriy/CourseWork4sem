@@ -16,36 +16,35 @@ namespace CW_ThoughtsOutLoud
 		Red, // Красный цвет
 		Black // Чёрный цвет
 	}
-	public struct Data // Структурный тип ключа, состоящий из двух полей
-	{
-		public byte day; // Целочисленное поле дня
-		public byte month; // Целочисленное поле месяца
-	}
 
-	public class RBNode<TKey, TData> // Класс узла
+	public class RBNode<TKey, TData> where TKey:IComparable // Класс узла
 	{
-		internal Colour color;            // Поле цвета
-		public RBNode<TKey, TData> left;               // Поле-узел слева
-		public RBNode<TKey, TData> right;              // Поле-узел справа
-		public RBNode<TKey, TData> parent;             // Поле-узел, являющийся родителем
-		public SingleLinkedList<TData> IndexesList { get; }         // Счётчик вставок узла с данным ключом в дерево
-		public Data data = new Data();  // Поле данных
+		// Поле цвета
+		internal Colour color;
+		// Поле-узел слева
+		public RBNode<TKey, TData> left;
+		// Поле-узел справа
+		public RBNode<TKey, TData> right;
+		// Поле-узел, являющийся родителем
+		public RBNode<TKey, TData> parent;
+		// Счётчик вставок узла с данным ключом в дерево
+		public SingleLinkedList<TData> IndexesList { get; } = new SingleLinkedList<TData>();
+		// Поле данных
+		public TKey key;
 
 		// Конструктор узла
 		// Формальные параметры: ключ - числа day и month
 		// Входные данные: пусто
 		// Выходные данные: узел с заданным ключом
-		public RBNode(byte day, byte month)
+		public RBNode(TKey key)
 		{
-			this.data.day = day;
-			this.data.month = month;
-			// Проверка ввода
-			if (day == 0 || day > 31 || month == 0 || month > 13 || (day > 29 && month == 2))
-			{
-				Console.WriteLine("Invalid data. Creating node 1.1");
-				this.data.day = 1;
-				this.data.month = 1;
-			}
+			this.key = key;
+		}
+
+		public RBNode(TKey key, TData data)
+		{
+			this.key = key;
+			IndexesList.PushBack(data);
 		}
 
 		// Конструктор узла
@@ -57,57 +56,29 @@ namespace CW_ThoughtsOutLoud
 			this.color = color;
 		}
 
-		// Конструктор узла
-		// Формальные параметры: ключ - числа day и month, цвет узла color
-		// Входные данные: пусто
-		// Выходные данные:  узел с заданным ключом и цветом
-		public RBNode(byte day, byte month, Colour color)
-		{
-			this.data.day = day;
-			this.data.month = month;
-			if (day == 0 || day > 31 || month == 0 || month > 13 || (day > 29 && month == 2))
-			{
-				Console.WriteLine("Invalid data. Creating node 1.1");
-				this.data.day = 1;
-				this.data.month = 1;
-			}
-			this.color = color;
-		}
-
-
 		// Проверяет, меньше ли ключ первого узла, чем ключ второго узла
 		// Формальные параметры: узел node2
 		// Входные данные: 2 узла
 		// Выходные данные: True или False
-		public bool IsLess(RBNode node2)
-		{
-			return (data.month < node2.data.month) || (data.month == node2.data.month && data.day < node2.data.day);
-		}
+		public bool IsLess(RBNode<TKey, TData> node2) => key.CompareTo(node2.key) < 0;
 
 		// Проверяет, больше ли ключ первого узла, чем ключ второго узла
 		// Формальные параметры: узел node2
 		// Входные данные: 2 узла
 		// Выходные данные: True или False
-		public bool IsMore(RBNode node2)
-		{
-			return (data.month > node2.data.month) || (data.month == node2.data.month && data.day > node2.data.day);
-		}
+		public bool IsMore(RBNode<TKey, TData> node2) => key.CompareTo(node2.key) > 0;
 
 		// Проверяет, равны ли ключи первого и второго узлов
 		// Формальные параметры: узел node2
 		// Входные данные: 2 узла
 		// Выходные данные: True или False
-		public bool IsEqual(RBNode node2)
-		{
-			return data.month == node2.data.month && data.day == node2.data.day;
-		}
-
+		public bool IsEqual(RBNode<TKey, TData> node2) => key.CompareTo(node2.key) == 0;
 	}
 
-	class RB
+	class RB<TKey, TData> where TKey : IComparable
 	{
-		private RBNode root; // Узел-корень дерева
-		private RBNode nil; // Пустой узел-лист дерева
+		private RBNode<TKey, TData> root; // Узел-корень дерева
+		private RBNode<TKey, TData> nil; // Пустой узел-лист дерева
 
 
 		// Конструктор дерева
@@ -116,12 +87,11 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: инициализация чёрного узла nil, root = nil
 		public RB()
 		{
-			nil = new RBNode(Colour.Black);
+			nil = new RBNode<TKey, TData>(Colour.Black);
 			nil.parent = nil;
 			nil.left = nil;
 			nil.right = nil;
-			nil.data.day = 0;
-			nil.data.month = 0;
+			nil.key = default;
 			root = nil;
 		}
 
@@ -142,9 +112,9 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел X
 		// Входные данные: дерево
 		// Выходные данные: дерево с изменёнными связями около X
-		private void LeftRotate(RBNode X)
+		private void LeftRotate(RBNode<TKey, TData> X)
 		{
-			RBNode Y = X.right; // set Y
+			RBNode<TKey, TData> Y = X.right; // set Y
 			X.right = Y.left; // turn Y's left subtree into X's right subtree
 
 			if (Y.left != nil)
@@ -170,9 +140,9 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел X
 		// Входные данные: дерево
 		// Выходные данные: дерево с изменёнными связями около X
-		private void RightRotate(RBNode Y)
+		private void RightRotate(RBNode<TKey, TData> Y)
 		{
-			RBNode X = Y.left;
+			RBNode<TKey, TData> X = Y.left;
 			Y.left = X.right;
 
 			if (X.right != nil)
@@ -198,11 +168,11 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: поля структуры ключа day и month
 		// Входные данные: дерево
 		// Выходные данные: узел с заданным ключом
-		public RBNode Find(byte day, byte month)
+		public RBNode<TKey, TData> Find(TKey key, TData data)
 		{
 			bool isFound = false;
-			RBNode temp = root;
-			RBNode node = new RBNode(day, month);
+			RBNode<TKey, TData> temp = root;
+			RBNode<TKey, TData> node = new RBNode<TKey, TData>(key);
 
 			while (!isFound)
 			{
@@ -212,8 +182,10 @@ namespace CW_ThoughtsOutLoud
 					temp = temp.left;
 				else if (node.IsMore(temp))
 					temp = temp.right;
-				else
+				else if (temp.IndexesList.Contains(data))
 					isFound = true;
+				else
+					break;
 			}
 
 			if (isFound)
@@ -226,10 +198,10 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: пусто
 		// Входные данные: дерево
 		// Выходные данные: узел с минимальным ключом
-		public RBNode FindMinimum()
+		public RBNode<TKey, TData> FindMinimum()
 		{
-			RBNode node = FindMinimum(root);
-			Console.WriteLine("Minimal node {0}.{1} in the tree was found.", node.data.day, node.data.month);
+			RBNode<TKey, TData> node = FindMinimum(root);
+			Console.WriteLine("Minimal node {0} in the tree was found.", node.key);
 			return node;
 		}
 
@@ -237,9 +209,9 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень node поддерева
 		// Входные данные: дерево
 		// Выходные данные: узел с минимальным ключом в поддереве
-		public RBNode FindMinimum(RBNode node)
+		public RBNode<TKey, TData> FindMinimum(RBNode<TKey, TData> node)
 		{
-			RBNode temp = node;
+			RBNode<TKey, TData> temp = node;
 
 			if (temp == nil)
 				return nil;
@@ -272,7 +244,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень поддерева, число пробелов n
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева по порядку
-		private void Display(RBNode current, int n)
+		private void Display(RBNode<TKey, TData> current, int n)
 		{
 			if (current != nil)
 			{
@@ -280,11 +252,11 @@ namespace CW_ThoughtsOutLoud
 
 				for (int i = 0; i < n; i++)
 					Console.Write("	");
-				Console.Write("{0}.{1}", current.data.day, current.data.month);
+				Console.Write("{0} ", current.key);
 				if (current.color == Colour.Black)
-					Console.WriteLine(" (B, {0})", current.count);
+					Console.WriteLine(" (B, {0})", current.IndexesList.Print());
 				else
-					Console.WriteLine(" (R, {0})", current.count);
+					Console.WriteLine(" (R, {0})", current.IndexesList.Print());
 
 				Display(current.left, n + 1);
 			}
@@ -307,11 +279,11 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке КЛП
-		private void TraversalNLR(RBNode current)
+		private void TraversalNLR(RBNode<TKey, TData> current)
 		{
 			if (current != nil)
 			{
-				Console.Write("{0}.{1} ", current.data.day, current.data.month);
+				Console.Write("{0} ", current.key);
 				TraversalNLR(current.left);
 				TraversalNLR(current.right);
 			}
@@ -334,12 +306,12 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке ЛКП
-		private void TraversalLNR(RBNode current)
+		private void TraversalLNR(RBNode<TKey, TData> current)
 		{
 			if (current != nil)
 			{
 				TraversalLNR(current.left);
-				Console.Write("{0}.{1} ", current.data.day, current.data.month);
+				Console.Write("{0} ", current.key);
 				TraversalLNR(current.right);
 			}
 		}
@@ -361,12 +333,12 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке ПКЛ
-		private void TraversalRNL(RBNode current)
+		private void TraversalRNL(RBNode<TKey, TData> current)
 		{
 			if (current != nil)
 			{
 				TraversalRNL(current.right);
-				Console.Write("{0}.{1} ", current.data.day, current.data.month);
+				Console.Write("{0} ", current.key);
 				TraversalRNL(current.left);
 			}
 		}
@@ -388,13 +360,13 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел-корень current поддерева
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева в порядке ЛПК
-		private void TraversalLRN(RBNode current)
+		private void TraversalLRN(RBNode<TKey, TData> current)
 		{
 			if (current != nil)
 			{
 				TraversalLRN(current.left);
 				TraversalLRN(current.right);
-				Console.Write("{0}.{1} ", current.data.day, current.data.month);
+				Console.Write("{0} ", current.key);
 			}
 		}
 
@@ -403,24 +375,18 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: поля структуры ключа day и month
 		// Входные данные: дерево
 		// Выходные данные: дерево с новым узлом, удовлетворяющее свойствам КЧ дерева
-		public void Insert(byte day, byte month)
+		public void Insert(TKey key, TData data)
 		{
-			if (day == 0 || day > 31 || month == 0 || month > 12 || (day > 29 && month == 2))
-			{
-				Console.WriteLine("Invalid data.");
-				return;
-			}
-
-			RBNode Z = new RBNode(day, month);
-			RBNode Y = nil;
-			RBNode X = root;
+			RBNode<TKey, TData> Z = new RBNode<TKey, TData>(key, data);
+			RBNode<TKey, TData> Y = nil;
+			RBNode<TKey, TData> X = root;
 
 			while (X != nil)
 			{
 				Y = X;
 				if (Z.IsEqual(X))
 				{
-					X.count++;
+					X.IndexesList.PushBack(data);
 					return;
 				}
 				else if (Z.IsLess(X))
@@ -449,10 +415,10 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: дерево
 		// Выходные данные: дерево с новым узлом, удовлетворяющее свойствам КЧ дерева,
 		//					и его изображение на экране
-		public void InsertAndDisplay(byte day, byte month)
+		public void InsertAndDisplay(TKey key, TData data)
 		{
-			Console.WriteLine("Inserting {0}.{1}", day, month);
-			this.Insert(day, month);
+			Console.WriteLine("Inserting {0} with data {1}", key, data);
+			this.Insert(key, data);
 			this.DisplayTree();
 		}
 
@@ -460,13 +426,13 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: вставленный узел Z
 		// Входные данные: дерево
 		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
-		private void InsertFixUp(RBNode Z)
+		private void InsertFixUp(RBNode<TKey, TData> Z)
 		{
 			while (Z != root && Z.parent.color == Colour.Red)
 			{
 				if (Z.parent == Z.parent.parent.left)
 				{
-					RBNode Y = Z.parent.parent.right;
+					RBNode<TKey, TData> Y = Z.parent.parent.right;
 
 					if (Y.color == Colour.Red) // Case 1: uncle is red
 					{
@@ -491,7 +457,7 @@ namespace CW_ThoughtsOutLoud
 				}
 				else
 				{
-					RBNode X = Z.parent.parent.left;
+					RBNode<TKey, TData> X = Z.parent.parent.left;
 
 					if (X.color == Colour.Red) // Case 1
 					{
@@ -523,7 +489,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: узел X, узел Y
 		// Входные данные: дерево
 		// Выходные данные: дерево с изменёнными связями
-		private void Transplant(RBNode X, RBNode Y)
+		private void Transplant(RBNode<TKey, TData> X, RBNode<TKey, TData> Y)
 		{
 			if (X.parent == nil)
 				root = Y;
@@ -539,25 +505,25 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: поля структуры ключа day и month
 		// Входные данные: дерево
 		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
-		public void Delete(byte day, byte month)
+		public void Delete(TKey key, TData data)
 		{
-			RBNode Z = Find(day, month);
-			Delete(Z);
+			RBNode<TKey, TData> Z = Find(key, data);
+			Delete(Z, data);
 		}
 
-		// Удаляет узел из дерева по правилу удаления в бинарном дереве
+		// Удаляет узел из дерева по правилу удаления в бинарном дереве или удаляет лишь индекс data
 		// Формальные параметры: узел Z дерева
 		// Входные данные: дерево
 		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
-		public void Delete(RBNode Z)
+		public void Delete(RBNode<TKey, TData> Z, TData data)
 		{
-			RBNode Y = Z;
-			RBNode X = nil;
+			RBNode<TKey, TData> Y = Z;
+			RBNode<TKey, TData> X = nil;
 			Colour SavedColor = Y.color;
 
-			if (Z.count > 1)
+			if (Z.IndexesList.Count > 1)
 			{
-				Z.count--;
+				Z.IndexesList.Remove(data);
 				return;
 			}
 			if (Z == nil)
@@ -578,7 +544,62 @@ namespace CW_ThoughtsOutLoud
 			else
 			{
 				Y = FindMinimum(Z.right);
-				Console.WriteLine("Minimum {0}.{1} was found.", Y.data.day, Y.data.month);
+				Console.WriteLine("Minimum {0} was found.", Y.key);
+				if (Y == nil)
+				{
+					Console.WriteLine("Node does not have minimum.");
+					return;
+				}
+				SavedColor = Y.color;
+				X = Y.right;
+				if (Y.parent == Z)
+					X.parent = Y;
+				else
+				{
+					Transplant(Y, Y.right);
+					Y.right = Z.right;
+					Y.right.parent = Y;
+				}
+				Transplant(Z, Y);
+
+				Y.left = Z.left;
+				Y.left.parent = Y;
+				Y.color = Z.color;
+			}
+
+			if (SavedColor == Colour.Black)
+				DeleteFixUp(X);
+		}
+
+		// Удаляет узел из дерева по правилу удаления в бинарном дереве
+		// Формальные параметры: узел Z дерева
+		// Входные данные: дерево
+		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
+		public void Delete(RBNode<TKey, TData> Z)
+		{
+			RBNode<TKey, TData> Y = Z;
+			RBNode<TKey, TData> X = nil;
+			Colour SavedColor = Y.color;
+
+			if (Z == nil)
+			{
+				Console.WriteLine("Nothing to delete!");
+				return;
+			}
+			if (Z.left == nil)
+			{
+				X = Z.right;
+				Transplant(Z, Z.right);
+			}
+			else if (Z.right == nil)
+			{
+				X = Z.left;
+				Transplant(Z, Z.left);
+			}
+			else
+			{
+				Y = FindMinimum(Z.right);
+				Console.WriteLine("Minimum {0} was found.", Y.key);
 				if (Y == nil)
 				{
 					Console.WriteLine("Node does not have minimum.");
@@ -610,10 +631,10 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: дерево
 		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева,
 		//					и его изображение на экране
-		public void DeleteAndDisplay(byte day, byte month)
+		public void DeleteAndDisplay(TKey key, TData data)
 		{
-			Console.WriteLine("Deleting {0}.{1}", day, month);
-			this.Delete(day, month);
+			Console.WriteLine("Deleting {0} with data {1}", key, data);
+			this.Delete(key, data);
 			this.DisplayTree();
 		}
 
@@ -621,14 +642,14 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: текущий узел X
 		// Входные данные: дерево
 		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
-		private void DeleteFixUp(RBNode X)
+		private void DeleteFixUp(RBNode<TKey, TData> X)
 		{
 			while (X != root && X.color == Colour.Black)
 			{
-				RBNode Y = X.parent;
+				RBNode<TKey, TData> Y = X.parent;
 				if (X == Y.left)
 				{
-					RBNode W = Y.right;
+					RBNode<TKey, TData> W = Y.right;
 
 					if (W.color == Colour.Red)
 					{
@@ -662,7 +683,7 @@ namespace CW_ThoughtsOutLoud
 				}
 				else //mirror code from above with "right" & "left" exchanged
 				{
-					RBNode W = Y.left;
+					RBNode<TKey, TData> W = Y.left;
 
 					if (W.color == Colour.Red)
 					{
