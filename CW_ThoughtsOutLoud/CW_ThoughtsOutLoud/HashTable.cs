@@ -27,7 +27,7 @@ namespace CW_ThoughtsOutLoud
 	}
 
 	// Класс ХТ
-	class HashTable<TKey, TData> where TKey : IComparable
+	public class HashTable<TKey, TData> where TKey : IComparable
 	{
 		// Константа для хеш-функции
 		private const double HASH_CONST = 0.341;
@@ -49,7 +49,7 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: объект класса
 		// Очистка цепочек массива items
 		// Выходные данные: пустая хеш-таблица
-		public void Clear() => items = new HTNode<TKey, TData>[Size];
+		public void Clear() => items = new HTNode<TKey, TData>[8];
 
 
 		// Входные данные: объект класса
@@ -61,7 +61,8 @@ namespace CW_ThoughtsOutLoud
 
 			for (int i = 0; i < Size; i++)
 			{
-				result += "\t" + i + ":\n" + items[i];
+				if (items[i] != null)
+					result += $"{i, 3}: {items[i].Data, -50} {items[i].Key, -14}\n";
 			}
 
 			return result;
@@ -232,7 +233,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: целое число - хеш для ключа
 		private int GetHashCode(TKey key)
 		{
-			return (int)(Size * (int.Parse(key.ToString()) * HASH_CONST % 1));
+			return (int)(Size * (double.Parse(key.ToString()) * HASH_CONST % 1));
 		}
 
 	}
