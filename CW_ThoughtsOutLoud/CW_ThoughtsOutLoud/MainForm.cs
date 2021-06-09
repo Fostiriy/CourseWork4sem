@@ -14,7 +14,7 @@ namespace CW_ThoughtsOutLoud
 	public partial class MainForm : Form
 	{
 		HashTable<string, string> nameDateBook = new HashTable<string, string>(8);
-		string currentFileName;
+		RBTree<double, DataGridView> dateTree = new RBTree<double, DataGridView>();
 
 		public void FillHT(HashTable<string, string> HT, string path)
 		{
@@ -26,16 +26,23 @@ namespace CW_ThoughtsOutLoud
 				{
 					string[] info = istream.ReadLine().Split('|');
 					string data = info[0].Trim('\t', ' ');
-					string key = info[1] + info[2];
+					string key = info[1] + " " + info[2];
+
+					nameDateGrid.Rows.Add(data, key);
+
+					key = key.Replace(" ", "");
 					key = key.Replace("\t", "");
 					key = key.Replace(".", "");
 					key = key.Replace(":", "");
-
 					HT.Insert(key, data);
 				}
 			}
 		}
 
+		public void RedrawGrid(DataGridView grid, HashTable<string, string> HT)
+		{
+
+		}
 
 		public MainForm()
 		{
@@ -48,13 +55,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Открытие файла
-		private void button1_Click(object sender, EventArgs e)
+		private void OpenFileButton_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.Cancel)
 				return;
 			// получаем выбранный файл
-			currentFileName = openFileDialog.FileName;
-			FillHT(nameDateBook, currentFileName);
+			FillHT(nameDateBook, openFileDialog.FileName);
 		}
 
 		private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -62,21 +68,48 @@ namespace CW_ThoughtsOutLoud
 
 		}
 
-		private void nameDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		private void NameDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
 
 		}
 
 		// Запись в файл
-		private void saveFileButton_Click(object sender, EventArgs e)
+		private void SaveFileButton_Click(object sender, EventArgs e)
 		{
 			if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
 				return;
 			// получаем выбранный файл
 			string filename = saveFileDialog.FileName;
 			// сохраняем текст в файл
-			File.WriteAllText(filename, nameDateBook.Info());
+			string infoHT = String.Join('\n', nameDateBook.Info());
+			File.WriteAllText(filename, infoHT);
 			MessageBox.Show("Файл сохранён");
+		}
+
+		private void AddRecordButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void ShowDebugButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void DeleteRecordButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void SearchRecordButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void NewBookButton_Click(object sender, EventArgs e)
+		{
+			nameDateBook.Clear();
+			nameDateGrid.Rows.Clear();
 		}
 	}
 }

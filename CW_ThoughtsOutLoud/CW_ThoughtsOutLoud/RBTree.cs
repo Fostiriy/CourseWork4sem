@@ -76,7 +76,7 @@ namespace CW_ThoughtsOutLoud
 		public bool IsEqual(RBNode<TKey, TData> node2) => key.CompareTo(node2.key) == 0;
 	}
 
-	class RB<TKey, TData> where TKey : IComparable
+	class RBTree<TKey, TData> where TKey : IComparable
 	{
 		private RBNode<TKey, TData> root; // Узел-корень дерева
 		private RBNode<TKey, TData> nil; // Пустой узел-лист дерева
@@ -86,7 +86,7 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: пусто
 		// Входные данные: узлы root и nil
 		// Выходные данные: инициализация чёрного узла nil, root = nil
-		public RB()
+		public RBTree()
 		{
 			nil = new RBNode<TKey, TData>(Colour.Black);
 			nil.parent = nil;

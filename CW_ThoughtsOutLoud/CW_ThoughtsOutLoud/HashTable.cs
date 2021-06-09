@@ -55,14 +55,18 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: объект класса
 		// Метод, возвращающий строку с информацией о таблице
 		// Выходные данные: строка с информацией о всех элементах таблицы
-		public string Info()
+		public string[] Info()
 		{
-			string result = string.Empty;
+			string[] result = new string[Size];
+			int k = 0;
 
 			for (int i = 0; i < Size; i++)
 			{
-				if (items[i] != null)
-					result += $"{i, 3}: {items[i].Data, -50} {items[i].Key, -14}\n";
+				if (items[i] != null && !items[i].wasDeleted)
+				{
+					result[k] = $"{i,3}: {items[i].Data,-50} {items[i].Key,-14}";
+					k++;
+				}
 			}
 
 			return result;
