@@ -33,6 +33,7 @@ namespace CW_ThoughtsOutLoud
 			this.categoryComboBox = new System.Windows.Forms.ComboBox();
 			this.nameTextBox = new System.Windows.Forms.TextBox();
 			this.colorTextBox = new System.Windows.Forms.TextBox();
+			this.addRecordButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// dateComboBox
@@ -43,6 +44,7 @@ namespace CW_ThoughtsOutLoud
 			this.dateComboBox.Name = "dateComboBox";
 			this.dateComboBox.Size = new System.Drawing.Size(151, 28);
 			this.dateComboBox.TabIndex = 0;
+			this.dateComboBox.SelectedIndexChanged += new System.EventHandler(this.dateComboBox_SelectedIndexChanged);
 			// 
 			// categoryComboBox
 			// 
@@ -52,6 +54,7 @@ namespace CW_ThoughtsOutLoud
 			this.categoryComboBox.Name = "categoryComboBox";
 			this.categoryComboBox.Size = new System.Drawing.Size(151, 28);
 			this.categoryComboBox.TabIndex = 0;
+			this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.categoryComboBox_SelectedIndexChanged);
 			// 
 			// nameTextBox
 			// 
@@ -69,17 +72,29 @@ namespace CW_ThoughtsOutLoud
 			this.colorTextBox.Size = new System.Drawing.Size(151, 27);
 			this.colorTextBox.TabIndex = 1;
 			// 
+			// addRecordButton
+			// 
+			this.addRecordButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.addRecordButton.Location = new System.Drawing.Point(210, 392);
+			this.addRecordButton.Name = "addRecordButton";
+			this.addRecordButton.Size = new System.Drawing.Size(94, 29);
+			this.addRecordButton.TabIndex = 2;
+			this.addRecordButton.Text = "Добавить";
+			this.addRecordButton.UseVisualStyleBackColor = true;
+			// 
 			// AddMainRecordForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(332, 453);
+			this.Controls.Add(this.addRecordButton);
 			this.Controls.Add(this.colorTextBox);
 			this.Controls.Add(this.nameTextBox);
 			this.Controls.Add(this.categoryComboBox);
 			this.Controls.Add(this.dateComboBox);
 			this.Name = "AddMainRecordForm";
 			this.Text = "Добавить запись";
+			this.Load += new System.EventHandler(this.AddMainRecordForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -91,5 +106,6 @@ namespace CW_ThoughtsOutLoud
 		public System.Windows.Forms.ComboBox categoryComboBox;
 		public System.Windows.Forms.TextBox nameTextBox;
 		public System.Windows.Forms.TextBox colorTextBox;
+		protected internal System.Windows.Forms.Button addRecordButton;
 	}
 }

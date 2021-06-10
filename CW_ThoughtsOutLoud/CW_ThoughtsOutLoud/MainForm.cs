@@ -6,9 +6,11 @@ namespace CW_ThoughtsOutLoud
 {
 	public partial class MainForm : Form
 	{
-		HashTable<string, string> nameDateBook = new HashTable<string, string>(8);
-		HashTable<string, string> categoryColorBook = new HashTable<string, string>(8);
+		internal HashTable<string, string> nameDateBook = new HashTable<string, string>(8);
+		internal HashTable<string, string> categoryColorBook = new HashTable<string, string>(8);
 		RBTree<double, DataGridView> dateTree = new RBTree<double, DataGridView>();
+		AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
+		AddRecordForm addRecordWindow = new AddRecordForm();
 
 		public void FillHT(HashTable<string, string> HT, string path)
 		{
@@ -22,12 +24,9 @@ namespace CW_ThoughtsOutLoud
 					string data = info[0].Trim('\t', ' ');
 					string key = info[1] + " " + info[2];
 
-					nameDateGrid.Rows.Add(data, key);
+					addMainRecordWindow.dateComboBox.Items.Add(key);
 
-					key = key.Replace(" ", "");
-					key = key.Replace("\t", "");
-					key = key.Replace(".", "");
-					key = key.Replace(":", "");
+					nameDateGrid.Rows.Add(data, key);
 					HT.Insert(key, data);
 				}
 			}
@@ -41,6 +40,7 @@ namespace CW_ThoughtsOutLoud
 		public MainForm()
 		{
 			InitializeComponent();
+			addMainRecordWindow.Owner = this;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -75,9 +75,8 @@ namespace CW_ThoughtsOutLoud
 		{
 			//AddRecordForm addRecordWindow = new AddRecordForm();
 			//var dialogResult = addRecordWindow.ShowDialog();
-			AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
 			var dialogResult = addMainRecordWindow.ShowDialog();
-			string key, data;
+			string key, data, key2, data2;
 
 			if (dialogResult == DialogResult.OK)
 			{
@@ -93,15 +92,17 @@ namespace CW_ThoughtsOutLoud
 				{
 					case 0:
 						currentGrid = mainGrid;
-
+						key = addMainRecordWindow.dateComboBox.Text;
+						data = addMainRecordWindow.nameTextBox.Text;
+						key2 = addMainRecordWindow.categoryComboBox.Text;
+						data2 = addMainRecordWindow.colorTextBox.Text;
+						currentGrid.Rows.Add(data, key, key2, data2);
 						break;
 					case 1:
 						currentGrid = nameDateGrid;
-						currentGrid.Rows.Add(data, key);
-						key = key.Replace(" ", "");
-						key = key.Replace(".", "");
-						key = key.Replace(":", "");
-						nameDateBook.Insert(key, data);
+						//currentGrid.Rows.Add(data, key);
+						//nameDateBook.Insert(key, data);
+						//addMainRecordWindow.dateComboBox.Items.Add(key);
 						break;
 					case 2:
 						currentGrid = categoryColorGrid;

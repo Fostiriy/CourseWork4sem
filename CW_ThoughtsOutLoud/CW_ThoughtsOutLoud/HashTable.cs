@@ -237,7 +237,13 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: целое число - хеш для ключа
 		private int GetHashCode(TKey key)
 		{
-			return (int)(Size * (double.Parse(key.ToString()) * HASH_CONST % 1));
+			string keyNumberString = key.ToString();
+			keyNumberString = keyNumberString.Replace(" ", "");
+			keyNumberString = keyNumberString.Replace("\t", "");
+			keyNumberString = keyNumberString.Replace(".", "");
+			keyNumberString = keyNumberString.Replace(":", "");
+
+			return (int)(Size * (double.Parse(keyNumberString) * HASH_CONST % 1));
 		}
 
 	}
