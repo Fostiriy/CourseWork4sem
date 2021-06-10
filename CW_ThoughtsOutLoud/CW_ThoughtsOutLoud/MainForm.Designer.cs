@@ -30,19 +30,18 @@ namespace CW_ThoughtsOutLoud
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.BooksTabControl = new System.Windows.Forms.TabControl();
+			this.booksTabControl = new System.Windows.Forms.TabControl();
 			this.MainTabPage = new System.Windows.Forms.TabPage();
-			this.dataGridView2 = new System.Windows.Forms.DataGridView();
+			this.mainGrid = new System.Windows.Forms.DataGridView();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.CategoryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.AlexeyTabPage = new System.Windows.Forms.TabPage();
 			this.nameDateGrid = new System.Windows.Forms.DataGridView();
 			this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.EgorTabPage = new System.Windows.Forms.TabPage();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.addRecordButton = new System.Windows.Forms.Button();
 			this.deleteRecordButton = new System.Windows.Forms.Button();
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -54,32 +53,35 @@ namespace CW_ThoughtsOutLoud
 			this.saveFileButton = new System.Windows.Forms.Button();
 			this.fileWorkingBox = new System.Windows.Forms.GroupBox();
 			this.bookWorkingBox = new System.Windows.Forms.GroupBox();
-			this.BooksTabControl.SuspendLayout();
+			this.categoryColorGrid = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.booksTabControl.SuspendLayout();
 			this.MainTabPage.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
 			this.AlexeyTabPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nameDateGrid)).BeginInit();
 			this.EgorTabPage.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.fileWorkingBox.SuspendLayout();
 			this.bookWorkingBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.categoryColorGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// BooksTabControl
+			// booksTabControl
 			// 
-			this.BooksTabControl.Controls.Add(this.MainTabPage);
-			this.BooksTabControl.Controls.Add(this.AlexeyTabPage);
-			this.BooksTabControl.Controls.Add(this.EgorTabPage);
-			this.BooksTabControl.Dock = System.Windows.Forms.DockStyle.Left;
-			this.BooksTabControl.Location = new System.Drawing.Point(0, 0);
-			this.BooksTabControl.Name = "BooksTabControl";
-			this.BooksTabControl.SelectedIndex = 0;
-			this.BooksTabControl.Size = new System.Drawing.Size(993, 673);
-			this.BooksTabControl.TabIndex = 1;
+			this.booksTabControl.Controls.Add(this.MainTabPage);
+			this.booksTabControl.Controls.Add(this.AlexeyTabPage);
+			this.booksTabControl.Controls.Add(this.EgorTabPage);
+			this.booksTabControl.Dock = System.Windows.Forms.DockStyle.Left;
+			this.booksTabControl.Location = new System.Drawing.Point(0, 0);
+			this.booksTabControl.Name = "booksTabControl";
+			this.booksTabControl.SelectedIndex = 0;
+			this.booksTabControl.Size = new System.Drawing.Size(993, 673);
+			this.booksTabControl.TabIndex = 1;
 			// 
 			// MainTabPage
 			// 
-			this.MainTabPage.Controls.Add(this.dataGridView2);
+			this.MainTabPage.Controls.Add(this.mainGrid);
 			this.MainTabPage.Location = new System.Drawing.Point(4, 29);
 			this.MainTabPage.Name = "MainTabPage";
 			this.MainTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -88,29 +90,32 @@ namespace CW_ThoughtsOutLoud
 			this.MainTabPage.Text = "Общая информация";
 			this.MainTabPage.UseVisualStyleBackColor = true;
 			// 
-			// dataGridView2
+			// mainGrid
 			// 
-			this.dataGridView2.AllowUserToAddRows = false;
-			this.dataGridView2.AllowUserToDeleteRows = false;
-			this.dataGridView2.AllowUserToResizeColumns = false;
-			this.dataGridView2.AllowUserToResizeRows = false;
-			this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.mainGrid.AllowUserToAddRows = false;
+			this.mainGrid.AllowUserToDeleteRows = false;
+			this.mainGrid.AllowUserToResizeColumns = false;
+			this.mainGrid.AllowUserToResizeRows = false;
+			this.mainGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.mainGrid.BackgroundColor = System.Drawing.SystemColors.Menu;
+			this.mainGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.mainGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-			this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-			this.dataGridView2.Name = "dataGridView2";
-			this.dataGridView2.RowHeadersWidth = 51;
-			this.dataGridView2.RowTemplate.Height = 29;
-			this.dataGridView2.Size = new System.Drawing.Size(979, 634);
-			this.dataGridView2.TabIndex = 2;
+            this.dataGridViewTextBoxColumn4,
+            this.CategoryColumn,
+            this.ColorColumn});
+			this.mainGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.mainGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+			this.mainGrid.Location = new System.Drawing.Point(3, 3);
+			this.mainGrid.Name = "mainGrid";
+			this.mainGrid.RowHeadersVisible = false;
+			this.mainGrid.RowHeadersWidth = 51;
+			this.mainGrid.RowTemplate.Height = 29;
+			this.mainGrid.Size = new System.Drawing.Size(979, 634);
+			this.mainGrid.TabIndex = 2;
 			// 
 			// dataGridViewTextBoxColumn3
 			// 
-			this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.dataGridViewTextBoxColumn3.HeaderText = "Имя аудиозаписи";
 			this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
 			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
@@ -118,11 +123,24 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// dataGridViewTextBoxColumn4
 			// 
-			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.dataGridViewTextBoxColumn4.HeaderText = "Дата и время записи";
 			this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			// 
+			// CategoryColumn
+			// 
+			this.CategoryColumn.HeaderText = "Категория";
+			this.CategoryColumn.MinimumWidth = 6;
+			this.CategoryColumn.Name = "CategoryColumn";
+			this.CategoryColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			// 
+			// ColorColumn
+			// 
+			this.ColorColumn.HeaderText = "Цвет категории";
+			this.ColorColumn.MinimumWidth = 6;
+			this.ColorColumn.Name = "ColorColumn";
+			this.ColorColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			// 
 			// AlexeyTabPage
 			// 
@@ -142,6 +160,7 @@ namespace CW_ThoughtsOutLoud
 			this.nameDateGrid.AllowUserToResizeColumns = false;
 			this.nameDateGrid.AllowUserToResizeRows = false;
 			this.nameDateGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.nameDateGrid.BackgroundColor = System.Drawing.SystemColors.Menu;
 			this.nameDateGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.nameDateGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NameColumn,
@@ -150,15 +169,14 @@ namespace CW_ThoughtsOutLoud
 			this.nameDateGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.nameDateGrid.Location = new System.Drawing.Point(3, 3);
 			this.nameDateGrid.Name = "nameDateGrid";
+			this.nameDateGrid.RowHeadersVisible = false;
 			this.nameDateGrid.RowHeadersWidth = 51;
 			this.nameDateGrid.RowTemplate.Height = 29;
 			this.nameDateGrid.Size = new System.Drawing.Size(979, 634);
 			this.nameDateGrid.TabIndex = 1;
-			this.nameDateGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NameDataGrid_CellContentClick);
 			// 
 			// NameColumn
 			// 
-			this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.NameColumn.HeaderText = "Имя аудиозаписи";
 			this.NameColumn.MinimumWidth = 6;
 			this.NameColumn.Name = "NameColumn";
@@ -166,7 +184,6 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// TimeColumn
 			// 
-			this.TimeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.TimeColumn.HeaderText = "Дата и время записи";
 			this.TimeColumn.MinimumWidth = 6;
 			this.TimeColumn.Name = "TimeColumn";
@@ -174,49 +191,13 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// EgorTabPage
 			// 
-			this.EgorTabPage.Controls.Add(this.dataGridView1);
+			this.EgorTabPage.Controls.Add(this.categoryColorGrid);
 			this.EgorTabPage.Location = new System.Drawing.Point(4, 29);
 			this.EgorTabPage.Name = "EgorTabPage";
 			this.EgorTabPage.Size = new System.Drawing.Size(985, 640);
 			this.EgorTabPage.TabIndex = 2;
 			this.EgorTabPage.Text = "Категория-цвет";
 			this.EgorTabPage.UseVisualStyleBackColor = true;
-			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.AllowUserToAddRows = false;
-			this.dataGridView1.AllowUserToDeleteRows = false;
-			this.dataGridView1.AllowUserToResizeColumns = false;
-			this.dataGridView1.AllowUserToResizeRows = false;
-			this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.RowHeadersWidth = 51;
-			this.dataGridView1.RowTemplate.Height = 29;
-			this.dataGridView1.Size = new System.Drawing.Size(985, 640);
-			this.dataGridView1.TabIndex = 3;
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Имя аудиозаписи";
-			this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Дата и время записи";
-			this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			// 
 			// addRecordButton
 			// 
@@ -263,7 +244,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// showDebugButton
 			// 
-			this.showDebugButton.Location = new System.Drawing.Point(1014, 525);
+			this.showDebugButton.Location = new System.Drawing.Point(1014, 608);
 			this.showDebugButton.Name = "showDebugButton";
 			this.showDebugButton.Size = new System.Drawing.Size(226, 58);
 			this.showDebugButton.TabIndex = 3;
@@ -325,6 +306,42 @@ namespace CW_ThoughtsOutLoud
 			this.bookWorkingBox.TabStop = false;
 			this.bookWorkingBox.Text = "Работа со справочником";
 			// 
+			// categoryColorGrid
+			// 
+			this.categoryColorGrid.AllowUserToAddRows = false;
+			this.categoryColorGrid.AllowUserToDeleteRows = false;
+			this.categoryColorGrid.AllowUserToResizeColumns = false;
+			this.categoryColorGrid.AllowUserToResizeRows = false;
+			this.categoryColorGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.categoryColorGrid.BackgroundColor = System.Drawing.SystemColors.Menu;
+			this.categoryColorGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.categoryColorGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+			this.categoryColorGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.categoryColorGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+			this.categoryColorGrid.Location = new System.Drawing.Point(0, 0);
+			this.categoryColorGrid.Name = "categoryColorGrid";
+			this.categoryColorGrid.RowHeadersVisible = false;
+			this.categoryColorGrid.RowHeadersWidth = 51;
+			this.categoryColorGrid.RowTemplate.Height = 29;
+			this.categoryColorGrid.Size = new System.Drawing.Size(985, 640);
+			this.categoryColorGrid.TabIndex = 2;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.HeaderText = "Имя аудиозаписи";
+			this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.HeaderText = "Дата и время записи";
+			this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -334,27 +351,27 @@ namespace CW_ThoughtsOutLoud
 			this.Controls.Add(this.bookWorkingBox);
 			this.Controls.Add(this.fileWorkingBox);
 			this.Controls.Add(this.showDebugButton);
-			this.Controls.Add(this.BooksTabControl);
+			this.Controls.Add(this.booksTabControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Мысли вслух";
 			this.Load += new System.EventHandler(this.Form1_Load);
-			this.BooksTabControl.ResumeLayout(false);
+			this.booksTabControl.ResumeLayout(false);
 			this.MainTabPage.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.mainGrid)).EndInit();
 			this.AlexeyTabPage.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.nameDateGrid)).EndInit();
 			this.EgorTabPage.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.fileWorkingBox.ResumeLayout(false);
 			this.bookWorkingBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.categoryColorGrid)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-		private System.Windows.Forms.TabControl BooksTabControl;
+		private System.Windows.Forms.TabControl booksTabControl;
 		private System.Windows.Forms.TabPage MainTabPage;
 		private System.Windows.Forms.TabPage AlexeyTabPage;
 		private System.Windows.Forms.TabPage EgorTabPage;
@@ -368,14 +385,16 @@ namespace CW_ThoughtsOutLoud
 		private System.Windows.Forms.Button openFileButton;
 		private System.Windows.Forms.Button newBookButton;
 		private System.Windows.Forms.Button saveFileButton;
-		private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
-		private System.Windows.Forms.DataGridView dataGridView2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 		private System.Windows.Forms.GroupBox fileWorkingBox;
 		private System.Windows.Forms.GroupBox bookWorkingBox;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView mainGrid;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn CategoryColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColorColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
+		private System.Windows.Forms.DataGridView categoryColorGrid;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 	}

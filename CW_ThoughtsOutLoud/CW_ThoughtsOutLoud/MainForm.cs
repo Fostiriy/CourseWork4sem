@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CW_ThoughtsOutLoud
@@ -14,6 +7,7 @@ namespace CW_ThoughtsOutLoud
 	public partial class MainForm : Form
 	{
 		HashTable<string, string> nameDateBook = new HashTable<string, string>(8);
+		HashTable<string, string> categoryColorBook = new HashTable<string, string>(8);
 		RBTree<double, DataGridView> dateTree = new RBTree<double, DataGridView>();
 
 		public void FillHT(HashTable<string, string> HT, string path)
@@ -63,16 +57,6 @@ namespace CW_ThoughtsOutLoud
 			FillHT(nameDateBook, openFileDialog.FileName);
 		}
 
-		private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void NameDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
-		}
-
 		// Запись в файл
 		private void SaveFileButton_Click(object sender, EventArgs e)
 		{
@@ -83,16 +67,51 @@ namespace CW_ThoughtsOutLoud
 			// сохраняем текст в файл
 			string infoHT = String.Join('\n', nameDateBook.Info());
 			File.WriteAllText(filename, infoHT);
-			MessageBox.Show("Файл сохранён");
+
+			MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		private void AddRecordButton_Click(object sender, EventArgs e)
 		{
+			AddRecordForm addRecordWindow = new AddRecordForm();
+			var dialogResult = addRecordWindow.ShowDialog();
+			string key, data;
 
+			if (dialogResult == DialogResult.OK)
+			{
+				// Вообще добавь проверку данных
+				key = addRecordWindow.inputDateTextBox.Text + " " + addRecordWindow.inputTimeTextBox.Text;
+				data = addRecordWindow.inputNameTextBox.Text;
+
+				DataGridView currentGrid;
+				switch (booksTabControl.SelectedIndex)
+				{
+					case 0:
+						currentGrid = mainGrid;
+
+						break;
+					case 1:
+						currentGrid = nameDateGrid;
+						currentGrid.Rows.Add(data, key);
+						key = key.Replace(" ", "");
+						key = key.Replace(".", "");
+						key = key.Replace(":", "");
+						nameDateBook.Insert(key, data);
+						break;
+					case 2:
+						currentGrid = categoryColorGrid;
+						break;
+					default: break;
+				}
+			}
+			// Описать другие результаты диалога
+			
 		}
 
 		private void ShowDebugButton_Click(object sender, EventArgs e)
 		{
+			DebugForm debugWindow = new DebugForm();
+			debugWindow.Show();
 
 		}
 
