@@ -73,15 +73,20 @@ namespace CW_ThoughtsOutLoud
 
 		private void AddRecordButton_Click(object sender, EventArgs e)
 		{
-			AddRecordForm addRecordWindow = new AddRecordForm();
-			var dialogResult = addRecordWindow.ShowDialog();
+			//AddRecordForm addRecordWindow = new AddRecordForm();
+			//var dialogResult = addRecordWindow.ShowDialog();
+			AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
+			var dialogResult = addMainRecordWindow.ShowDialog();
 			string key, data;
 
 			if (dialogResult == DialogResult.OK)
 			{
 				// Вообще добавь проверку данных
-				key = addRecordWindow.inputDateTextBox.Text + " " + addRecordWindow.inputTimeTextBox.Text;
-				data = addRecordWindow.inputNameTextBox.Text;
+
+				//key = addRecordWindow.inputDateTextBox.Text + " " + addRecordWindow.inputTimeTextBox.Text;
+				//data = addRecordWindow.inputNameTextBox.Text;
+
+
 
 				DataGridView currentGrid;
 				switch (booksTabControl.SelectedIndex)
