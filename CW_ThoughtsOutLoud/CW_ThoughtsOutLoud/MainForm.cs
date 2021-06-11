@@ -7,15 +7,18 @@ namespace CW_ThoughtsOutLoud
 {
 	public partial class MainForm : Form
 	{
-		internal HashTable<string, string> nameDateBook = new HashTable<string, string>(8);
+		internal HashTable<string, string> dateNameBook = new HashTable<string, string>(8);
 		internal HashTable<string, string> categoryColorBook = new HashTable<string, string>(8);
-		RBTree<double, DataGridViewRow> dateTree = new RBTree<double, DataGridViewRow>();
+		internal RBTree<double, DataGridViewRow> dateTree = new RBTree<double, DataGridViewRow>();
+		internal string[] debugInfo = new string[4];
+		internal DataGridView currentGrid;
 
-		AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
-		AddDateRecordForm addDateRecordWindow = new AddDateRecordForm();
+		internal AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
+		internal AddDateRecordForm addDateRecordWindow = new AddDateRecordForm();
+		internal AddCategoryRecordForm addCategoryRecordWindow = new AddCategoryRecordForm();
 		DebugForm debugWindow;
 
-		public void FillHT(HashTable<string, string> HT, string path)
+		public void FillDateNameBook(HashTable<string, string> HT, string path)
 		{
 			FileInfo inputFile = new FileInfo(path);
 
@@ -44,19 +47,14 @@ namespace CW_ThoughtsOutLoud
 		{
 			InitializeComponent();
 			addMainRecordWindow.Owner = this;
+			addDateRecordWindow.Owner = this;
 		}
 
-		private void Form1_Load(object sender, EventArgs e)
-		{
-
-		}
-
-		// Открытие файла
 		private void OpenFileButton_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.Cancel)
 				return;
-			FillHT(nameDateBook, openFileDialog.FileName);
+			FillDateNameBook(dateNameBook, openFileDialog.FileName);
 		}
 
 		private void SaveFileButton_Click(object sender, EventArgs e)
@@ -66,7 +64,7 @@ namespace CW_ThoughtsOutLoud
 			// получаем выбранный файл
 			string filename = saveFileDialog.FileName;
 			// сохраняем текст в файл
-			string infoHT = String.Join('\n', nameDateBook.Info());
+			string infoHT = String.Join('\n', dateNameBook.Info());
 			File.WriteAllText(filename, infoHT);
 
 			MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -74,51 +72,24 @@ namespace CW_ThoughtsOutLoud
 
 		private void AddRecordButton_Click(object sender, EventArgs e)
 		{
-			//AddRecordForm addRecordWindow = new AddRecordForm();
-			//var dialogResult = addRecordWindow.ShowDialog();
-			var dialogResult = addMainRecordWindow.ShowDialog();
-			string key, data, key2, data2;
-
-			if (dialogResult == DialogResult.OK)
+			Form currentWindow = null;
+			switch (booksTabControl.SelectedIndex)
 			{
-				// Вообще добавь проверку данных
-
-				//key = addRecordWindow.inputDateTextBox.Text + " " + addRecordWindow.inputTimeTextBox.Text;
-				//data = addRecordWindow.inputNameTextBox.Text;
-
-
-
-				DataGridView currentGrid;
-				switch (booksTabControl.SelectedIndex)
-				{
-					case 0:
-						currentGrid = mainGrid;
-						key = addMainRecordWindow.dateComboBox.Text;
-						data = addMainRecordWindow.nameTextBox.Text;
-						key2 = addMainRecordWindow.categoryComboBox.Text;
-						data2 = addMainRecordWindow.colorTextBox.Text;
-						// нормальное имя придумай
-						int index = currentGrid.Rows.Add(data, key, key2, data2);
-						key = key.Replace(" ", "");
-						key = key.Replace("\t", "");
-						key = key.Replace(".", "");
-						key = key.Replace(":", "");
-						dateTree.Insert(double.Parse(key), currentGrid.Rows[index]);
-						break;
-					case 1:
-						currentGrid = dateNameGrid;
-						//currentGrid.Rows.Add(data, key);
-						//nameDateBook.Insert(key, data);
-						//addMainRecordWindow.dateComboBox.Items.Add(key);
-						break;
-					case 2:
-						currentGrid = categoryColorGrid;
-						break;
-					default: break;
-				}
+				case 0:
+					currentGrid = mainGrid;
+					currentWindow = addMainRecordWindow;
+					break;
+				case 1:
+					currentGrid = dateNameGrid;
+					currentWindow = addDateRecordWindow;
+					break;
+				case 2:
+					currentGrid = categoryColorGrid;
+					currentWindow = addCategoryRecordWindow;
+					break;
+				default: break;
 			}
-			// Описать другие результаты диалога
-			
+			currentWindow.ShowDialog();
 		}
 
 		private void ShowDebugButton_Click(object sender, EventArgs e)
@@ -150,7 +121,7 @@ namespace CW_ThoughtsOutLoud
 
 		private void NewBookButton_Click(object sender, EventArgs e)
 		{
-			nameDateBook.Clear();
+			dateNameBook.Clear();
 			dateNameGrid.Rows.Clear();
 		}
 
@@ -158,6 +129,16 @@ namespace CW_ThoughtsOutLoud
 		{
 			if (debugWindow != null)
 				debugWindow.Location = new Point(Location.X + Size.Width, Location.Y);
+		}
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			debugInfo[0] += "Хеш-таблицао времени записи.\nКлюч: (string) дата время.\nЗначение: (string) имя аудиозаписи.\n" +
+				"Метод разрешения коллизий: открытая линейная адресация.\n";
+			debugInfo[1] += "Хеш-таблица о категориях аудиозаписей.\nКлюч: (string) название категории.\nЗначение: (string) цвет категории.\n" +
+				"Метод разрешения коллизий: метод цепочек.\n";
+			debugInfo[2] += "Красно-чёрное двоичное дерево.\nПоиск: диапазон дат.\nКлюч: (double) дата время.\n";
+			debugInfo[3] += "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n";
 		}
 	}
 }

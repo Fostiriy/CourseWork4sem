@@ -12,6 +12,8 @@ namespace CW_ThoughtsOutLoud
 {
 	public partial class AddDateRecordForm : Form
 	{
+		MainForm mainWindow;
+
 		public AddDateRecordForm()
 		{
 			InitializeComponent();
@@ -19,12 +21,16 @@ namespace CW_ThoughtsOutLoud
 
 		private void AddRecordButton_Click(object sender, EventArgs e)
 		{
-			
+			var key = inputDateTextBox.Text + " " + inputTimeTextBox.Text;
+			var data = inputNameTextBox.Text;
+			mainWindow.currentGrid.Rows.Add(data, key);
+			mainWindow.dateNameBook.Insert(key, data);
+			mainWindow.addMainRecordWindow.dateComboBox.Items.Add(key);
 		}
 
-		private void inputDateTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+		private void AddDateRecordForm_Load(object sender, EventArgs e)
 		{
-
+			mainWindow = (MainForm)Owner;
 		}
 	}
 }

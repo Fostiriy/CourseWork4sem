@@ -21,7 +21,7 @@ namespace CW_ThoughtsOutLoud
 
 		private void DateComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			string recordName = mainWindow.nameDateBook.Search(dateComboBox.Text).Data;
+			string recordName = mainWindow.dateNameBook.Search(dateComboBox.Text).Data;
 			nameTextBox.Text = recordName;
 		}
 
@@ -34,6 +34,20 @@ namespace CW_ThoughtsOutLoud
 		private void AddMainRecordForm_Load(object sender, EventArgs e)
 		{
 			mainWindow = (MainForm)Owner;
+		}
+
+		private void addRecordButton_Click(object sender, EventArgs e)
+		{
+			var key1 = dateComboBox.Text;
+			var data1 = nameTextBox.Text;
+			var key2 = categoryComboBox.Text;
+			var data2 = colorTextBox.Text;
+			int gridIndex = mainWindow.currentGrid.Rows.Add(data1, key1, key2, data2);
+			key1 = key1.Replace(" ", "");
+			key1 = key1.Replace("\t", "");
+			key1 = key1.Replace(".", "");
+			key1 = key1.Replace(":", "");
+			mainWindow.dateTree.Insert(double.Parse(key1), mainWindow.currentGrid.Rows[gridIndex]);
 		}
 	}
 }

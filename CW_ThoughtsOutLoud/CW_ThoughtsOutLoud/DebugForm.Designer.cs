@@ -32,10 +32,10 @@ namespace CW_ThoughtsOutLoud
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebugForm));
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.debugInfoRichTextBox = new System.Windows.Forms.RichTextBox();
-			this.radioButton4 = new System.Windows.Forms.RadioButton();
-			this.radioButton3 = new System.Windows.Forms.RadioButton();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
+			this.dateTreeRadioButton = new System.Windows.Forms.RadioButton();
+			this.categoryTreeRadioButton = new System.Windows.Forms.RadioButton();
+			this.categoryColorBookRadioButton = new System.Windows.Forms.RadioButton();
+			this.dateNameBookRadioButton = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.Panel2.SuspendLayout();
@@ -57,12 +57,12 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// splitContainer.Panel2
 			// 
-			this.splitContainer.Panel2.Controls.Add(this.radioButton4);
-			this.splitContainer.Panel2.Controls.Add(this.radioButton3);
-			this.splitContainer.Panel2.Controls.Add(this.radioButton2);
-			this.splitContainer.Panel2.Controls.Add(this.radioButton1);
+			this.splitContainer.Panel2.Controls.Add(this.dateTreeRadioButton);
+			this.splitContainer.Panel2.Controls.Add(this.categoryTreeRadioButton);
+			this.splitContainer.Panel2.Controls.Add(this.categoryColorBookRadioButton);
+			this.splitContainer.Panel2.Controls.Add(this.dateNameBookRadioButton);
 			this.splitContainer.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
-			this.splitContainer.Size = new System.Drawing.Size(342, 673);
+			this.splitContainer.Size = new System.Drawing.Size(382, 673);
 			this.splitContainer.SplitterDistance = 586;
 			this.splitContainer.TabIndex = 0;
 			// 
@@ -72,59 +72,59 @@ namespace CW_ThoughtsOutLoud
 			this.debugInfoRichTextBox.Location = new System.Drawing.Point(0, 0);
 			this.debugInfoRichTextBox.Name = "debugInfoRichTextBox";
 			this.debugInfoRichTextBox.ReadOnly = true;
-			this.debugInfoRichTextBox.Size = new System.Drawing.Size(342, 586);
+			this.debugInfoRichTextBox.Size = new System.Drawing.Size(382, 586);
 			this.debugInfoRichTextBox.TabIndex = 0;
 			this.debugInfoRichTextBox.Text = "";
 			// 
-			// radioButton4
+			// dateTreeRadioButton
 			// 
-			this.radioButton4.AutoSize = true;
-			this.radioButton4.Location = new System.Drawing.Point(186, 14);
-			this.radioButton4.Name = "radioButton4";
-			this.radioButton4.Size = new System.Drawing.Size(144, 24);
-			this.radioButton4.TabIndex = 2;
-			this.radioButton4.TabStop = true;
-			this.radioButton4.Text = "БДП дата-время";
-			this.radioButton4.UseVisualStyleBackColor = true;
+			this.dateTreeRadioButton.AutoSize = true;
+			this.dateTreeRadioButton.Location = new System.Drawing.Point(226, 14);
+			this.dateTreeRadioButton.Name = "dateTreeRadioButton";
+			this.dateTreeRadioButton.Size = new System.Drawing.Size(144, 24);
+			this.dateTreeRadioButton.TabIndex = 2;
+			this.dateTreeRadioButton.Text = "БДП дата-время";
+			this.dateTreeRadioButton.UseVisualStyleBackColor = true;
+			this.dateTreeRadioButton.CheckedChanged += new System.EventHandler(this.dateTreeRadioButton_CheckedChanged);
 			// 
-			// radioButton3
+			// categoryTreeRadioButton
 			// 
-			this.radioButton3.AutoSize = true;
-			this.radioButton3.Location = new System.Drawing.Point(186, 44);
-			this.radioButton3.Name = "radioButton3";
-			this.radioButton3.Size = new System.Drawing.Size(134, 24);
-			this.radioButton3.TabIndex = 3;
-			this.radioButton3.TabStop = true;
-			this.radioButton3.Text = "БДП категория";
-			this.radioButton3.UseVisualStyleBackColor = true;
+			this.categoryTreeRadioButton.AutoSize = true;
+			this.categoryTreeRadioButton.Location = new System.Drawing.Point(226, 44);
+			this.categoryTreeRadioButton.Name = "categoryTreeRadioButton";
+			this.categoryTreeRadioButton.Size = new System.Drawing.Size(134, 24);
+			this.categoryTreeRadioButton.TabIndex = 4;
+			this.categoryTreeRadioButton.Text = "БДП категория";
+			this.categoryTreeRadioButton.UseVisualStyleBackColor = true;
+			this.categoryTreeRadioButton.CheckedChanged += new System.EventHandler(this.categoryTreeRadioButton_CheckedChanged);
 			// 
-			// radioButton2
+			// categoryColorBookRadioButton
 			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(12, 44);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(158, 24);
-			this.radioButton2.TabIndex = 4;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "ХТ категория-цвет";
-			this.radioButton2.UseVisualStyleBackColor = true;
+			this.categoryColorBookRadioButton.AutoSize = true;
+			this.categoryColorBookRadioButton.Location = new System.Drawing.Point(12, 44);
+			this.categoryColorBookRadioButton.Name = "categoryColorBookRadioButton";
+			this.categoryColorBookRadioButton.Size = new System.Drawing.Size(158, 24);
+			this.categoryColorBookRadioButton.TabIndex = 3;
+			this.categoryColorBookRadioButton.Text = "ХТ категория-цвет";
+			this.categoryColorBookRadioButton.UseVisualStyleBackColor = true;
+			this.categoryColorBookRadioButton.CheckedChanged += new System.EventHandler(this.categoryColorBookRadioButton_CheckedChanged);
 			// 
-			// radioButton1
+			// dateNameBookRadioButton
 			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.Location = new System.Drawing.Point(12, 14);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(165, 24);
-			this.radioButton1.TabIndex = 5;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "ХТ имя-дата-время";
-			this.radioButton1.UseVisualStyleBackColor = true;
+			this.dateNameBookRadioButton.AutoSize = true;
+			this.dateNameBookRadioButton.Location = new System.Drawing.Point(12, 14);
+			this.dateNameBookRadioButton.Name = "dateNameBookRadioButton";
+			this.dateNameBookRadioButton.Size = new System.Drawing.Size(165, 24);
+			this.dateNameBookRadioButton.TabIndex = 1;
+			this.dateNameBookRadioButton.Text = "ХТ имя-дата-время";
+			this.dateNameBookRadioButton.UseVisualStyleBackColor = true;
+			this.dateNameBookRadioButton.CheckedChanged += new System.EventHandler(this.dateNameBookRadioButton_CheckedChanged);
 			// 
 			// DebugForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(342, 673);
+			this.ClientSize = new System.Drawing.Size(382, 673);
 			this.Controls.Add(this.splitContainer);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -148,9 +148,9 @@ namespace CW_ThoughtsOutLoud
 
 		private System.Windows.Forms.SplitContainer splitContainer;
 		private System.Windows.Forms.RichTextBox debugInfoRichTextBox;
-		private System.Windows.Forms.RadioButton radioButton4;
-		private System.Windows.Forms.RadioButton radioButton3;
-		private System.Windows.Forms.RadioButton radioButton2;
-		private System.Windows.Forms.RadioButton radioButton1;
+		private System.Windows.Forms.RadioButton dateTreeRadioButton;
+		private System.Windows.Forms.RadioButton categoryTreeRadioButton;
+		private System.Windows.Forms.RadioButton categoryColorBookRadioButton;
+		private System.Windows.Forms.RadioButton dateNameBookRadioButton;
 	}
 }

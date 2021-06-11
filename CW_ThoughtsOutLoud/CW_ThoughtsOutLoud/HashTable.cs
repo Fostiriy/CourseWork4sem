@@ -30,7 +30,7 @@ namespace CW_ThoughtsOutLoud
 	public class HashTable<TKey, TData> where TKey : IComparable
 	{
 		// Константа для хеш-функции
-		private const double HASH_CONST = 0.341;
+		private const double HASH_CONST = 0.6180339887;
 		// Массив элементов
 		private HTNode<TKey, TData>[] items;
 		// Размер хеш-таблицы (длина массива items)

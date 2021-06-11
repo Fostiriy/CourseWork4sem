@@ -96,7 +96,6 @@ namespace CW_ThoughtsOutLoud
 			this.inputDateTextBox.Size = new System.Drawing.Size(175, 34);
 			this.inputDateTextBox.TabIndex = 3;
 			this.inputDateTextBox.ValidatingType = typeof(System.DateTime);
-			this.inputDateTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.inputDateTextBox_MaskInputRejected);
 			// 
 			// inputTimeTextBox
 			// 
@@ -143,6 +142,7 @@ namespace CW_ThoughtsOutLoud
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Добавить запись";
+			this.Load += new System.EventHandler(this.AddDateRecordForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
