@@ -19,13 +19,13 @@ namespace CW_ThoughtsOutLoud
 			InitializeComponent();
 		}
 
-		private void dateComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		private void DateComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string recordName = mainWindow.nameDateBook.Search(dateComboBox.Text).Data;
 			nameTextBox.Text = recordName;
 		}
 
-		private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string recordName = mainWindow.categoryColorBook.Search(dateComboBox.Text).Data;
 			nameTextBox.Text = recordName;

@@ -42,6 +42,9 @@ namespace CW_ThoughtsOutLoud
 			this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.EgorTabPage = new System.Windows.Forms.TabPage();
+			this.categoryColorGrid = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.addRecordButton = new System.Windows.Forms.Button();
 			this.deleteRecordButton = new System.Windows.Forms.Button();
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -53,18 +56,15 @@ namespace CW_ThoughtsOutLoud
 			this.saveFileButton = new System.Windows.Forms.Button();
 			this.fileWorkingBox = new System.Windows.Forms.GroupBox();
 			this.bookWorkingBox = new System.Windows.Forms.GroupBox();
-			this.categoryColorGrid = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.booksTabControl.SuspendLayout();
 			this.MainTabPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
 			this.AlexeyTabPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nameDateGrid)).BeginInit();
 			this.EgorTabPage.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.categoryColorGrid)).BeginInit();
 			this.fileWorkingBox.SuspendLayout();
 			this.bookWorkingBox.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.categoryColorGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// booksTabControl
@@ -199,113 +199,6 @@ namespace CW_ThoughtsOutLoud
 			this.EgorTabPage.Text = "Категория-цвет";
 			this.EgorTabPage.UseVisualStyleBackColor = true;
 			// 
-			// addRecordButton
-			// 
-			this.addRecordButton.Location = new System.Drawing.Point(36, 40);
-			this.addRecordButton.Name = "addRecordButton";
-			this.addRecordButton.Size = new System.Drawing.Size(155, 29);
-			this.addRecordButton.TabIndex = 3;
-			this.addRecordButton.Text = "Добавить запись...";
-			this.addRecordButton.UseVisualStyleBackColor = true;
-			this.addRecordButton.Click += new System.EventHandler(this.AddRecordButton_Click);
-			// 
-			// deleteRecordButton
-			// 
-			this.deleteRecordButton.Location = new System.Drawing.Point(36, 86);
-			this.deleteRecordButton.Name = "deleteRecordButton";
-			this.deleteRecordButton.Size = new System.Drawing.Size(155, 29);
-			this.deleteRecordButton.TabIndex = 3;
-			this.deleteRecordButton.Text = "Удалить запись...";
-			this.deleteRecordButton.UseVisualStyleBackColor = true;
-			this.deleteRecordButton.Click += new System.EventHandler(this.DeleteRecordButton_Click);
-			// 
-			// openFileDialog
-			// 
-			this.openFileDialog.DefaultExt = "txt";
-			this.openFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
-			this.openFileDialog.Title = "Открыть файл-справочник";
-			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(36, 132);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(155, 29);
-			this.button2.TabIndex = 3;
-			this.button2.Text = "Найти...";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.SearchRecordButton_Click);
-			// 
-			// saveFileDialog
-			// 
-			this.saveFileDialog.DefaultExt = "txt";
-			this.saveFileDialog.FileName = "saveFileName";
-			this.saveFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
-			this.saveFileDialog.Title = "Сохранить справочник в файл";
-			// 
-			// showDebugButton
-			// 
-			this.showDebugButton.Location = new System.Drawing.Point(1014, 608);
-			this.showDebugButton.Name = "showDebugButton";
-			this.showDebugButton.Size = new System.Drawing.Size(226, 58);
-			this.showDebugButton.TabIndex = 3;
-			this.showDebugButton.Text = "Показать окно отладки";
-			this.showDebugButton.UseVisualStyleBackColor = true;
-			this.showDebugButton.Click += new System.EventHandler(this.ShowDebugButton_Click);
-			// 
-			// openFileButton
-			// 
-			this.openFileButton.Location = new System.Drawing.Point(36, 30);
-			this.openFileButton.Name = "openFileButton";
-			this.openFileButton.Size = new System.Drawing.Size(155, 29);
-			this.openFileButton.TabIndex = 3;
-			this.openFileButton.Text = "Открыть...";
-			this.openFileButton.UseVisualStyleBackColor = true;
-			this.openFileButton.Click += new System.EventHandler(this.OpenFileButton_Click);
-			// 
-			// newBookButton
-			// 
-			this.newBookButton.Location = new System.Drawing.Point(36, 178);
-			this.newBookButton.Name = "newBookButton";
-			this.newBookButton.Size = new System.Drawing.Size(155, 29);
-			this.newBookButton.TabIndex = 3;
-			this.newBookButton.Text = "Очистить";
-			this.newBookButton.UseVisualStyleBackColor = true;
-			this.newBookButton.Click += new System.EventHandler(this.NewBookButton_Click);
-			// 
-			// saveFileButton
-			// 
-			this.saveFileButton.Location = new System.Drawing.Point(36, 74);
-			this.saveFileButton.Name = "saveFileButton";
-			this.saveFileButton.Size = new System.Drawing.Size(155, 29);
-			this.saveFileButton.TabIndex = 3;
-			this.saveFileButton.Text = "Сохранить как...";
-			this.saveFileButton.UseVisualStyleBackColor = true;
-			this.saveFileButton.Click += new System.EventHandler(this.SaveFileButton_Click);
-			// 
-			// fileWorkingBox
-			// 
-			this.fileWorkingBox.Controls.Add(this.saveFileButton);
-			this.fileWorkingBox.Controls.Add(this.openFileButton);
-			this.fileWorkingBox.Location = new System.Drawing.Point(1014, 89);
-			this.fileWorkingBox.Name = "fileWorkingBox";
-			this.fileWorkingBox.Size = new System.Drawing.Size(226, 132);
-			this.fileWorkingBox.TabIndex = 4;
-			this.fileWorkingBox.TabStop = false;
-			this.fileWorkingBox.Text = "Работа с файлом";
-			// 
-			// bookWorkingBox
-			// 
-			this.bookWorkingBox.Controls.Add(this.button2);
-			this.bookWorkingBox.Controls.Add(this.newBookButton);
-			this.bookWorkingBox.Controls.Add(this.deleteRecordButton);
-			this.bookWorkingBox.Controls.Add(this.addRecordButton);
-			this.bookWorkingBox.Location = new System.Drawing.Point(1014, 247);
-			this.bookWorkingBox.Name = "bookWorkingBox";
-			this.bookWorkingBox.Size = new System.Drawing.Size(226, 246);
-			this.bookWorkingBox.TabIndex = 5;
-			this.bookWorkingBox.TabStop = false;
-			this.bookWorkingBox.Text = "Работа со справочником";
-			// 
 			// categoryColorGrid
 			// 
 			this.categoryColorGrid.AllowUserToAddRows = false;
@@ -342,6 +235,117 @@ namespace CW_ThoughtsOutLoud
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			// 
+			// addRecordButton
+			// 
+			this.addRecordButton.Location = new System.Drawing.Point(45, 29);
+			this.addRecordButton.Name = "addRecordButton";
+			this.addRecordButton.Size = new System.Drawing.Size(160, 35);
+			this.addRecordButton.TabIndex = 3;
+			this.addRecordButton.Text = "Добавить запись...";
+			this.addRecordButton.UseVisualStyleBackColor = true;
+			this.addRecordButton.Click += new System.EventHandler(this.AddRecordButton_Click);
+			// 
+			// deleteRecordButton
+			// 
+			this.deleteRecordButton.Location = new System.Drawing.Point(45, 75);
+			this.deleteRecordButton.Name = "deleteRecordButton";
+			this.deleteRecordButton.Size = new System.Drawing.Size(160, 35);
+			this.deleteRecordButton.TabIndex = 3;
+			this.deleteRecordButton.Text = "Удалить запись...";
+			this.deleteRecordButton.UseVisualStyleBackColor = true;
+			this.deleteRecordButton.Click += new System.EventHandler(this.DeleteRecordButton_Click);
+			// 
+			// openFileDialog
+			// 
+			this.openFileDialog.DefaultExt = "txt";
+			this.openFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
+			this.openFileDialog.Title = "Открыть файл-справочник";
+			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(45, 121);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(160, 35);
+			this.button2.TabIndex = 3;
+			this.button2.Text = "Найти...";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.SearchRecordButton_Click);
+			// 
+			// saveFileDialog
+			// 
+			this.saveFileDialog.DefaultExt = "txt";
+			this.saveFileDialog.FileName = "saveFileName";
+			this.saveFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
+			this.saveFileDialog.Title = "Сохранить справочник в файл";
+			// 
+			// showDebugButton
+			// 
+			this.showDebugButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.showDebugButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.showDebugButton.Location = new System.Drawing.Point(1000, 606);
+			this.showDebugButton.Name = "showDebugButton";
+			this.showDebugButton.Size = new System.Drawing.Size(250, 60);
+			this.showDebugButton.TabIndex = 3;
+			this.showDebugButton.Text = "Показать окно отладки";
+			this.showDebugButton.UseVisualStyleBackColor = true;
+			this.showDebugButton.Click += new System.EventHandler(this.ShowDebugButton_Click);
+			// 
+			// openFileButton
+			// 
+			this.openFileButton.Location = new System.Drawing.Point(45, 26);
+			this.openFileButton.Name = "openFileButton";
+			this.openFileButton.Size = new System.Drawing.Size(160, 35);
+			this.openFileButton.TabIndex = 3;
+			this.openFileButton.Text = "Открыть...";
+			this.openFileButton.UseVisualStyleBackColor = true;
+			this.openFileButton.Click += new System.EventHandler(this.OpenFileButton_Click);
+			// 
+			// newBookButton
+			// 
+			this.newBookButton.Location = new System.Drawing.Point(45, 167);
+			this.newBookButton.Name = "newBookButton";
+			this.newBookButton.Size = new System.Drawing.Size(160, 35);
+			this.newBookButton.TabIndex = 3;
+			this.newBookButton.Text = "Очистить";
+			this.newBookButton.UseVisualStyleBackColor = true;
+			this.newBookButton.Click += new System.EventHandler(this.NewBookButton_Click);
+			// 
+			// saveFileButton
+			// 
+			this.saveFileButton.Location = new System.Drawing.Point(45, 67);
+			this.saveFileButton.Name = "saveFileButton";
+			this.saveFileButton.Size = new System.Drawing.Size(160, 35);
+			this.saveFileButton.TabIndex = 3;
+			this.saveFileButton.Text = "Сохранить как...";
+			this.saveFileButton.UseVisualStyleBackColor = true;
+			this.saveFileButton.Click += new System.EventHandler(this.SaveFileButton_Click);
+			// 
+			// fileWorkingBox
+			// 
+			this.fileWorkingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.fileWorkingBox.Controls.Add(this.saveFileButton);
+			this.fileWorkingBox.Controls.Add(this.openFileButton);
+			this.fileWorkingBox.Location = new System.Drawing.Point(1000, 29);
+			this.fileWorkingBox.Name = "fileWorkingBox";
+			this.fileWorkingBox.Size = new System.Drawing.Size(250, 130);
+			this.fileWorkingBox.TabIndex = 4;
+			this.fileWorkingBox.TabStop = false;
+			this.fileWorkingBox.Text = "Работа с файлом";
+			// 
+			// bookWorkingBox
+			// 
+			this.bookWorkingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.bookWorkingBox.Controls.Add(this.button2);
+			this.bookWorkingBox.Controls.Add(this.newBookButton);
+			this.bookWorkingBox.Controls.Add(this.deleteRecordButton);
+			this.bookWorkingBox.Controls.Add(this.addRecordButton);
+			this.bookWorkingBox.Location = new System.Drawing.Point(999, 165);
+			this.bookWorkingBox.Name = "bookWorkingBox";
+			this.bookWorkingBox.Size = new System.Drawing.Size(250, 230);
+			this.bookWorkingBox.TabIndex = 5;
+			this.bookWorkingBox.TabStop = false;
+			this.bookWorkingBox.Text = "Работа со справочником";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -363,9 +367,9 @@ namespace CW_ThoughtsOutLoud
 			this.AlexeyTabPage.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.nameDateGrid)).EndInit();
 			this.EgorTabPage.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.categoryColorGrid)).EndInit();
 			this.fileWorkingBox.ResumeLayout(false);
 			this.bookWorkingBox.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.categoryColorGrid)).EndInit();
 			this.ResumeLayout(false);
 
 		}

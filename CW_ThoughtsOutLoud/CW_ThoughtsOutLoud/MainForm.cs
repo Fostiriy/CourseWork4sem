@@ -8,9 +8,9 @@ namespace CW_ThoughtsOutLoud
 	{
 		internal HashTable<string, string> nameDateBook = new HashTable<string, string>(8);
 		internal HashTable<string, string> categoryColorBook = new HashTable<string, string>(8);
-		RBTree<double, DataGridView> dateTree = new RBTree<double, DataGridView>();
+		RBTree<double, DataGridViewRow> dateTree = new RBTree<double, DataGridViewRow>();
 		AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
-		AddRecordForm addRecordWindow = new AddRecordForm();
+		AddDateRecordForm addRecordWindow = new AddDateRecordForm();
 
 		public void FillHT(HashTable<string, string> HT, string path)
 		{
@@ -96,7 +96,13 @@ namespace CW_ThoughtsOutLoud
 						data = addMainRecordWindow.nameTextBox.Text;
 						key2 = addMainRecordWindow.categoryComboBox.Text;
 						data2 = addMainRecordWindow.colorTextBox.Text;
-						currentGrid.Rows.Add(data, key, key2, data2);
+						// нормальное имя придумай
+						int index = currentGrid.Rows.Add(data, key, key2, data2);
+						key = key.Replace(" ", "");
+						key = key.Replace("\t", "");
+						key = key.Replace(".", "");
+						key = key.Replace(":", "");
+						dateTree.Insert(double.Parse(key), currentGrid.Rows[index]);
 						break;
 					case 1:
 						currentGrid = nameDateGrid;
