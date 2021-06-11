@@ -12,7 +12,7 @@ namespace CW_ThoughtsOutLoud
 		RBTree<double, DataGridViewRow> dateTree = new RBTree<double, DataGridViewRow>();
 
 		AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
-		AddDateRecordForm addRecordWindow = new AddDateRecordForm();
+		AddDateRecordForm addDateRecordWindow = new AddDateRecordForm();
 		DebugForm debugWindow;
 
 		public void FillHT(HashTable<string, string> HT, string path)
@@ -56,11 +56,9 @@ namespace CW_ThoughtsOutLoud
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.Cancel)
 				return;
-			// получаем выбранный файл
 			FillHT(nameDateBook, openFileDialog.FileName);
 		}
 
-		// Запись в файл
 		private void SaveFileButton_Click(object sender, EventArgs e)
 		{
 			if (saveFileDialog.ShowDialog() == DialogResult.Cancel)

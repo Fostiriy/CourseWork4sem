@@ -232,18 +232,23 @@ namespace CW_ThoughtsOutLoud
 			return result;
 		}
 
+		private double ConvertToNumber(TKey key)
+		{
+			double result = 0;
+			string keyString = key.ToString();
+
+			foreach (char symbol in keyString)
+				result += symbol;
+
+			return result;
+		}
+
 		// Входные данные: объект класса, ключ
 		// Хеш-функция - мультипликативная
 		// Выходные данные: целое число - хеш для ключа
 		private int GetHashCode(TKey key)
 		{
-			string keyNumberString = key.ToString();
-			keyNumberString = keyNumberString.Replace(" ", "");
-			keyNumberString = keyNumberString.Replace("\t", "");
-			keyNumberString = keyNumberString.Replace(".", "");
-			keyNumberString = keyNumberString.Replace(":", "");
-
-			return (int)(Size * (double.Parse(keyNumberString) * HASH_CONST % 1));
+			return (int)(Size * (ConvertToNumber(key) * HASH_CONST % 1));
 		}
 
 	}
