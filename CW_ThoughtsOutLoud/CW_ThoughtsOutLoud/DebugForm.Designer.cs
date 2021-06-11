@@ -101,7 +101,7 @@ namespace CW_ThoughtsOutLoud
 			this.Controls.Add(this.richTextBox1);
 			this.Name = "DebugForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "DebugWindow";
+			this.Text = "Окно отладки";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

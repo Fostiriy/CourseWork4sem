@@ -44,7 +44,7 @@ namespace CW_ThoughtsOutLoud
 			this.addRecordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.addRecordButton.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.addRecordButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.addRecordButton.Location = new System.Drawing.Point(104, 256);
+			this.addRecordButton.Location = new System.Drawing.Point(104, 206);
 			this.addRecordButton.Name = "addRecordButton";
 			this.addRecordButton.Size = new System.Drawing.Size(105, 35);
 			this.addRecordButton.TabIndex = 0;
@@ -55,7 +55,7 @@ namespace CW_ThoughtsOutLoud
 			// inputNameTextBox
 			// 
 			this.inputNameTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputNameTextBox.Location = new System.Drawing.Point(12, 41);
+			this.inputNameTextBox.Location = new System.Drawing.Point(12, 45);
 			this.inputNameTextBox.Name = "inputNameTextBox";
 			this.inputNameTextBox.Size = new System.Drawing.Size(308, 34);
 			this.inputNameTextBox.TabIndex = 1;
@@ -63,7 +63,7 @@ namespace CW_ThoughtsOutLoud
 			// inputNameLabel
 			// 
 			this.inputNameLabel.AutoSize = true;
-			this.inputNameLabel.Location = new System.Drawing.Point(12, 18);
+			this.inputNameLabel.Location = new System.Drawing.Point(12, 22);
 			this.inputNameLabel.Name = "inputNameLabel";
 			this.inputNameLabel.Size = new System.Drawing.Size(194, 20);
 			this.inputNameLabel.TabIndex = 2;
@@ -72,49 +72,47 @@ namespace CW_ThoughtsOutLoud
 			// inputDateLabel
 			// 
 			this.inputDateLabel.AutoSize = true;
-			this.inputDateLabel.Location = new System.Drawing.Point(12, 115);
+			this.inputDateLabel.Location = new System.Drawing.Point(12, 107);
 			this.inputDateLabel.Name = "inputDateLabel";
-			this.inputDateLabel.Size = new System.Drawing.Size(98, 20);
+			this.inputDateLabel.Size = new System.Drawing.Size(101, 20);
 			this.inputDateLabel.TabIndex = 2;
-			this.inputDateLabel.Text = "Введите дату";
+			this.inputDateLabel.Text = "Введите дату:";
 			// 
 			// inputTimeLabel
 			// 
 			this.inputTimeLabel.AutoSize = true;
-			this.inputTimeLabel.Location = new System.Drawing.Point(12, 191);
+			this.inputTimeLabel.Location = new System.Drawing.Point(12, 147);
 			this.inputTimeLabel.Name = "inputTimeLabel";
-			this.inputTimeLabel.Size = new System.Drawing.Size(113, 20);
+			this.inputTimeLabel.Size = new System.Drawing.Size(116, 20);
 			this.inputTimeLabel.TabIndex = 2;
-			this.inputTimeLabel.Text = "Введите время";
+			this.inputTimeLabel.Text = "Введите время:";
 			// 
 			// inputDateTextBox
 			// 
 			this.inputDateTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputDateTextBox.Location = new System.Drawing.Point(144, 108);
+			this.inputDateTextBox.Location = new System.Drawing.Point(145, 97);
 			this.inputDateTextBox.Mask = "00/00/0000";
 			this.inputDateTextBox.Name = "inputDateTextBox";
 			this.inputDateTextBox.Size = new System.Drawing.Size(175, 34);
 			this.inputDateTextBox.TabIndex = 3;
-			this.inputDateTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.inputDateTextBox.ValidatingType = typeof(System.DateTime);
 			this.inputDateTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.inputDateTextBox_MaskInputRejected);
 			// 
 			// inputTimeTextBox
 			// 
 			this.inputTimeTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputTimeTextBox.Location = new System.Drawing.Point(144, 184);
+			this.inputTimeTextBox.Location = new System.Drawing.Point(145, 137);
 			this.inputTimeTextBox.Mask = "00:00:00";
 			this.inputTimeTextBox.Name = "inputTimeTextBox";
 			this.inputTimeTextBox.Size = new System.Drawing.Size(175, 34);
 			this.inputTimeTextBox.TabIndex = 3;
-			this.inputTimeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// cancelButton
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.cancelButton.Location = new System.Drawing.Point(215, 256);
+			this.cancelButton.Location = new System.Drawing.Point(215, 206);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(105, 35);
 			this.cancelButton.TabIndex = 0;
@@ -122,11 +120,13 @@ namespace CW_ThoughtsOutLoud
 			this.cancelButton.UseVisualStyleBackColor = true;
 			this.cancelButton.Click += new System.EventHandler(this.AddRecordButton_Click);
 			// 
-			// AddRecordForm
+			// AddDateRecordForm
 			// 
+			this.AcceptButton = this.addRecordButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(332, 303);
+			this.CancelButton = this.cancelButton;
+			this.ClientSize = new System.Drawing.Size(332, 253);
 			this.Controls.Add(this.inputTimeTextBox);
 			this.Controls.Add(this.inputDateTextBox);
 			this.Controls.Add(this.inputTimeLabel);
@@ -135,7 +135,11 @@ namespace CW_ThoughtsOutLoud
 			this.Controls.Add(this.inputNameTextBox);
 			this.Controls.Add(this.cancelButton);
 			this.Controls.Add(this.addRecordButton);
-			this.Name = "AddRecordForm";
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.Name = "AddDateRecordForm";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Добавить запись";
 			this.ResumeLayout(false);

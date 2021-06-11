@@ -26,7 +26,7 @@ namespace CW_ThoughtsOutLoud
 
 					addMainRecordWindow.dateComboBox.Items.Add(key);
 
-					nameDateGrid.Rows.Add(data, key);
+					dateNameGrid.Rows.Add(data, key);
 					HT.Insert(key, data);
 				}
 			}
@@ -105,7 +105,7 @@ namespace CW_ThoughtsOutLoud
 						dateTree.Insert(double.Parse(key), currentGrid.Rows[index]);
 						break;
 					case 1:
-						currentGrid = nameDateGrid;
+						currentGrid = dateNameGrid;
 						//currentGrid.Rows.Add(data, key);
 						//nameDateBook.Insert(key, data);
 						//addMainRecordWindow.dateComboBox.Items.Add(key);
@@ -140,7 +140,7 @@ namespace CW_ThoughtsOutLoud
 		private void NewBookButton_Click(object sender, EventArgs e)
 		{
 			nameDateBook.Clear();
-			nameDateGrid.Rows.Clear();
+			dateNameGrid.Rows.Clear();
 		}
 	}
 }
