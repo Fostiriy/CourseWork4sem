@@ -108,7 +108,7 @@ namespace CW_ThoughtsOutLoud
 			this.addRecordButton.TabIndex = 4;
 			this.addRecordButton.Text = "OK";
 			this.addRecordButton.UseVisualStyleBackColor = true;
-			this.addRecordButton.Click += new System.EventHandler(this.addRecordButton_Click);
+			this.addRecordButton.Click += new System.EventHandler(this.AddRecordButton_Click);
 			// 
 			// timeLabel
 			// 

@@ -117,7 +117,6 @@ namespace CW_ThoughtsOutLoud
 			this.cancelButton.TabIndex = 0;
 			this.cancelButton.Text = "Отмена";
 			this.cancelButton.UseVisualStyleBackColor = true;
-			this.cancelButton.Click += new System.EventHandler(this.AddRecordButton_Click);
 			// 
 			// AddDateRecordForm
 			// 

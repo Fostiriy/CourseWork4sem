@@ -18,7 +18,7 @@ namespace CW_ThoughtsOutLoud
 		internal AddCategoryRecordForm addCategoryRecordWindow = new AddCategoryRecordForm();
 		DebugForm debugWindow;
 
-		public void FillDateNameBook(HashTable<string, string> HT, string path)
+		private void FillDateNameBook(HashTable<string, string> HT, string path)
 		{
 			FileInfo inputFile = new FileInfo(path);
 
@@ -36,11 +36,6 @@ namespace CW_ThoughtsOutLoud
 					HT.Insert(key, data);
 				}
 			}
-		}
-
-		public void RedrawGrid(DataGridView grid, HashTable<string, string> HT)
-		{
-
 		}
 
 		public MainForm()
@@ -61,9 +56,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
 				return;
-			// получаем выбранный файл
 			string filename = saveFileDialog.FileName;
-			// сохраняем текст в файл
 			string infoHT = String.Join('\n', dateNameBook.Info());
 			File.WriteAllText(filename, infoHT);
 
@@ -111,7 +104,37 @@ namespace CW_ThoughtsOutLoud
 
 		private void DeleteRecordButton_Click(object sender, EventArgs e)
 		{
+			DataGridViewRow currentRow = null;
+			double keyDate = 0;
+			string keyCategory = string.Empty;
+			switch (booksTabControl.SelectedIndex)
+			{
+				case 0:
+					currentGrid = mainGrid;
+					currentRow = currentGrid.SelectedRows[0] ?? null;
+					string temp = currentRow.Cells[0].Value.ToString();
+					break;
+				case 1:
+					currentGrid = dateNameGrid;
 
+					currentRow = currentGrid.SelectedRows[0];
+					break;
+				case 2:
+					currentGrid = categoryColorGrid;
+					currentRow = currentGrid.SelectedRows[0];
+					break;
+				default: break;
+			}
+			if (currentRow != null)
+			{
+				
+				currentGrid.Rows.Remove(currentRow);
+			}
+			else
+			{
+				MessageBox.Show("Необходимо выбрать строку для удаления в таблицу.",
+					"Не выбрана строка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void SearchRecordButton_Click(object sender, EventArgs e)

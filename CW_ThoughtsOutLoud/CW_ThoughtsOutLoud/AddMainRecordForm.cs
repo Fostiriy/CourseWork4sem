@@ -36,7 +36,7 @@ namespace CW_ThoughtsOutLoud
 			mainWindow = (MainForm)Owner;
 		}
 
-		private void addRecordButton_Click(object sender, EventArgs e)
+		private void AddRecordButton_Click(object sender, EventArgs e)
 		{
 			var key1 = dateComboBox.Text;
 			var data1 = nameTextBox.Text;

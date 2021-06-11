@@ -107,6 +107,7 @@ namespace CW_ThoughtsOutLoud
 			this.mainGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mainGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.mainGrid.Location = new System.Drawing.Point(3, 3);
+			this.mainGrid.MultiSelect = false;
 			this.mainGrid.Name = "mainGrid";
 			this.mainGrid.RowHeadersVisible = false;
 			this.mainGrid.RowHeadersWidth = 51;
@@ -168,6 +169,7 @@ namespace CW_ThoughtsOutLoud
 			this.dateNameGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dateNameGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.dateNameGrid.Location = new System.Drawing.Point(3, 3);
+			this.dateNameGrid.MultiSelect = false;
 			this.dateNameGrid.Name = "dateNameGrid";
 			this.dateNameGrid.RowHeadersVisible = false;
 			this.dateNameGrid.RowHeadersWidth = 51;
@@ -215,6 +217,7 @@ namespace CW_ThoughtsOutLoud
 			this.categoryColorGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.categoryColorGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.categoryColorGrid.Location = new System.Drawing.Point(3, 3);
+			this.categoryColorGrid.MultiSelect = false;
 			this.categoryColorGrid.Name = "categoryColorGrid";
 			this.categoryColorGrid.RowHeadersVisible = false;
 			this.categoryColorGrid.RowHeadersWidth = 51;
