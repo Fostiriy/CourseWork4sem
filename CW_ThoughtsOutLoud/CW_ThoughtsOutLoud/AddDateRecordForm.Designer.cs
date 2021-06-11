@@ -135,6 +135,7 @@ namespace CW_ThoughtsOutLoud
 			this.Controls.Add(this.inputNameTextBox);
 			this.Controls.Add(this.cancelButton);
 			this.Controls.Add(this.addRecordButton);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AddDateRecordForm";

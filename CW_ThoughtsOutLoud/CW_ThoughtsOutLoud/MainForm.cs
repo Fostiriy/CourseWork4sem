@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -9,8 +10,10 @@ namespace CW_ThoughtsOutLoud
 		internal HashTable<string, string> nameDateBook = new HashTable<string, string>(8);
 		internal HashTable<string, string> categoryColorBook = new HashTable<string, string>(8);
 		RBTree<double, DataGridViewRow> dateTree = new RBTree<double, DataGridViewRow>();
+
 		AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
 		AddDateRecordForm addRecordWindow = new AddDateRecordForm();
+		DebugForm debugWindow;
 
 		public void FillHT(HashTable<string, string> HT, string path)
 		{
@@ -122,9 +125,19 @@ namespace CW_ThoughtsOutLoud
 
 		private void ShowDebugButton_Click(object sender, EventArgs e)
 		{
-			DebugForm debugWindow = new DebugForm();
-			debugWindow.Show();
-
+			if (showDebugButton.Text == "Показать окно отладки")
+			{
+				debugWindow = new DebugForm();
+				debugWindow.Owner = this;
+				debugWindow.StartPosition = FormStartPosition.Manual;
+				debugWindow.Location = new Point(Location.X + Size.Width, Location.Y);
+				debugWindow.Show();
+				showDebugButton.Text = "Скрыть окно отладки";
+			}
+			else if (showDebugButton.Text == "Скрыть окно отладки")
+			{
+				debugWindow.Close();
+			}
 		}
 
 		private void DeleteRecordButton_Click(object sender, EventArgs e)
@@ -141,6 +154,12 @@ namespace CW_ThoughtsOutLoud
 		{
 			nameDateBook.Clear();
 			dateNameGrid.Rows.Clear();
+		}
+
+		private void MainForm_LocationChanged(object sender, EventArgs e)
+		{
+			if (debugWindow != null)
+				debugWindow.Location = new Point(Location.X + Size.Width, Location.Y);
 		}
 	}
 }

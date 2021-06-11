@@ -47,9 +47,9 @@ namespace CW_ThoughtsOutLoud
 			this.dateComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.dateComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.dateComboBox.FormattingEnabled = true;
-			this.dateComboBox.Location = new System.Drawing.Point(177, 27);
+			this.dateComboBox.Location = new System.Drawing.Point(204, 27);
 			this.dateComboBox.Name = "dateComboBox";
-			this.dateComboBox.Size = new System.Drawing.Size(193, 36);
+			this.dateComboBox.Size = new System.Drawing.Size(216, 36);
 			this.dateComboBox.TabIndex = 0;
 			this.dateComboBox.SelectedIndexChanged += new System.EventHandler(this.DateComboBox_SelectedIndexChanged);
 			// 
@@ -59,9 +59,9 @@ namespace CW_ThoughtsOutLoud
 			this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.categoryComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.categoryComboBox.FormattingEnabled = true;
-			this.categoryComboBox.Location = new System.Drawing.Point(177, 139);
+			this.categoryComboBox.Location = new System.Drawing.Point(204, 139);
 			this.categoryComboBox.Name = "categoryComboBox";
-			this.categoryComboBox.Size = new System.Drawing.Size(193, 36);
+			this.categoryComboBox.Size = new System.Drawing.Size(216, 36);
 			this.categoryComboBox.TabIndex = 0;
 			this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
 			// 
@@ -69,20 +69,20 @@ namespace CW_ThoughtsOutLoud
 			// 
 			this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.nameTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.nameTextBox.Location = new System.Drawing.Point(177, 69);
+			this.nameTextBox.Location = new System.Drawing.Point(204, 69);
 			this.nameTextBox.Name = "nameTextBox";
 			this.nameTextBox.ReadOnly = true;
-			this.nameTextBox.Size = new System.Drawing.Size(193, 34);
+			this.nameTextBox.Size = new System.Drawing.Size(216, 34);
 			this.nameTextBox.TabIndex = 1;
 			// 
 			// colorTextBox
 			// 
 			this.colorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.colorTextBox.Location = new System.Drawing.Point(177, 181);
+			this.colorTextBox.Location = new System.Drawing.Point(204, 181);
 			this.colorTextBox.Name = "colorTextBox";
 			this.colorTextBox.ReadOnly = true;
-			this.colorTextBox.Size = new System.Drawing.Size(193, 34);
+			this.colorTextBox.Size = new System.Drawing.Size(216, 34);
 			this.colorTextBox.TabIndex = 1;
 			// 
 			// cancelButton
@@ -90,7 +90,7 @@ namespace CW_ThoughtsOutLoud
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.cancelButton.Location = new System.Drawing.Point(265, 256);
+			this.cancelButton.Location = new System.Drawing.Point(315, 256);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(105, 35);
 			this.cancelButton.TabIndex = 3;
@@ -102,7 +102,7 @@ namespace CW_ThoughtsOutLoud
 			this.addRecordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.addRecordButton.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.addRecordButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.addRecordButton.Location = new System.Drawing.Point(154, 256);
+			this.addRecordButton.Location = new System.Drawing.Point(204, 256);
 			this.addRecordButton.Name = "addRecordButton";
 			this.addRecordButton.Size = new System.Drawing.Size(105, 35);
 			this.addRecordButton.TabIndex = 4;
@@ -151,7 +151,7 @@ namespace CW_ThoughtsOutLoud
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(382, 303);
+			this.ClientSize = new System.Drawing.Size(432, 303);
 			this.Controls.Add(this.colorLabel);
 			this.Controls.Add(this.categoryLabel);
 			this.Controls.Add(this.nameLabel);
@@ -162,6 +162,7 @@ namespace CW_ThoughtsOutLoud
 			this.Controls.Add(this.nameTextBox);
 			this.Controls.Add(this.categoryComboBox);
 			this.Controls.Add(this.dateComboBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AddMainRecordForm";
