@@ -55,6 +55,21 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: объект класса
 		// Метод, возвращающий строку с информацией о таблице
 		// Выходные данные: строка с информацией о всех элементах таблицы
+		public string InfoToFile()
+		{
+			string result = string.Empty;
+
+			for (int i = 0; i < Size; i++)
+			{
+				if (items[i] != null && !items[i].wasDeleted)
+				{
+					result += $"{items[i].Data, -50} |{items[i].Key}\n";
+				}
+			}
+
+			return result;
+		}
+
 		public string[] Info()
 		{
 			string[] result = new string[Size];
@@ -64,7 +79,10 @@ namespace CW_ThoughtsOutLoud
 			{
 				if (items[i] != null && !items[i].wasDeleted)
 				{
-					result[k] = $"{i,3}: {items[i].Data,-50} {items[i].Key,-14}";
+					result[k] = $"Значение: {items[i].Data}\n" +
+						$"Ключ: {items[i].Key,-14} ({ConvertToNumber(items[i].Key)})\n" +
+						$"Хеш 1: {GetHashCode(items[i].Key)}\n" +
+						$"Хеш 2: {i}\n";
 					k++;
 				}
 			}

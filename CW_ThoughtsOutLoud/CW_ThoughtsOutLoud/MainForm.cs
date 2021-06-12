@@ -28,7 +28,7 @@ namespace CW_ThoughtsOutLoud
 				{
 					string[] info = istream.ReadLine().Split('|');
 					string data = info[0].Trim('\t', ' ');
-					string key = info[1] + " " + info[2];
+					string key = info[1];
 
 					addMainRecordWindow.dateComboBox.Items.Add(key);
 
@@ -36,6 +36,7 @@ namespace CW_ThoughtsOutLoud
 					HT.Insert(key, data);
 				}
 			}
+			debugInfo[0] += String.Join('\n',HT.Info());
 		}
 
 		public MainForm()
@@ -49,6 +50,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.Cancel)
 				return;
+			dateNameGrid.Rows.Clear();
 			FillDateNameBook(dateNameBook, openFileDialog.FileName);
 		}
 
@@ -57,8 +59,7 @@ namespace CW_ThoughtsOutLoud
 			if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
 				return;
 			string filename = saveFileDialog.FileName;
-			string infoHT = String.Join('\n', dateNameBook.Info());
-			File.WriteAllText(filename, infoHT);
+			File.WriteAllText(filename, dateNameBook.InfoToFile());
 
 			MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
@@ -105,35 +106,65 @@ namespace CW_ThoughtsOutLoud
 		private void DeleteRecordButton_Click(object sender, EventArgs e)
 		{
 			DataGridViewRow currentRow = null;
+			DialogResult result = DialogResult.Yes;
 			double keyDate = 0;
 			string keyCategory = string.Empty;
+
 			switch (booksTabControl.SelectedIndex)
 			{
 				case 0:
 					currentGrid = mainGrid;
-					currentRow = currentGrid.SelectedRows[0] ?? null;
-					string temp = currentRow.Cells[0].Value.ToString();
+					currentRow = currentGrid.CurrentRow;
 					break;
 				case 1:
 					currentGrid = dateNameGrid;
-
-					currentRow = currentGrid.SelectedRows[0];
+					currentRow = currentGrid.CurrentRow;
+					if (currentRow != null)
+					{
+						string date = currentRow.Cells[1].Value.ToString();
+						date = date.Replace(" ", "");
+						date = date.Replace(".", "");
+						date = date.Replace(":", "");
+						keyDate = double.Parse(date);
+					}
 					break;
 				case 2:
 					currentGrid = categoryColorGrid;
-					currentRow = currentGrid.SelectedRows[0];
+					currentRow = currentGrid.CurrentRow;
+
+					// добавить обработку для keyCategory
+
 					break;
 				default: break;
 			}
-			if (currentRow != null)
+
+			if (keyDate != 0 && dateTree.Find(keyDate) != dateTree.Nil)
 			{
-				
-				currentGrid.Rows.Remove(currentRow);
+				result = MessageBox.Show("В основном справочнике содержатся записи, связанные с записью, которую вы хотите удалить.\n" +
+					"Всё равно удалить?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+				if (result == DialogResult.Yes)
+				{
+					string date = currentRow.Cells[0].Value.ToString();
+					dateNameBook.Remove(date);
+					SingleLinkedList<DataGridViewRow> deletedIndexes = dateTree.Delete(keyDate);
+					foreach (DataGridViewRow row in deletedIndexes)
+					{
+						mainGrid.Rows.RemoveAt(row.Index);
+					}
+				}
 			}
-			else
+
+			if (result == DialogResult.Yes)
 			{
-				MessageBox.Show("Необходимо выбрать строку для удаления в таблицу.",
-					"Не выбрана строка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				if (currentRow != null)
+				{
+					currentGrid.Rows.RemoveAt(currentGrid.CurrentRow.Index);
+				}
+				else
+				{
+					MessageBox.Show("Необходимо выбрать строку для удаления в таблице!",
+						"Не выбрана строка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 		}
 
@@ -156,7 +187,7 @@ namespace CW_ThoughtsOutLoud
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			debugInfo[0] += "Хеш-таблицао времени записи.\nКлюч: (string) дата время.\nЗначение: (string) имя аудиозаписи.\n" +
+			debugInfo[0] += "Хеш-таблица о времени записи.\nКлюч: (string) дата время.\nЗначение: (string) имя аудиозаписи.\n" +
 				"Метод разрешения коллизий: открытая линейная адресация.\n";
 			debugInfo[1] += "Хеш-таблица о категориях аудиозаписей.\nКлюч: (string) название категории.\nЗначение: (string) цвет категории.\n" +
 				"Метод разрешения коллизий: метод цепочек.\n";

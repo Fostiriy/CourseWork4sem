@@ -79,7 +79,8 @@ namespace CW_ThoughtsOutLoud
 	class RBTree<TKey, TData> where TKey : IComparable
 	{
 		private RBNode<TKey, TData> root; // Узел-корень дерева
-		private RBNode<TKey, TData> nil; // Пустой узел-лист дерева
+		private readonly RBNode<TKey, TData> nil; // Пустой узел-лист дерева
+		public RBNode<TKey, TData> Nil => nil;
 
 
 		// Конструктор дерева
@@ -103,7 +104,7 @@ namespace CW_ThoughtsOutLoud
 		public void Clear()
 		{
 			Console.WriteLine("Clearing the tree.");
-			while (root != nil)
+			while (root != Nil)
 				Delete(root);
 			DisplayTree();
 		}
@@ -118,13 +119,13 @@ namespace CW_ThoughtsOutLoud
 			RBNode<TKey, TData> Y = X.right; // set Y
 			X.right = Y.left; // turn Y's left subtree into X's right subtree
 
-			if (Y.left != nil)
+			if (Y.left != Nil)
 				Y.left.parent = X;
 
-			if (Y != nil)
+			if (Y != Nil)
 				Y.parent = X.parent; // link X's parent to Y
 
-			if (X.parent == nil)
+			if (X.parent == Nil)
 				root = Y;
 			else if (X == X.parent.left)
 				X.parent.left = Y;
@@ -133,7 +134,7 @@ namespace CW_ThoughtsOutLoud
 
 			Y.left = X; // put X on Y's left
 
-			if (X != nil)
+			if (X != Nil)
 				X.parent = Y;
 		}
 
@@ -146,13 +147,13 @@ namespace CW_ThoughtsOutLoud
 			RBNode<TKey, TData> X = Y.left;
 			Y.left = X.right;
 
-			if (X.right != nil)
+			if (X.right != Nil)
 				X.right.parent = Y;
 
-			if (X != nil)
+			if (X != Nil)
 				X.parent = Y.parent;
 
-			if (Y.parent == nil)
+			if (Y.parent == Nil)
 				root = X;
 			else if (Y == Y.parent.right)
 				Y.parent.right = X;
@@ -161,7 +162,7 @@ namespace CW_ThoughtsOutLoud
 
 			X.right = Y; // put Y on X's right
 
-			if (Y != nil)
+			if (Y != Nil)
 				Y.parent = X;
 		}
 
@@ -177,7 +178,7 @@ namespace CW_ThoughtsOutLoud
 
 			while (!isFound)
 			{
-				if (temp == nil)
+				if (temp == Nil)
 					break;
 				if (node.IsLess(temp))
 					temp = temp.left;
@@ -192,7 +193,31 @@ namespace CW_ThoughtsOutLoud
 			if (isFound)
 				return temp;
 			else
-				return nil;
+				return Nil;
+		}
+
+		public RBNode<TKey, TData> Find(TKey key)
+		{
+			bool isFound = false;
+			RBNode<TKey, TData> temp = root;
+			RBNode<TKey, TData> node = new RBNode<TKey, TData>(key);
+
+			while (!isFound)
+			{
+				if (temp == Nil)
+					break;
+				if (node.IsLess(temp))
+					temp = temp.left;
+				else if (node.IsMore(temp))
+					temp = temp.right;
+				else
+					isFound = true;
+			}
+
+			if (isFound)
+				return temp;
+			else
+				return Nil;
 		}
 
 		// Нахождение узла с минимальным ключом в дереве
@@ -214,10 +239,10 @@ namespace CW_ThoughtsOutLoud
 		{
 			RBNode<TKey, TData> temp = node;
 
-			if (temp == nil)
-				return nil;
+			if (temp == Nil)
+				return Nil;
 
-			while (temp.left != nil)
+			while (temp.left != Nil)
 				temp = temp.left;
 
 			return temp;
@@ -229,12 +254,12 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: значения узлов дерева по порядку
 		public void DisplayTree()
 		{
-			if (root == nil)
+			if (root == Nil)
 			{
 				Console.WriteLine("The tree is empty.");
 				return;
 			}
-			if (root != nil)
+			if (root != Nil)
 			{
 				Display(root, 0);
 				Console.WriteLine("____________________________________");
@@ -247,7 +272,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: значения узлов поддерева по порядку
 		private void Display(RBNode<TKey, TData> current, int n)
 		{
-			if (current != nil)
+			if (current != Nil)
 			{
 				Display(current.right, n + 1);
 
@@ -271,7 +296,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			Console.WriteLine("Pre-order NLR");
 			TraversalNLR(root);
-			if (root == nil)
+			if (root == Nil)
 				Console.WriteLine("Empty tree.");
 			Console.WriteLine();
 		}
@@ -282,7 +307,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: значения узлов поддерева в порядке КЛП
 		private void TraversalNLR(RBNode<TKey, TData> current)
 		{
-			if (current != nil)
+			if (current != Nil)
 			{
 				Console.Write("{0} ", current.key);
 				TraversalNLR(current.left);
@@ -298,7 +323,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			Console.WriteLine("In-order LNR");
 			TraversalLNR(root);
-			if (root == nil)
+			if (root == Nil)
 				Console.WriteLine("Empty tree.");
 			Console.WriteLine();
 		}
@@ -309,7 +334,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: значения узлов поддерева в порядке ЛКП
 		private void TraversalLNR(RBNode<TKey, TData> current)
 		{
-			if (current != nil)
+			if (current != Nil)
 			{
 				TraversalLNR(current.left);
 				Console.Write("{0} ", current.key);
@@ -325,7 +350,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			Console.WriteLine("Reverse in-order RNL");
 			TraversalRNL(root);
-			if (root == nil)
+			if (root == Nil)
 				Console.WriteLine("Empty tree.");
 			Console.WriteLine();
 		}
@@ -336,7 +361,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: значения узлов поддерева в порядке ПКЛ
 		private void TraversalRNL(RBNode<TKey, TData> current)
 		{
-			if (current != nil)
+			if (current != Nil)
 			{
 				TraversalRNL(current.right);
 				Console.Write("{0} ", current.key);
@@ -352,7 +377,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			Console.WriteLine("Post-order LRN");
 			TraversalLRN(root);
-			if (root == nil)
+			if (root == Nil)
 				Console.WriteLine("Empty tree.");
 			Console.WriteLine();
 		}
@@ -363,7 +388,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: значения узлов поддерева в порядке ЛПК
 		private void TraversalLRN(RBNode<TKey, TData> current)
 		{
-			if (current != nil)
+			if (current != Nil)
 			{
 				TraversalLRN(current.left);
 				TraversalLRN(current.right);
@@ -379,10 +404,10 @@ namespace CW_ThoughtsOutLoud
 		public void Insert(TKey key, TData data)
 		{
 			RBNode<TKey, TData> Z = new RBNode<TKey, TData>(key, data);
-			RBNode<TKey, TData> Y = nil;
+			RBNode<TKey, TData> Y = Nil;
 			RBNode<TKey, TData> X = root;
 
-			while (X != nil)
+			while (X != Nil)
 			{
 				Y = X;
 				if (Z.IsEqual(X))
@@ -397,15 +422,15 @@ namespace CW_ThoughtsOutLoud
 			}
 			Z.parent = Y;
 
-			if (Y == nil)
+			if (Y == Nil)
 				root = Z;
 			else if (Z.IsLess(Y))
 				Y.left = Z;
 			else
 				Y.right = Z;
 
-			Z.left = nil;
-			Z.right = nil;
+			Z.left = Nil;
+			Z.right = Nil;
 			Z.color = Colour.Red; // colour the new node red
 
 			InsertFixUp(Z); // call method to check for violations and fix
@@ -492,7 +517,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: дерево с изменёнными связями
 		private void Transplant(RBNode<TKey, TData> X, RBNode<TKey, TData> Y)
 		{
-			if (X.parent == nil)
+			if (X.parent == Nil)
 				root = Y;
 			else if (X == X.parent.left)
 				X.parent.left = Y;
@@ -506,10 +531,18 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: поля структуры ключа day и month
 		// Входные данные: дерево
 		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
-		public void Delete(TKey key, TData data)
+		public SingleLinkedList<TData> Delete(TKey key, TData data)
 		{
 			RBNode<TKey, TData> Z = Find(key, data);
 			Delete(Z, data);
+			return Z.IndexesList;
+		}
+
+		public SingleLinkedList<TData> Delete(TKey key)
+		{
+			RBNode<TKey, TData> Z = Find(key);
+			Delete(Z);
+			return Z.IndexesList;
 		}
 
 		// Удаляет узел из дерева по правилу удаления в бинарном дереве или удаляет лишь индекс data
@@ -519,7 +552,7 @@ namespace CW_ThoughtsOutLoud
 		public void Delete(RBNode<TKey, TData> Z, TData data)
 		{
 			RBNode<TKey, TData> Y = Z;
-			RBNode<TKey, TData> X = nil;
+			RBNode<TKey, TData> X = Nil;
 			Colour SavedColor = Y.color;
 
 			if (Z.IndexesList.Count > 1)
@@ -527,17 +560,17 @@ namespace CW_ThoughtsOutLoud
 				Z.IndexesList.Remove(data);
 				return;
 			}
-			if (Z == nil)
+			if (Z == Nil)
 			{
 				Console.WriteLine("Nothing to delete!");
 				return;
 			}
-			if (Z.left == nil)
+			if (Z.left == Nil)
 			{
 				X = Z.right;
 				Transplant(Z, Z.right);
 			}
-			else if (Z.right == nil)
+			else if (Z.right == Nil)
 			{
 				X = Z.left;
 				Transplant(Z, Z.left);
@@ -546,7 +579,7 @@ namespace CW_ThoughtsOutLoud
 			{
 				Y = FindMinimum(Z.right);
 				Console.WriteLine("Minimum {0} was found.", Y.key);
-				if (Y == nil)
+				if (Y == Nil)
 				{
 					Console.WriteLine("Node does not have minimum.");
 					return;
@@ -579,20 +612,20 @@ namespace CW_ThoughtsOutLoud
 		public void Delete(RBNode<TKey, TData> Z)
 		{
 			RBNode<TKey, TData> Y = Z;
-			RBNode<TKey, TData> X = nil;
+			RBNode<TKey, TData> X = Nil;
 			Colour SavedColor = Y.color;
 
-			if (Z == nil)
+			if (Z == Nil)
 			{
-				Console.WriteLine("Nothing to delete!");
+				//Console.WriteLine("Nothing to delete!");
 				return;
 			}
-			if (Z.left == nil)
+			if (Z.left == Nil)
 			{
 				X = Z.right;
 				Transplant(Z, Z.right);
 			}
-			else if (Z.right == nil)
+			else if (Z.right == Nil)
 			{
 				X = Z.left;
 				Transplant(Z, Z.left);
@@ -600,10 +633,10 @@ namespace CW_ThoughtsOutLoud
 			else
 			{
 				Y = FindMinimum(Z.right);
-				Console.WriteLine("Minimum {0} was found.", Y.key);
-				if (Y == nil)
+				//Console.WriteLine("Minimum {0} was found.", Y.key);
+				if (Y == Nil)
 				{
-					Console.WriteLine("Node does not have minimum.");
+					//Console.WriteLine("Node does not have minimum.");
 					return;
 				}
 				SavedColor = Y.color;
@@ -632,11 +665,13 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: дерево
 		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева,
 		//					и его изображение на экране
-		public void DeleteAndDisplay(TKey key, TData data)
+		public SingleLinkedList<TData> DeleteAndDisplay(TKey key, TData data)
 		{
 			Console.WriteLine("Deleting {0} with data {1}", key, data);
-			this.Delete(key, data);
+			var result = this.Delete(key, data);
 			this.DisplayTree();
+
+			return result;
 		}
 
 		// Проверяет, нарушены ли свойства КЧ дерева после удаления узла, и исправляет нарушения

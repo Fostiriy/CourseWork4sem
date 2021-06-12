@@ -47,7 +47,7 @@ namespace CW_ThoughtsOutLoud
 			this.addRecordButton.Location = new System.Drawing.Point(104, 206);
 			this.addRecordButton.Name = "addRecordButton";
 			this.addRecordButton.Size = new System.Drawing.Size(105, 35);
-			this.addRecordButton.TabIndex = 0;
+			this.addRecordButton.TabIndex = 3;
 			this.addRecordButton.Text = "OK";
 			this.addRecordButton.UseVisualStyleBackColor = true;
 			this.addRecordButton.Click += new System.EventHandler(this.AddRecordButton_Click);
@@ -58,7 +58,7 @@ namespace CW_ThoughtsOutLoud
 			this.inputNameTextBox.Location = new System.Drawing.Point(12, 45);
 			this.inputNameTextBox.Name = "inputNameTextBox";
 			this.inputNameTextBox.Size = new System.Drawing.Size(308, 34);
-			this.inputNameTextBox.TabIndex = 1;
+			this.inputNameTextBox.TabIndex = 0;
 			// 
 			// inputNameLabel
 			// 
@@ -93,8 +93,9 @@ namespace CW_ThoughtsOutLoud
 			this.inputDateTextBox.Location = new System.Drawing.Point(145, 97);
 			this.inputDateTextBox.Mask = "00/00/0000";
 			this.inputDateTextBox.Name = "inputDateTextBox";
+			this.inputDateTextBox.ResetOnSpace = false;
 			this.inputDateTextBox.Size = new System.Drawing.Size(175, 34);
-			this.inputDateTextBox.TabIndex = 3;
+			this.inputDateTextBox.TabIndex = 1;
 			this.inputDateTextBox.ValidatingType = typeof(System.DateTime);
 			// 
 			// inputTimeTextBox
@@ -103,8 +104,9 @@ namespace CW_ThoughtsOutLoud
 			this.inputTimeTextBox.Location = new System.Drawing.Point(145, 137);
 			this.inputTimeTextBox.Mask = "00:00:00";
 			this.inputTimeTextBox.Name = "inputTimeTextBox";
+			this.inputTimeTextBox.ResetOnSpace = false;
 			this.inputTimeTextBox.Size = new System.Drawing.Size(175, 34);
-			this.inputTimeTextBox.TabIndex = 3;
+			this.inputTimeTextBox.TabIndex = 2;
 			// 
 			// cancelButton
 			// 
@@ -114,7 +116,7 @@ namespace CW_ThoughtsOutLoud
 			this.cancelButton.Location = new System.Drawing.Point(215, 206);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(105, 35);
-			this.cancelButton.TabIndex = 0;
+			this.cancelButton.TabIndex = 4;
 			this.cancelButton.Text = "Отмена";
 			this.cancelButton.UseVisualStyleBackColor = true;
 			// 
