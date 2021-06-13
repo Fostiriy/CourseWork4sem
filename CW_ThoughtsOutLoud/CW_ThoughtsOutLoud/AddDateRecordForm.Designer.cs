@@ -59,6 +59,7 @@ namespace CW_ThoughtsOutLoud
 			this.inputNameTextBox.Name = "inputNameTextBox";
 			this.inputNameTextBox.Size = new System.Drawing.Size(308, 34);
 			this.inputNameTextBox.TabIndex = 0;
+			this.inputNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputNameTextBox_KeyPress);
 			// 
 			// inputNameLabel
 			// 

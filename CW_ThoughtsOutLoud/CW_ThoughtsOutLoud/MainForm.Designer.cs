@@ -278,7 +278,7 @@ namespace CW_ThoughtsOutLoud
 			// saveFileDialog
 			// 
 			this.saveFileDialog.DefaultExt = "txt";
-			this.saveFileDialog.FileName = "saveFileName";
+			this.saveFileDialog.FileName = "CW output";
 			this.saveFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
 			this.saveFileDialog.Title = "Сохранить справочник в файл";
 			// 
