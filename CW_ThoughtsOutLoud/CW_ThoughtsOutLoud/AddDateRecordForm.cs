@@ -26,6 +26,7 @@ namespace CW_ThoughtsOutLoud
 			mainWindow.currentGrid.Rows.Add(data, key);
 			mainWindow.dateNameBook.Insert(key, data);
 			mainWindow.addMainRecordWindow.dateComboBox.Items.Add(key);
+			mainWindow.ChangeDebugInfo(0);
 		}
 
 		private void AddDateRecordForm_Load(object sender, EventArgs e)

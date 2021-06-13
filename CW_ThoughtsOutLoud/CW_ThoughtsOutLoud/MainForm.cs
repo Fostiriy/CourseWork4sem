@@ -18,6 +18,30 @@ namespace CW_ThoughtsOutLoud
 		internal AddCategoryRecordForm addCategoryRecordWindow = new AddCategoryRecordForm();
 		DebugForm debugWindow;
 
+		internal void ChangeDebugInfo(int index)
+		{
+			switch (index)
+			{
+				case 0:
+					debugInfo[0] = "Хеш-таблица о времени записи.\nКлюч: (string) дата время.\nЗначение: (string) имя аудиозаписи.\n" +
+						"Метод разрешения коллизий: открытая линейная адресация.\n";
+					debugInfo[0] += string.Join('\n', dateNameBook.Info());
+					break;
+				case 1:
+					debugInfo[1] = "Хеш-таблица о категориях аудиозаписей.\nКлюч: (string) название категории.\nЗначение: (string) цвет категории.\n" +
+						"Метод разрешения коллизий: метод цепочек.\n";
+					break;
+				case 2:
+					debugInfo[2] = "Красно-чёрное двоичное дерево.\nПоиск: диапазон дат.\nКлюч: (double) дата время.\n";
+					debugInfo[2] += string.Join('\n', dateTree.Info());
+					break;
+				case 3:
+					debugInfo[3] = "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n";
+					break;
+				default: break;
+			}
+		}
+
 		private void FillDateNameBook(HashTable<string, string> HT, string path)
 		{
 			FileInfo inputFile = new FileInfo(path);
@@ -36,8 +60,9 @@ namespace CW_ThoughtsOutLoud
 					HT.Insert(key, data);
 				}
 			}
-			debugInfo[0] += String.Join('\n',HT.Info());
+			ChangeDebugInfo(0);
 		}
+
 
 		public MainForm()
 		{
@@ -137,34 +162,45 @@ namespace CW_ThoughtsOutLoud
 					break;
 				default: break;
 			}
-
-			if (keyDate != 0 && dateTree.Find(keyDate) != dateTree.Nil)
+			if (currentRow != null && MessageBox.Show("Вы действительно хотите удалить выбранную запись?", "Подтверждение удаления",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 			{
-				result = MessageBox.Show("В основном справочнике содержатся записи, связанные с записью, которую вы хотите удалить.\n" +
-					"Всё равно удалить?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-				if (result == DialogResult.Yes)
+
+				if (keyDate != 0)
 				{
-					string date = currentRow.Cells[0].Value.ToString();
-					dateNameBook.Remove(date);
-					SingleLinkedList<DataGridViewRow> deletedIndexes = dateTree.Delete(keyDate);
-					foreach (DataGridViewRow row in deletedIndexes)
+					if (dateTree.Find(keyDate) != dateTree.Nil)
 					{
-						mainGrid.Rows.RemoveAt(row.Index);
+						result = MessageBox.Show("В основном справочнике содержатся записи, связанные с записью, которую вы хотите удалить.\n" +
+						"Всё равно удалить?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+						if (result == DialogResult.Yes)
+						{
+							SingleLinkedList<DataGridViewRow> deletedIndexes = dateTree.Delete(keyDate);
+							ChangeDebugInfo(2);
+							foreach (DataGridViewRow row in deletedIndexes)
+							{
+								mainGrid.Rows.RemoveAt(row.Index);
+							}
+						}
+					}
+
+					if (result == DialogResult.Yes)
+					{
+						string date = currentRow.Cells[0].Value.ToString();
+						dateNameBook.Remove(date);
+						ChangeDebugInfo(0);
 					}
 				}
-			}
 
-			if (result == DialogResult.Yes)
-			{
-				if (currentRow != null)
+				if (result == DialogResult.Yes)
 				{
 					currentGrid.Rows.RemoveAt(currentGrid.CurrentRow.Index);
 				}
-				else
-				{
-					MessageBox.Show("Необходимо выбрать строку для удаления в таблице!",
-						"Не выбрана строка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
+
+			}
+			else
+			{
+				MessageBox.Show("Необходимо выбрать строку для удаления в таблице!",
+					"Не выбрана строка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -189,6 +225,11 @@ namespace CW_ThoughtsOutLoud
 					if (result == DialogResult.Yes)
 					{
 						mainGrid.Rows.Clear();
+						dateTree.Clear();
+						ChangeDebugInfo(2);
+						ChangeDebugInfo(3);
+
+						// И дерево Егора тоже чистится
 					}
 					return;
 				case 1:
@@ -206,10 +247,22 @@ namespace CW_ThoughtsOutLoud
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 			if (result == DialogResult.Yes)
 			{
-				currentGrid.Rows.Clear();
 				mainGrid.Rows.Clear();
+				dateTree.Clear();
+
+				ChangeDebugInfo(2);
+				ChangeDebugInfo(3);
+
+				currentGrid.Rows.Clear();
 				if (dateHT != null)
+				{
 					dateHT.Clear();
+					ChangeDebugInfo(0);
+				}
+
+				// И дерево, и ХТ Егора тоже чистятся
+				//ChangeDebugInfo(1);
+
 			}
 		}
 
@@ -221,12 +274,12 @@ namespace CW_ThoughtsOutLoud
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			debugInfo[0] += "Хеш-таблица о времени записи.\nКлюч: (string) дата время.\nЗначение: (string) имя аудиозаписи.\n" +
+			debugInfo[0] = "Хеш-таблица о времени записи.\nКлюч: (string) дата время.\nЗначение: (string) имя аудиозаписи.\n" +
 				"Метод разрешения коллизий: открытая линейная адресация.\n";
-			debugInfo[1] += "Хеш-таблица о категориях аудиозаписей.\nКлюч: (string) название категории.\nЗначение: (string) цвет категории.\n" +
+			debugInfo[1] = "Хеш-таблица о категориях аудиозаписей.\nКлюч: (string) название категории.\nЗначение: (string) цвет категории.\n" +
 				"Метод разрешения коллизий: метод цепочек.\n";
-			debugInfo[2] += "Красно-чёрное двоичное дерево.\nПоиск: диапазон дат.\nКлюч: (double) дата время.\n";
-			debugInfo[3] += "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n";
+			debugInfo[2] = "Красно-чёрное двоичное дерево.\nПоиск: диапазон дат.\nКлюч: (double) дата время.\n";
+			debugInfo[3] = "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n";
 		}
 
 	}

@@ -26,8 +26,11 @@ namespace CW_ThoughtsOutLoud
 		private Node<Tdata> head;
 		public int Count { get; private set; } = 0;
 
+		// Очищает список
+		public void Clear() => head = null;
+
 		// Возвращает строку, содержащую значения узлов списка по порядку
-		public string Print()
+		public string Info()
 		{
 			string result = "";
 			Node<Tdata> current = head;
@@ -193,36 +196,6 @@ namespace CW_ThoughtsOutLoud
 
 			Count++;
 		}
-
-		//public void Insert(Tdata item)
-		//{
-		//	Node<Tdata> newNode = new Node<Tdata>(item);
-		//	if (Count == 0)
-		//	{
-		//		head = newNode;
-		//	}
-		//	else
-		//	{
-		//		InsertAscending(newNode);
-		//	}
-		//}
-
-		//private void InsertAscending(Node<Tdata> node)
-		//{
-		//	var tail = FindTail();
-		//	if (node > tail)
-		//	{
-		//		AddAfter(tail, node);
-		//		tail = node;
-		//	}
-		//	else
-		//	{
-		//		Node current = tail.Next;
-		//		while (node.Key > current.Key && current.Next != tail)
-		//			current = current.Next;
-		//		InsertAfterInternal(current, node);
-		//	}
-		//}
 
 		// Добавляет элементы переданного массива в конец
 		public void PushBackRange(Tdata[] array)
@@ -427,9 +400,6 @@ namespace CW_ThoughtsOutLoud
 
 			head = prev;
 		}
-
-		// Очищает список
-		public void Clear() => head = null;
 
 		// Реализация foreach
 		IEnumerator<Tdata> IEnumerable<Tdata>.GetEnumerator()

@@ -29,24 +29,36 @@ namespace CW_ThoughtsOutLoud
 			mainWindow = (MainForm)Owner;
 		}
 
-		private void dateNameBookRadioButton_CheckedChanged(object sender, EventArgs e)
+		private void DateNameBookRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			debugInfoRichTextBox.Text = mainWindow.debugInfo[0];
 		}
 
-		private void categoryColorBookRadioButton_CheckedChanged(object sender, EventArgs e)
+		private void CategoryColorBookRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			debugInfoRichTextBox.Text = mainWindow.debugInfo[1];
 		}
 
-		private void dateTreeRadioButton_CheckedChanged(object sender, EventArgs e)
+		private void DateTreeRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			debugInfoRichTextBox.Text = mainWindow.debugInfo[2];
 		}
 
-		private void categoryTreeRadioButton_CheckedChanged(object sender, EventArgs e)
+		private void CategoryTreeRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			debugInfoRichTextBox.Text = mainWindow.debugInfo[3];
+		}
+
+		private void DebugForm_Activated(object sender, EventArgs e)
+		{
+			if (dateNameBookRadioButton.Checked)
+				debugInfoRichTextBox.Text = mainWindow.debugInfo[0];
+			if (categoryColorBookRadioButton.Checked)
+				debugInfoRichTextBox.Text = mainWindow.debugInfo[1];
+			if (dateTreeRadioButton.Checked)
+				debugInfoRichTextBox.Text = mainWindow.debugInfo[2];
+			if (categoryTreeRadioButton.Checked)
+				debugInfoRichTextBox.Text = mainWindow.debugInfo[3];
 		}
 	}
 }

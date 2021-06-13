@@ -85,7 +85,7 @@ namespace CW_ThoughtsOutLoud
 			this.dateTreeRadioButton.TabIndex = 2;
 			this.dateTreeRadioButton.Text = "БДП дата-время";
 			this.dateTreeRadioButton.UseVisualStyleBackColor = true;
-			this.dateTreeRadioButton.CheckedChanged += new System.EventHandler(this.dateTreeRadioButton_CheckedChanged);
+			this.dateTreeRadioButton.CheckedChanged += new System.EventHandler(this.DateTreeRadioButton_CheckedChanged);
 			// 
 			// categoryTreeRadioButton
 			// 
@@ -96,7 +96,7 @@ namespace CW_ThoughtsOutLoud
 			this.categoryTreeRadioButton.TabIndex = 4;
 			this.categoryTreeRadioButton.Text = "БДП категория";
 			this.categoryTreeRadioButton.UseVisualStyleBackColor = true;
-			this.categoryTreeRadioButton.CheckedChanged += new System.EventHandler(this.categoryTreeRadioButton_CheckedChanged);
+			this.categoryTreeRadioButton.CheckedChanged += new System.EventHandler(this.CategoryTreeRadioButton_CheckedChanged);
 			// 
 			// categoryColorBookRadioButton
 			// 
@@ -107,7 +107,7 @@ namespace CW_ThoughtsOutLoud
 			this.categoryColorBookRadioButton.TabIndex = 3;
 			this.categoryColorBookRadioButton.Text = "ХТ категория-цвет";
 			this.categoryColorBookRadioButton.UseVisualStyleBackColor = true;
-			this.categoryColorBookRadioButton.CheckedChanged += new System.EventHandler(this.categoryColorBookRadioButton_CheckedChanged);
+			this.categoryColorBookRadioButton.CheckedChanged += new System.EventHandler(this.CategoryColorBookRadioButton_CheckedChanged);
 			// 
 			// dateNameBookRadioButton
 			// 
@@ -118,7 +118,7 @@ namespace CW_ThoughtsOutLoud
 			this.dateNameBookRadioButton.TabIndex = 1;
 			this.dateNameBookRadioButton.Text = "ХТ имя-дата-время";
 			this.dateNameBookRadioButton.UseVisualStyleBackColor = true;
-			this.dateNameBookRadioButton.CheckedChanged += new System.EventHandler(this.dateNameBookRadioButton_CheckedChanged);
+			this.dateNameBookRadioButton.CheckedChanged += new System.EventHandler(this.DateNameBookRadioButton_CheckedChanged);
 			// 
 			// DebugForm
 			// 
@@ -133,6 +133,7 @@ namespace CW_ThoughtsOutLoud
 			this.Name = "DebugForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Окно отладки";
+			this.Activated += new System.EventHandler(this.DebugForm_Activated);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DebugForm_FormClosing);
 			this.Load += new System.EventHandler(this.DebugForm_Load);
 			this.splitContainer.Panel1.ResumeLayout(false);

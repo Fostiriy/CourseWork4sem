@@ -48,6 +48,7 @@ namespace CW_ThoughtsOutLoud
 			key1 = key1.Replace(".", "");
 			key1 = key1.Replace(":", "");
 			mainWindow.dateTree.Insert(double.Parse(key1), mainWindow.currentGrid.Rows[gridIndex]);
+			mainWindow.ChangeDebugInfo(2);
 		}
 	}
 }

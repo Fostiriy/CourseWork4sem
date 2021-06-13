@@ -106,7 +106,7 @@ namespace CW_ThoughtsOutLoud
 			Console.WriteLine("Clearing the tree.");
 			while (root != Nil)
 				Delete(root);
-			DisplayTree();
+			Info();
 		}
 
 
@@ -252,40 +252,47 @@ namespace CW_ThoughtsOutLoud
 		// Формальные параметры: пусто
 		// Входные данные: дерево
 		// Выходные данные: значения узлов дерева по порядку
-		public void DisplayTree()
+		public string Info()
 		{
+			string result = string.Empty;
+
 			if (root == Nil)
 			{
-				Console.WriteLine("The tree is empty.");
-				return;
+				result += "The tree is empty.\n";
 			}
-			if (root != Nil)
+			else
 			{
-				Display(root, 0);
-				Console.WriteLine("____________________________________");
+				result += Info(root, 0);
+				result += "____________________________________\n";
 			}
+
+			return result;
 		}
 
 		// Выводит значения полей узлов поддерева на экран с учётом связей
 		// Формальные параметры: узел-корень поддерева, число пробелов n
 		// Входные данные: дерево
 		// Выходные данные: значения узлов поддерева по порядку
-		private void Display(RBNode<TKey, TData> current, int n)
+		private string Info(RBNode<TKey, TData> current, int n)
 		{
+			string result = string.Empty;
+
 			if (current != Nil)
 			{
-				Display(current.right, n + 1);
+				result += Info(current.right, n + 1);
 
 				for (int i = 0; i < n; i++)
-					Console.Write("	");
-				Console.Write("{0} ", current.key);
+					result += "	";
+				result += $"{current.key} ";
 				if (current.color == Colour.Black)
-					Console.WriteLine(" (B, {0})", current.IndexesList.Print());
+					result += $" (B, {current.IndexesList.Info()})\n";
 				else
-					Console.WriteLine(" (R, {0})", current.IndexesList.Print());
+					result += $" (R, {current.IndexesList.Info()})\n";
 
-				Display(current.left, n + 1);
+				result += Info(current.left, n + 1);
 			}
+
+			return result;
 		}
 
 		// Выводит ключи узлов согласно прямому обходу дерева
@@ -445,7 +452,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			Console.WriteLine("Inserting {0} with data {1}", key, data);
 			this.Insert(key, data);
-			this.DisplayTree();
+			this.Info();
 		}
 
 		// Проверяет, нарушены ли свойства КЧ дерева после вставки узла, и исправляет нарушения
@@ -669,7 +676,7 @@ namespace CW_ThoughtsOutLoud
 		{
 			Console.WriteLine("Deleting {0} with data {1}", key, data);
 			var result = this.Delete(key, data);
-			this.DisplayTree();
+			this.Info();
 
 			return result;
 		}
