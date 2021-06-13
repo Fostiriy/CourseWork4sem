@@ -42,22 +42,29 @@ namespace CW_ThoughtsOutLoud
 			}
 		}
 
-		private void FillDateNameBook(HashTable<string, string> HT, string path)
+		private void ReadFile(string path)
 		{
 			FileInfo inputFile = new FileInfo(path);
+			string line;
 
 			using (StreamReader istream = inputFile.OpenText())
 			{
-				while (!istream.EndOfStream)
+				line = istream.ReadLine();
+				if (line[0] == '|')
 				{
-					string[] info = istream.ReadLine().Split('|');
-					string data = info[0].Trim('\t', ' ');
-					string key = info[1];
+					line = istream.ReadLine();
+					while (line[0] != '|')
+					{
+						string[] info = line.Split('|');
+						string data = info[0].Trim('\t', ' ');
+						string key = info[1];
 
-					addMainRecordWindow.dateComboBox.Items.Add(key);
+						addMainRecordWindow.dateComboBox.Items.Add(key);
 
-					dateNameGrid.Rows.Add(data, key);
-					HT.Insert(key, data);
+						dateNameGrid.Rows.Add(data, key);
+						dateNameBook.Insert(key, data);
+						line = istream.ReadLine();
+					}
 				}
 			}
 			ChangeDebugInfo(0);
@@ -76,7 +83,7 @@ namespace CW_ThoughtsOutLoud
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
 			{
 				dateNameGrid.Rows.Clear();
-				FillDateNameBook(dateNameBook, openFileDialog.FileName);
+				ReadFile(openFileDialog.FileName);
 			}
 		}
 
@@ -84,8 +91,21 @@ namespace CW_ThoughtsOutLoud
 		{
 			if (saveFileDialog.ShowDialog() == DialogResult.OK)
 			{
-				string filename = saveFileDialog.FileName;
-				File.WriteAllText(filename, dateNameBook.InfoToFile());
+				string fileName = saveFileDialog.FileName;
+				using (StreamWriter ostream = new StreamWriter(fileName))
+				{
+					ostream.WriteLine(dateNameBook.InfoToFile());
+					//ostream.WriteLine(categoryColorBook.InfoToFile());
+					ostream.WriteLine("|Общий справочник");
+					foreach (DataGridViewRow row in mainGrid.Rows)
+					{
+						ostream.WriteLine($"{row.Cells[0].Value.ToString(), -50}|" +
+							$"{row.Cells[1].Value.ToString(), -14}|" +
+							$"{row.Cells[2].Value.ToString(), -30}|" +
+							$"{row.Cells[3].Value.ToString(), -30}");
+					}
+					ostream.WriteLine("|Общий справочник");
+				}
 				MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
@@ -186,7 +206,7 @@ namespace CW_ThoughtsOutLoud
 
 					if (result == DialogResult.Yes)
 					{
-						string date = currentRow.Cells[0].Value.ToString();
+						string date = currentRow.Cells[1].Value.ToString();
 						dateNameBook.Remove(date);
 						ChangeDebugInfo(0);
 					}

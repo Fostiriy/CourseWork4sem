@@ -86,7 +86,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				MessageBox.Show("Ошибка в введённых данных! Запись не будет добавлена.", "Некорректные данные", 
+				MessageBox.Show("Ошибка в введённых данных! Запись не будет добавлена.", "Некорректные данные",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
