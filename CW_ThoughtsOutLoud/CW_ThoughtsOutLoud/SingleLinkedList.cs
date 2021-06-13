@@ -32,7 +32,7 @@ namespace CW_ThoughtsOutLoud
 		// Возвращает строку, содержащую значения узлов списка по порядку
 		public string Info()
 		{
-			string result = "";
+			string result = string.Empty;
 			Node<Tdata> current = head;
 			while (current != null)
 			{
@@ -40,6 +40,20 @@ namespace CW_ThoughtsOutLoud
 				current = current.Next;
 			}
 			result += "null";
+
+			return result;
+		}
+
+		// Возвращает строку, содержащую значения узлов списка по порядку
+		public string ElementsInfo()
+		{
+			string result = string.Empty;
+			Node<Tdata> current = head;
+			while (current != null)
+			{
+				result += $"{current.Data} ";
+				current = current.Next;
+			}
 
 			return result;
 		}

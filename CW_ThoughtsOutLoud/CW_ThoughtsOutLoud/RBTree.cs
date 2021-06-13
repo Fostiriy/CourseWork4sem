@@ -263,7 +263,6 @@ namespace CW_ThoughtsOutLoud
 			else
 			{
 				result += Info(root, 0);
-				result += "____________________________________\n";
 			}
 
 			return result;
@@ -281,6 +280,52 @@ namespace CW_ThoughtsOutLoud
 			{
 				result += Info(current.right, n + 1);
 
+				result += $"Ключ: {current.key}\n";
+				if (current.color == Colour.Black)
+					result += $"Цвет: чёрный\n";
+				else
+					result += $"Цвет: красный\n";
+				result += $"Индексы:\n{current.IndexesList.ElementsInfo()}\n\n";
+
+				result += Info(current.left, n + 1);
+			}
+
+			return result;
+		}
+
+		// Выводит значения полей узлов дерева на экран с учётом связей
+		// Формальные параметры: пусто
+		// Входные данные: дерево
+		// Выходные данные: значения узлов дерева по порядку
+		public string InfoLikeTree()
+		{
+			string result = string.Empty;
+
+			if (root == Nil)
+			{
+				result += "The tree is empty.\n";
+			}
+			else
+			{
+				result += InfoLikeTree(root, 0);
+				result += "____________________________________\n";
+			}
+
+			return result;
+		}
+
+		// Выводит значения полей узлов поддерева на экран с учётом связей
+		// Формальные параметры: узел-корень поддерева, число пробелов n
+		// Входные данные: дерево
+		// Выходные данные: значения узлов поддерева по порядку
+		private string InfoLikeTree(RBNode<TKey, TData> current, int n)
+		{
+			string result = string.Empty;
+
+			if (current != Nil)
+			{
+				result += InfoLikeTree(current.right, n + 1);
+
 				for (int i = 0; i < n; i++)
 					result += "	";
 				result += $"{current.key} ";
@@ -289,7 +334,7 @@ namespace CW_ThoughtsOutLoud
 				else
 					result += $" (R, {current.IndexesList.Info()})\n";
 
-				result += Info(current.left, n + 1);
+				result += InfoLikeTree(current.left, n + 1);
 			}
 
 			return result;
