@@ -175,8 +175,42 @@ namespace CW_ThoughtsOutLoud
 
 		private void NewBookButton_Click(object sender, EventArgs e)
 		{
-			dateNameBook.Clear();
-			dateNameGrid.Rows.Clear();
+			HashTable<string, string> dateHT = null;
+			// Здесь ещё хеш-таблица с категориями
+			DialogResult result = DialogResult.None;
+
+			switch (booksTabControl.SelectedIndex)
+			{
+				case 0:
+					currentGrid = mainGrid;
+					result = MessageBox.Show("Все записи в выбранном справочнике будут удалены.\nПродолжить?",
+						"Предупреждение об удалении данных",
+						MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					if (result == DialogResult.Yes)
+					{
+						mainGrid.Rows.Clear();
+					}
+					return;
+				case 1:
+					currentGrid = dateNameGrid;
+					dateHT = dateNameBook;
+					break;
+				case 2:
+					currentGrid = categoryColorGrid;
+					break;
+				default: break;
+			}
+
+			result = MessageBox.Show("Все записи в выбранном и основном справочниках будут удалены.\nПродолжить?",
+				"Предупреждение об удалении данных",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			if (result == DialogResult.Yes)
+			{
+				currentGrid.Rows.Clear();
+				mainGrid.Rows.Clear();
+				if (dateHT != null)
+					dateHT.Clear();
+			}
 		}
 
 		private void MainForm_LocationChanged(object sender, EventArgs e)
@@ -194,5 +228,6 @@ namespace CW_ThoughtsOutLoud
 			debugInfo[2] += "Красно-чёрное двоичное дерево.\nПоиск: диапазон дат.\nКлюч: (double) дата время.\n";
 			debugInfo[3] += "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n";
 		}
+
 	}
 }

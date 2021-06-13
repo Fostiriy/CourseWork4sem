@@ -49,7 +49,11 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: объект класса
 		// Очистка цепочек массива items
 		// Выходные данные: пустая хеш-таблица
-		public void Clear() => items = new HTNode<TKey, TData>[8];
+		public void Clear()
+		{
+			Size = 8;
+			items = new HTNode<TKey, TData>[Size];
+		}
 
 
 		// Входные данные: объект класса
