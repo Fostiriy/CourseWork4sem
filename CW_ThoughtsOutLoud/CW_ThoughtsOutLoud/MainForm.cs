@@ -73,20 +73,21 @@ namespace CW_ThoughtsOutLoud
 
 		private void OpenFileButton_Click(object sender, EventArgs e)
 		{
-			if (openFileDialog.ShowDialog() == DialogResult.Cancel)
-				return;
-			dateNameGrid.Rows.Clear();
-			FillDateNameBook(dateNameBook, openFileDialog.FileName);
+			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				dateNameGrid.Rows.Clear();
+				FillDateNameBook(dateNameBook, openFileDialog.FileName);
+			}
 		}
 
 		private void SaveFileButton_Click(object sender, EventArgs e)
 		{
-			if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
-				return;
-			string filename = saveFileDialog.FileName;
-			File.WriteAllText(filename, dateNameBook.InfoToFile());
-
-			MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				string filename = saveFileDialog.FileName;
+				File.WriteAllText(filename, dateNameBook.InfoToFile());
+				MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 		}
 
 		private void AddRecordButton_Click(object sender, EventArgs e)
@@ -282,5 +283,29 @@ namespace CW_ThoughtsOutLoud
 			debugInfo[3] = "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n";
 		}
 
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			DialogResult result = MessageBox.Show("Хотите выйти из программы?", "Завершение работы программы",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			if (result == DialogResult.Yes)
+			{
+				result = MessageBox.Show("Сохранить данные с хеш-таблиц в файл?", "Завершение работы программы",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+				if (result == DialogResult.Yes)
+				{
+					if (saveFileDialog.ShowDialog() == DialogResult.OK)
+					{
+						string filename = saveFileDialog.FileName;
+						File.WriteAllText(filename, dateNameBook.InfoToFile());
+						MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
+				}
+			}
+			else
+			{
+				e.Cancel = true;
+			}
+		}
 	}
 }

@@ -365,6 +365,7 @@ namespace CW_ThoughtsOutLoud
 			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.Text = "Мысли вслух";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
 			this.booksTabControl.ResumeLayout(false);
