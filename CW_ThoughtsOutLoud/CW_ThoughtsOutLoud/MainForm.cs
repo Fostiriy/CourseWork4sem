@@ -24,19 +24,20 @@ namespace CW_ThoughtsOutLoud
 			{
 				case 0:
 					debugInfo[0] = "Хеш-таблица о времени записи.\nКлюч: (string) дата время.\nЗначение: (string) имя аудиозаписи.\n" +
-						"Метод разрешения коллизий: открытая линейная адресация.\n";
+						"Метод разрешения коллизий: открытая линейная адресация.\n" +
+						$"Размер: {dateNameBook.Size}\n\n";
 					debugInfo[0] += string.Join('\n', dateNameBook.Info());
 					break;
 				case 1:
 					debugInfo[1] = "Хеш-таблица о категориях аудиозаписей.\nКлюч: (string) название категории.\nЗначение: (string) цвет категории.\n" +
-						"Метод разрешения коллизий: метод цепочек.\n";
+						"Метод разрешения коллизий: метод цепочек.\n\n";
 					break;
 				case 2:
-					debugInfo[2] = "Красно-чёрное двоичное дерево.\nПоиск: диапазон дат.\nКлюч: (double) дата время.\n";
+					debugInfo[2] = "Красно-чёрное двоичное дерево.\nПоиск: диапазон дат.\nКлюч: (double) дата время.\n\n";
 					debugInfo[2] += string.Join('\n', dateTree.Info());
 					break;
 				case 3:
-					debugInfo[3] = "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n";
+					debugInfo[3] = "АВЛ двоичное дерево.\nПоиск: категории в алфавитном порядке.\nКлюч: (string) название категории.\n\n";
 					break;
 				default: break;
 			}
@@ -64,6 +65,71 @@ namespace CW_ThoughtsOutLoud
 						dateNameGrid.Rows.Add(data, key);
 						dateNameBook.Insert(key, data);
 						line = istream.ReadLine();
+					}
+					MessageBox.Show("Справочник \"Имя-дата-время\" был успешно заполнен!", "Уведомление о заполнении", 
+						MessageBoxButtons.OK, MessageBoxIcon.Information);
+					ChangeDebugInfo(0);
+
+					line = istream.ReadLine();
+					if (line[0] == '|')
+					{
+						line = istream.ReadLine();
+						while (line[0] != '|')
+						{
+							string[] info = line.Split('|');
+							string key = info[0].Trim('\t', ' ');
+							string data = info[1].Trim('\t', ' ');
+
+							addMainRecordWindow.categoryComboBox.Items.Add(key);
+
+							categoryColorGrid.Rows.Add(key, data);
+							categoryColorBook.Insert(key, data); // Справочник Егора
+							line = istream.ReadLine();
+						}
+						MessageBox.Show("Справочник \"Категория-цвет\" был успешно заполнен!", "Уведомление о заполнении",
+							MessageBoxButtons.OK, MessageBoxIcon.Information);
+						ChangeDebugInfo(1);
+
+						line = istream.ReadLine();
+						if (line[0] == '|')
+						{
+							line = istream.ReadLine();
+							while (line[0] != '|')
+							{
+								string[] info = line.Split('|');
+
+								string data1 = info[0].Trim('\t', ' ');
+								string key1 = info[1];
+
+								string key2 = info[2].Trim('\t', ' ');
+								string data2 = info[3].Trim('\t', ' ');
+
+								if (dateNameBook.Search(key1) != null && categoryColorBook.Search(key2) != null) // Егору поменять на свой справочник
+								{
+									string keyDate = key1.Replace(" ", "");
+									keyDate = keyDate.Replace(".", "");
+									keyDate = keyDate.Replace(":", "");
+									int gridIndex = mainGrid.Rows.Add(data1, key1, key2, data2);
+									dateTree.Insert(double.Parse(keyDate), mainGrid.Rows[gridIndex]);
+									// Дерево Егора
+									
+									line = istream.ReadLine();
+								}
+								else
+								{
+									MessageBox.Show("В файле нарушена целостность данных, справочник \"Общая информация\" не может быть заполнен!", 
+										"Ошибка целостности данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+									mainGrid.Rows.Clear();
+									dateTree.Clear();
+									// Дерево Егора
+									return;
+								}
+							}
+							MessageBox.Show("Справочник \"Общая информация\" был успешно заполнен!", "Уведомление о заполнении",
+								MessageBoxButtons.OK, MessageBoxIcon.Information);
+							ChangeDebugInfo(2);
+							ChangeDebugInfo(3);
+						}
 					}
 				}
 			}
@@ -94,7 +160,9 @@ namespace CW_ThoughtsOutLoud
 				string fileName = saveFileDialog.FileName;
 				using (StreamWriter ostream = new StreamWriter(fileName))
 				{
-					ostream.WriteLine(dateNameBook.InfoToFile());
+					ostream.WriteLine("|Справочник 1");
+					ostream.Write(dateNameBook.InfoToFile());
+					ostream.WriteLine("|Справочник 1");
 					//ostream.WriteLine(categoryColorBook.InfoToFile());
 					ostream.WriteLine("|Общий справочник");
 					foreach (DataGridViewRow row in mainGrid.Rows)

@@ -281,10 +281,10 @@ namespace CW_ThoughtsOutLoud
 				result += Info(current.right, n + 1);
 
 				result += $"Ключ: {current.key}\n";
-				if (current.color == Colour.Black)
-					result += $"Цвет: чёрный\n";
-				else
-					result += $"Цвет: красный\n";
+				//if (current.color == Colour.Black)
+				//	result += $"Цвет: чёрный\n";
+				//else
+				//	result += $"Цвет: красный\n";
 				result += $"Индексы:\n{current.IndexesList.ElementsInfo()}\n\n";
 
 				result += Info(current.left, n + 1);

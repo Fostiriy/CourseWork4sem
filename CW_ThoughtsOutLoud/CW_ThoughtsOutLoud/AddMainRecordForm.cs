@@ -27,8 +27,8 @@ namespace CW_ThoughtsOutLoud
 
 		private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			string recordName = mainWindow.categoryColorBook.Search(dateComboBox.Text).Data;
-			nameTextBox.Text = recordName;
+			string color = mainWindow.categoryColorBook.Search(categoryComboBox.Text).Data;
+			colorTextBox.Text = color;
 		}
 
 		private void AddMainRecordForm_Load(object sender, EventArgs e)

@@ -51,7 +51,7 @@ namespace CW_ThoughtsOutLoud
 			Node<Tdata> current = head;
 			while (current != null)
 			{
-				result += $"{current.Data} ";
+				result += $"{current.Data}\n";
 				current = current.Next;
 			}
 

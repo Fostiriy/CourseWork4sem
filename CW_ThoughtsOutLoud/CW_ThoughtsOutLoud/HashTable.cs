@@ -61,7 +61,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: строка с информацией о всех элементах таблицы
 		public string InfoToFile()
 		{
-			string result = "|Справочник 1";
+			string result = string.Empty;
 
 			for (int i = 0; i < Size; i++)
 			{
@@ -70,7 +70,6 @@ namespace CW_ThoughtsOutLoud
 					result += $"{items[i].Data, -50} |{items[i].Key}\n";
 				}
 			}
-			result += "|Справочник 1\n\n";
 
 			return result;
 		}
