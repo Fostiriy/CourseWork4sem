@@ -35,6 +35,7 @@ namespace CW_ThoughtsOutLoud
 		private HTNode<TKey, TData>[] items;
 		// Размер хеш-таблицы (длина массива items)
 		public int Size { get; private set; }
+		public int ComparisonsNumber { get; private set; };
 		
 
 		// Входные данные: размер хеш-таблицы
@@ -221,6 +222,7 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: данные элемента с данным ключом
 		public HTNode<TKey, TData> Search(TKey key)
 		{
+			ComparisonsNumber = 0;
 			var hashCode = GetHashCode(key);
 			HTNode<TKey, TData> result = null;
 
@@ -236,6 +238,7 @@ namespace CW_ThoughtsOutLoud
 			{
 				for (int i = hashCode; i < Size; i++)
 				{
+					ComparisonsNumber++;
 					if (items[i] == null)
 						return result;
 					if (items[i].Key.Equals(key))
@@ -249,6 +252,7 @@ namespace CW_ThoughtsOutLoud
 				{
 					for (int i = 0; i < hashCode; i++)
 					{
+						ComparisonsNumber++;
 						if (items[i] == null)
 							return result;
 						if (items[i].Key.Equals(key))
