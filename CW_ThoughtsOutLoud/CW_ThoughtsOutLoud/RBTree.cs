@@ -285,7 +285,7 @@ namespace CW_ThoughtsOutLoud
 				//	result += $"Цвет: чёрный\n";
 				//else
 				//	result += $"Цвет: красный\n";
-				result += $"Индексы:\n{current.IndexesList.ElementsInfo()}\n\n";
+				result += $"Индексы:\n{current.IndexesList.ElementsInfo()}\n";
 
 				result += Info(current.left, n + 1);
 			}

@@ -85,6 +85,11 @@ namespace CW_ThoughtsOutLoud
 					mainWindow.addMainRecordWindow.dateComboBox.Items.Add(key);
 					mainWindow.ChangeDebugInfo(0);
 				}
+				else
+				{
+					MessageBox.Show("Запись с таким ключом уже есть в справочнике", "Повторное добавление",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 			else
 			{

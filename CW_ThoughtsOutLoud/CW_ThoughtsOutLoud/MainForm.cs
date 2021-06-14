@@ -43,6 +43,34 @@ namespace CW_ThoughtsOutLoud
 			}
 		}
 
+		private void ClearAllBooksWithSaving()
+		{
+			DialogResult result = MessageBox.Show("Сохранить данные хеш-таблиц в файл?", "Сохранение перед открытием нового файла",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+			if (result == DialogResult.Yes)
+			{
+				if (saveFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					string filename = saveFileDialog.FileName;
+					File.WriteAllText(filename, dateNameBook.InfoToFile());
+					MessageBox.Show("Файл сохранён!", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+			}
+
+			mainGrid.Rows.Clear();
+			dateNameGrid.Rows.Clear();
+			categoryColorGrid.Rows.Clear();
+			dateTree.Clear();
+			// дерево Егора
+			dateNameBook.Clear();
+			categoryColorBook.Clear(); // тоже Егора
+			ChangeDebugInfo(0);
+			ChangeDebugInfo(1);
+			ChangeDebugInfo(2);
+			ChangeDebugInfo(3);
+		}
+
 		private void ReadFile(string path)
 		{
 			FileInfo inputFile = new FileInfo(path);
@@ -146,9 +174,10 @@ namespace CW_ThoughtsOutLoud
 
 		private void OpenFileButton_Click(object sender, EventArgs e)
 		{
+			ClearAllBooksWithSaving();
+
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
 			{
-				dateNameGrid.Rows.Clear();
 				ReadFile(openFileDialog.FileName);
 			}
 		}
@@ -254,7 +283,7 @@ namespace CW_ThoughtsOutLoud
 			if (currentRow != null && MessageBox.Show("Вы действительно хотите удалить выбранную запись?", "Подтверждение удаления",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 			{
-
+				// Дописать случай с keyCategory != Empty
 				if (keyDate != 0)
 				{
 					if (dateTree.Find(keyDate) != dateTree.Nil)
@@ -282,7 +311,20 @@ namespace CW_ThoughtsOutLoud
 
 				if (result == DialogResult.Yes)
 				{
-					currentGrid.Rows.RemoveAt(currentGrid.CurrentRow.Index);
+					currentGrid.Rows.RemoveAt(currentRow.Index);
+				}
+
+				if (currentGrid == mainGrid)
+				{
+					string date = currentRow.Cells[1].Value.ToString();
+					date = date.Replace(" ", "");
+					date = date.Replace(".", "");
+					date = date.Replace(":", "");
+					keyDate = double.Parse(date);
+					dateTree.Delete(keyDate, currentRow);
+					ChangeDebugInfo(2);
+
+					// Удаление записи из дерева Егора
 				}
 
 			}
@@ -377,7 +419,7 @@ namespace CW_ThoughtsOutLoud
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 			if (result == DialogResult.Yes)
 			{
-				result = MessageBox.Show("Сохранить данные с хеш-таблиц в файл?", "Завершение работы программы",
+				result = MessageBox.Show("Сохранить данные хеш-таблиц в файл?", "Завершение работы программы",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 				if (result == DialogResult.Yes)
