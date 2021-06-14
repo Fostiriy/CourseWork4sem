@@ -115,8 +115,10 @@ namespace CW_ThoughtsOutLoud
 		// Входные данные: объект класса, целочисленный ключ, целое число-данные
 		// Вставка элемента с заданным ключом и заданными данными
 		// Выходные данные: хеш-таблица с вставленным элементом с переданными данными
-		public void Insert(TKey key, TData data)
+		public bool Insert(TKey key, TData data)
 		{
+			bool result = true;
+
 			var hashCode = GetHashCode(key);
 			var newItem = new HTNode<TKey, TData>(key, data);
 
@@ -128,6 +130,7 @@ namespace CW_ThoughtsOutLoud
 			else if (items[hashCode].Key.Equals(newItem.Key))
 			{
 				Console.WriteLine("Ключ " + key + " уже есть в таблице");
+				result = false;
 			}
 			else
 			{
@@ -136,7 +139,7 @@ namespace CW_ThoughtsOutLoud
 					if (items[i] == null || items[hashCode].wasDeleted)
 					{
 						items[i] = newItem;
-						return;
+						return result;
 					}
 				}
 				for (int i = 0; i < hashCode; i++)
@@ -144,16 +147,20 @@ namespace CW_ThoughtsOutLoud
 					if (items[i] == null || items[hashCode].wasDeleted)
 					{
 						items[i] = newItem;
-						return;
+						return result;
 					}
 				}
 				Rehash(Size * 2);
 				Insert(key, data);
 			}
+
+			return result;
 		}
 
-		private void Insert(HTNode<TKey, TData> item)
+		private bool Insert(HTNode<TKey, TData> item)
 		{
+			bool result = true;
+
 			var hashCode = GetHashCode(item.Key);
 
 			// проверка дупликатов
@@ -164,6 +171,7 @@ namespace CW_ThoughtsOutLoud
 			else if (items[hashCode].Key.Equals(item.Key))
 			{
 				Console.WriteLine("Ключ " + item.Key + " уже есть в таблице");
+				result = false;
 			}
 			else
 			{
@@ -172,7 +180,7 @@ namespace CW_ThoughtsOutLoud
 					if (items[i] == null || items[hashCode].wasDeleted)
 					{
 						items[i] = item;
-						return;
+						return result;
 					}
 				}
 				for (int i = 0; i < hashCode; i++)
@@ -180,12 +188,14 @@ namespace CW_ThoughtsOutLoud
 					if (items[i] == null || items[hashCode].wasDeleted)
 					{
 						items[i] = item;
-						return;
+						return result;
 					}
 				}
 				Rehash(Size * 2);
 				Insert(item);
 			}
+
+			return result;
 		}
 
 		// Входные данные: объект класса, целочисленный ключ

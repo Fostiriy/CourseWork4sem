@@ -78,11 +78,13 @@ namespace CW_ThoughtsOutLoud
 			if (name != string.Empty && IsDateCorrect(date) && IsTimeCorrect(time))
 			{
 				string key = date + " " + time;
-				
-				mainWindow.currentGrid.Rows.Add(name, key);
-				mainWindow.dateNameBook.Insert(key, name);
-				mainWindow.addMainRecordWindow.dateComboBox.Items.Add(key);
-				mainWindow.ChangeDebugInfo(0);
+
+				if (mainWindow.dateNameBook.Insert(key, name))
+				{
+					mainWindow.currentGrid.Rows.Add(name, key);
+					mainWindow.addMainRecordWindow.dateComboBox.Items.Add(key);
+					mainWindow.ChangeDebugInfo(0);
+				}
 			}
 			else
 			{
