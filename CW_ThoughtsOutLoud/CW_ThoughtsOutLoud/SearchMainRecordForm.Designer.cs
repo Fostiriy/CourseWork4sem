@@ -29,30 +29,30 @@ namespace CW_ThoughtsOutLoud
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.inputDateTextBox = new System.Windows.Forms.MaskedTextBox();
+			this.inputDateFromTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.inputDateLabel = new System.Windows.Forms.Label();
 			this.cancelButton = new System.Windows.Forms.Button();
 			this.searchRecordButton = new System.Windows.Forms.Button();
-			this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+			this.inputDateToTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.dateTreeRadioButton = new System.Windows.Forms.RadioButton();
 			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.inputTimeTextBox = new System.Windows.Forms.MaskedTextBox();
-			this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+			this.inputTimeFromTextBox = new System.Windows.Forms.MaskedTextBox();
+			this.inputTimeToTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.dateTreeGroupBox = new System.Windows.Forms.GroupBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.dateTreeGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// inputDateTextBox
+			// inputDateFromTextBox
 			// 
-			this.inputDateTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputDateTextBox.Location = new System.Drawing.Point(1, 42);
-			this.inputDateTextBox.Mask = "00/00/0000";
-			this.inputDateTextBox.Name = "inputDateTextBox";
-			this.inputDateTextBox.ResetOnSpace = false;
-			this.inputDateTextBox.Size = new System.Drawing.Size(175, 34);
-			this.inputDateTextBox.TabIndex = 11;
-			this.inputDateTextBox.ValidatingType = typeof(System.DateTime);
+			this.inputDateFromTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputDateFromTextBox.Location = new System.Drawing.Point(1, 42);
+			this.inputDateFromTextBox.Mask = "00/00/0000";
+			this.inputDateFromTextBox.Name = "inputDateFromTextBox";
+			this.inputDateFromTextBox.ResetOnSpace = false;
+			this.inputDateFromTextBox.Size = new System.Drawing.Size(175, 34);
+			this.inputDateFromTextBox.TabIndex = 11;
+			this.inputDateFromTextBox.ValidatingType = typeof(System.DateTime);
 			// 
 			// inputDateLabel
 			// 
@@ -78,6 +78,7 @@ namespace CW_ThoughtsOutLoud
 			// searchRecordButton
 			// 
 			this.searchRecordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.searchRecordButton.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.searchRecordButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.searchRecordButton.Location = new System.Drawing.Point(154, 356);
 			this.searchRecordButton.Name = "searchRecordButton";
@@ -85,17 +86,18 @@ namespace CW_ThoughtsOutLoud
 			this.searchRecordButton.TabIndex = 13;
 			this.searchRecordButton.Text = "Найти";
 			this.searchRecordButton.UseVisualStyleBackColor = true;
+			this.searchRecordButton.Click += new System.EventHandler(this.SearchRecordButton_Click);
 			// 
-			// maskedTextBox1
+			// inputDateToTextBox
 			// 
-			this.maskedTextBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.maskedTextBox1.Location = new System.Drawing.Point(1, 82);
-			this.maskedTextBox1.Mask = "00/00/0000";
-			this.maskedTextBox1.Name = "maskedTextBox1";
-			this.maskedTextBox1.ResetOnSpace = false;
-			this.maskedTextBox1.Size = new System.Drawing.Size(175, 34);
-			this.maskedTextBox1.TabIndex = 11;
-			this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
+			this.inputDateToTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputDateToTextBox.Location = new System.Drawing.Point(1, 82);
+			this.inputDateToTextBox.Mask = "00/00/0000";
+			this.inputDateToTextBox.Name = "inputDateToTextBox";
+			this.inputDateToTextBox.ResetOnSpace = false;
+			this.inputDateToTextBox.Size = new System.Drawing.Size(175, 34);
+			this.inputDateToTextBox.TabIndex = 11;
+			this.inputDateToTextBox.ValidatingType = typeof(System.DateTime);
 			// 
 			// dateTreeRadioButton
 			// 
@@ -107,6 +109,7 @@ namespace CW_ThoughtsOutLoud
 			this.dateTreeRadioButton.TabStop = true;
 			this.dateTreeRadioButton.Text = "Поиск по диапазону даты и времени";
 			this.dateTreeRadioButton.UseVisualStyleBackColor = true;
+			this.dateTreeRadioButton.CheckedChanged += new System.EventHandler(this.DateTreeRadioButton_CheckedChanged);
 			// 
 			// radioButton2
 			// 
@@ -119,33 +122,34 @@ namespace CW_ThoughtsOutLoud
 			this.radioButton2.Text = "Поиск по диапазону категорий";
 			this.radioButton2.UseVisualStyleBackColor = true;
 			// 
-			// inputTimeTextBox
+			// inputTimeFromTextBox
 			// 
-			this.inputTimeTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputTimeTextBox.Location = new System.Drawing.Point(182, 42);
-			this.inputTimeTextBox.Mask = "00:00:00";
-			this.inputTimeTextBox.Name = "inputTimeTextBox";
-			this.inputTimeTextBox.ResetOnSpace = false;
-			this.inputTimeTextBox.Size = new System.Drawing.Size(175, 34);
-			this.inputTimeTextBox.TabIndex = 16;
+			this.inputTimeFromTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputTimeFromTextBox.Location = new System.Drawing.Point(182, 42);
+			this.inputTimeFromTextBox.Mask = "00:00:00";
+			this.inputTimeFromTextBox.Name = "inputTimeFromTextBox";
+			this.inputTimeFromTextBox.ResetOnSpace = false;
+			this.inputTimeFromTextBox.Size = new System.Drawing.Size(175, 34);
+			this.inputTimeFromTextBox.TabIndex = 16;
 			// 
-			// maskedTextBox2
+			// inputTimeToTextBox
 			// 
-			this.maskedTextBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.maskedTextBox2.Location = new System.Drawing.Point(182, 82);
-			this.maskedTextBox2.Mask = "00:00:00";
-			this.maskedTextBox2.Name = "maskedTextBox2";
-			this.maskedTextBox2.ResetOnSpace = false;
-			this.maskedTextBox2.Size = new System.Drawing.Size(175, 34);
-			this.maskedTextBox2.TabIndex = 16;
+			this.inputTimeToTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputTimeToTextBox.Location = new System.Drawing.Point(182, 82);
+			this.inputTimeToTextBox.Mask = "00:00:00";
+			this.inputTimeToTextBox.Name = "inputTimeToTextBox";
+			this.inputTimeToTextBox.ResetOnSpace = false;
+			this.inputTimeToTextBox.Size = new System.Drawing.Size(175, 34);
+			this.inputTimeToTextBox.TabIndex = 16;
 			// 
 			// dateTreeGroupBox
 			// 
-			this.dateTreeGroupBox.Controls.Add(this.maskedTextBox2);
+			this.dateTreeGroupBox.Controls.Add(this.inputTimeToTextBox);
 			this.dateTreeGroupBox.Controls.Add(this.inputDateLabel);
-			this.dateTreeGroupBox.Controls.Add(this.inputTimeTextBox);
-			this.dateTreeGroupBox.Controls.Add(this.inputDateTextBox);
-			this.dateTreeGroupBox.Controls.Add(this.maskedTextBox1);
+			this.dateTreeGroupBox.Controls.Add(this.inputTimeFromTextBox);
+			this.dateTreeGroupBox.Controls.Add(this.inputDateFromTextBox);
+			this.dateTreeGroupBox.Controls.Add(this.inputDateToTextBox);
+			this.dateTreeGroupBox.Enabled = false;
 			this.dateTreeGroupBox.Location = new System.Drawing.Point(12, 42);
 			this.dateTreeGroupBox.Name = "dateTreeGroupBox";
 			this.dateTreeGroupBox.Size = new System.Drawing.Size(358, 135);
@@ -162,8 +166,10 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// SearchMainRecordForm
 			// 
+			this.AcceptButton = this.searchRecordButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(382, 403);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.dateTreeRadioButton);
@@ -177,6 +183,7 @@ namespace CW_ThoughtsOutLoud
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.Text = "SearchMainRecordForm";
+			this.Load += new System.EventHandler(this.SearchMainRecordForm_Load);
 			this.dateTreeGroupBox.ResumeLayout(false);
 			this.dateTreeGroupBox.PerformLayout();
 			this.ResumeLayout(false);
@@ -186,15 +193,15 @@ namespace CW_ThoughtsOutLoud
 
 		#endregion
 
-		public System.Windows.Forms.MaskedTextBox inputDateTextBox;
+		public System.Windows.Forms.MaskedTextBox inputDateFromTextBox;
 		private System.Windows.Forms.Label inputDateLabel;
 		protected internal System.Windows.Forms.Button cancelButton;
 		protected internal System.Windows.Forms.Button searchRecordButton;
-		public System.Windows.Forms.MaskedTextBox maskedTextBox1;
+		public System.Windows.Forms.MaskedTextBox inputDateToTextBox;
 		private System.Windows.Forms.RadioButton dateTreeRadioButton;
 		private System.Windows.Forms.RadioButton radioButton2;
-		public System.Windows.Forms.MaskedTextBox inputTimeTextBox;
-		public System.Windows.Forms.MaskedTextBox maskedTextBox2;
+		public System.Windows.Forms.MaskedTextBox inputTimeFromTextBox;
+		public System.Windows.Forms.MaskedTextBox inputTimeToTextBox;
 		private System.Windows.Forms.GroupBox dateTreeGroupBox;
 		private System.Windows.Forms.GroupBox groupBox2;
 	}

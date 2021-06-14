@@ -8,15 +8,18 @@ namespace CW_ThoughtsOutLoud
 	public partial class MainForm : Form
 	{
 		internal HashTable<string, string> dateNameBook = new HashTable<string, string>(8);
-		internal HashTable<string, string> categoryColorBook = new HashTable<string, string>(8);
+		internal HashTable<string, string> categoryColorBook = new HashTable<string, string>(8); // Изменить ХТ на свою Егору
 		internal RBTree<double, DataGridViewRow> dateTree = new RBTree<double, DataGridViewRow>();
 		internal string[] debugInfo = new string[4];
 		internal DataGridView currentGrid;
+		internal DataGridView gridToSearch;
+		internal DataGridView mainGridCopy;
 
 		internal AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
-		internal AddDateRecordForm addDateRecordWindow = new AddDateRecordForm();
-		internal AddCategoryRecordForm addCategoryRecordWindow = new AddCategoryRecordForm();
-		internal SearchDateRecordForm searchDateRecordWindow = new SearchDateRecordForm();
+		private AddDateRecordForm addDateRecordWindow = new AddDateRecordForm();
+		private AddCategoryRecordForm addCategoryRecordWindow = new AddCategoryRecordForm();
+		private SearchDateRecordForm searchDateRecordWindow = new SearchDateRecordForm();
+		private SearchMainRecordForm searchMainRecordWindow = new SearchMainRecordForm();
 		DebugForm debugWindow;
 
 		internal void ChangeDebugInfo(int index)
@@ -172,6 +175,7 @@ namespace CW_ThoughtsOutLoud
 			addMainRecordWindow.Owner = this;
 			addDateRecordWindow.Owner = this;
 			searchDateRecordWindow.Owner = this;
+			searchMainRecordWindow.Owner = this;
 		}
 
 		private void OpenFileButton_Click(object sender, EventArgs e)
@@ -344,7 +348,7 @@ namespace CW_ThoughtsOutLoud
 			{
 				case 0:
 					currentGrid = mainGrid;
-					currentWindow = addMainRecordWindow;
+					currentWindow = searchMainRecordWindow;
 					break;
 				case 1:
 					currentGrid = dateNameGrid;
@@ -352,7 +356,7 @@ namespace CW_ThoughtsOutLoud
 					break;
 				case 2:
 					currentGrid = categoryColorGrid;
-					currentWindow = addCategoryRecordWindow;
+					currentWindow = addCategoryRecordWindow; // Создать что-то своё Егору
 					break;
 				default: break;
 			}

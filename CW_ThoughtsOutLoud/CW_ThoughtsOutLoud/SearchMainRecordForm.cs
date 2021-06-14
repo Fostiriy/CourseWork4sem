@@ -12,9 +12,68 @@ namespace CW_ThoughtsOutLoud
 {
 	public partial class SearchMainRecordForm : Form
 	{
+		MainForm mainWindow;
+
 		public SearchMainRecordForm()
 		{
 			InitializeComponent();
+		}
+
+		private double ConvertToNumber(string numberString)
+		{
+			numberString = numberString.Replace(".", "");
+			numberString = numberString.Replace(":", "");
+
+			return double.Parse(numberString);
+		}
+
+		private void DateTreeRadioButton_CheckedChanged(object sender, EventArgs e)
+		{
+			dateTreeGroupBox.Enabled = !dateTreeGroupBox.Enabled;
+		}
+
+		private void SearchMainRecordForm_Load(object sender, EventArgs e)
+		{
+			mainWindow = (MainForm)Owner;
+		}
+
+		private void SearchRecordButton_Click(object sender, EventArgs e)
+		{
+			string date1 = inputDateFromTextBox.Text;
+			string time1 = inputTimeFromTextBox.Text;
+			double key1 = ConvertToNumber(date1 + time1);
+
+			string date2 = inputDateToTextBox.Text;
+			string time2 = inputTimeToTextBox.Text;
+			double key2 = ConvertToNumber(date2 + time2);
+
+			if (key1 <= key2)
+			{
+				var nodesFound = mainWindow.dateTree.Search(key1, key2);
+				SingleLinkedList<int> indexes = new SingleLinkedList<int>();
+				mainWindow.mainGridCopy = mainWindow.currentGrid;
+
+				foreach (var node in nodesFound)
+				{
+					foreach (var row in node.Data)
+					{
+						indexes.PushBack(row.Index);
+					}
+				}
+
+				mainWindow.gridToSearch = new DataGridView();
+				foreach (var index in indexes)
+				{
+					mainWindow.gridToSearch.Rows.Add(mainWindow.currentGrid.Rows[index]);
+				}
+				mainWindow.currentGrid = mainWindow.gridToSearch;
+
+			}
+			else
+			{
+				MessageBox.Show("Неверно задан диапазон. Дата и время первой строки должны предшествовать дате и времени второй строки" +
+					"или совпадать с ними.", "Ошибка в диапазоне", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 	}
 }

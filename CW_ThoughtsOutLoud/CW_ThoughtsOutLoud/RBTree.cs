@@ -29,7 +29,7 @@ namespace CW_ThoughtsOutLoud
 		// Поле-узел, являющийся родителем
 		public RBNode<TKey, TData> parent;
 		// Счётчик вставок узла с данным ключом в дерево
-		public SingleLinkedList<TData> IndexesList { get; } = new SingleLinkedList<TData>();
+		public SingleLinkedList<TData> Data { get; } = new SingleLinkedList<TData>();
 		// Поле данных
 		public TKey key;
 
@@ -45,7 +45,7 @@ namespace CW_ThoughtsOutLoud
 		public RBNode(TKey key, TData data)
 		{
 			this.key = key;
-			IndexesList.PushBack(data);
+			Data.PushBack(data);
 		}
 
 		// Конструктор узла
@@ -184,7 +184,7 @@ namespace CW_ThoughtsOutLoud
 					temp = temp.left;
 				else if (node.IsMore(temp))
 					temp = temp.right;
-				else if (temp.IndexesList.Contains(data))
+				else if (temp.Data.Contains(data))
 					isFound = true;
 				else
 					break;
@@ -218,6 +218,30 @@ namespace CW_ThoughtsOutLoud
 				return temp;
 			else
 				return Nil;
+		}
+
+		public SingleLinkedList<RBNode<TKey, TData>> Search(TKey key1, TKey key2)
+		{
+			SingleLinkedList<RBNode<TKey, TData>> result = new SingleLinkedList<RBNode<TKey, TData>>();
+
+			if (key1.CompareTo(key2) <= 0)
+			{
+				var nodeFrom = Find(key1);
+				var nodeTo = Find(key2);
+
+				if (nodeFrom != Nil && nodeTo != Nil)
+				{
+					var temp = nodeFrom;
+					while (temp != nodeTo)
+					{
+						result.PushBack(temp);
+						temp = temp.right;
+					}
+					result.PushBack(temp);
+				}
+			}
+
+			return result;
 		}
 
 		// Нахождение узла с минимальным ключом в дереве
@@ -285,7 +309,7 @@ namespace CW_ThoughtsOutLoud
 				//	result += $"Цвет: чёрный\n";
 				//else
 				//	result += $"Цвет: красный\n";
-				result += $"Индексы:\n{current.IndexesList.ElementsInfo()}\n";
+				result += $"Индексы:\n{current.Data.ElementsInfo()}\n";
 
 				result += Info(current.left, n + 1);
 			}
@@ -330,9 +354,9 @@ namespace CW_ThoughtsOutLoud
 					result += "	";
 				result += $"{current.key} ";
 				if (current.color == Colour.Black)
-					result += $" (B, {current.IndexesList.Info()})\n";
+					result += $" (B, {current.Data.Info()})\n";
 				else
-					result += $" (R, {current.IndexesList.Info()})\n";
+					result += $" (R, {current.Data.Info()})\n";
 
 				result += InfoLikeTree(current.left, n + 1);
 			}
@@ -464,7 +488,7 @@ namespace CW_ThoughtsOutLoud
 				Y = X;
 				if (Z.IsEqual(X))
 				{
-					X.IndexesList.PushBack(data);
+					X.Data.PushBack(data);
 					return;
 				}
 				else if (Z.IsLess(X))
@@ -587,14 +611,14 @@ namespace CW_ThoughtsOutLoud
 		{
 			RBNode<TKey, TData> Z = Find(key, data);
 			Delete(Z, data);
-			return Z.IndexesList;
+			return Z.Data;
 		}
 
 		public SingleLinkedList<TData> Delete(TKey key)
 		{
 			RBNode<TKey, TData> Z = Find(key);
 			Delete(Z);
-			return Z.IndexesList;
+			return Z.Data;
 		}
 
 		// Удаляет узел из дерева по правилу удаления в бинарном дереве или удаляет лишь индекс data
@@ -607,9 +631,9 @@ namespace CW_ThoughtsOutLoud
 			RBNode<TKey, TData> X = Nil;
 			Colour SavedColor = Y.color;
 
-			if (Z.IndexesList.Count > 1)
+			if (Z.Data.Count > 1)
 			{
-				Z.IndexesList.Remove(data);
+				Z.Data.Remove(data);
 				return;
 			}
 			if (Z == Nil)
