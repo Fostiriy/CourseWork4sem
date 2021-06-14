@@ -39,6 +39,8 @@ namespace CW_ThoughtsOutLoud
 
 		private void SearchRecordButton_Click(object sender, EventArgs e)
 		{
+			mainWindow.mainGridCopy = mainWindow.currentGrid;
+
 			string date1 = inputDateFromTextBox.Text;
 			string time1 = inputTimeFromTextBox.Text;
 			double key1 = ConvertToNumber(date1 + time1);
@@ -50,23 +52,29 @@ namespace CW_ThoughtsOutLoud
 			if (key1 <= key2)
 			{
 				var nodesFound = mainWindow.dateTree.Search(key1, key2);
-				SingleLinkedList<int> indexes = new SingleLinkedList<int>();
-				mainWindow.mainGridCopy = mainWindow.currentGrid;
 
-				foreach (var node in nodesFound)
+				if (nodesFound != null)
 				{
-					foreach (var row in node.Data)
+					SingleLinkedList<int> indexes = new SingleLinkedList<int>();
+					foreach (var node in nodesFound)
 					{
-						indexes.PushBack(row.Index);
+						foreach (var row in node.Data)
+						{
+							indexes.PushBack(row.Index);
+						}
 					}
-				}
 
-				mainWindow.gridToSearch = new DataGridView();
-				foreach (var index in indexes)
-				{
-					mainWindow.gridToSearch.Rows.Add(mainWindow.currentGrid.Rows[index]);
+					mainWindow.gridToSearch = new DataGridView();
+					foreach (var index in indexes)
+					{
+						mainWindow.gridToSearch.Rows.Add(mainWindow.currentGrid.Rows[index]);
+					}
+					mainWindow.currentGrid = mainWindow.gridToSearch;
 				}
-				mainWindow.currentGrid = mainWindow.gridToSearch;
+				else
+				{
+					MessageBox.Show("Ничего не найдено.", "Результаты поиска", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
 
 			}
 			else
