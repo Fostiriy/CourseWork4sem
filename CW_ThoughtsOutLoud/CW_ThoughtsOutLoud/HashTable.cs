@@ -35,7 +35,7 @@ namespace CW_ThoughtsOutLoud
 		private HTNode<TKey, TData>[] items;
 		// Размер хеш-таблицы (длина массива items)
 		public int Size { get; private set; }
-		public int ComparisonsNumber { get; private set; };
+		public int ComparisonsNumber { get; private set; }
 		
 
 		// Входные данные: размер хеш-таблицы

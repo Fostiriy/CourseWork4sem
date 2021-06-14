@@ -56,7 +56,7 @@ namespace CW_ThoughtsOutLoud
 			this.saveFileButton = new System.Windows.Forms.Button();
 			this.fileWorkingBox = new System.Windows.Forms.GroupBox();
 			this.bookWorkingBox = new System.Windows.Forms.GroupBox();
-			this.button1 = new System.Windows.Forms.Button();
+			this.showAllButton = new System.Windows.Forms.Button();
 			this.booksTabControl.SuspendLayout();
 			this.mainTabPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
@@ -242,7 +242,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// addRecordButton
 			// 
-			this.addRecordButton.Location = new System.Drawing.Point(45, 29);
+			this.addRecordButton.Location = new System.Drawing.Point(45, 26);
 			this.addRecordButton.Name = "addRecordButton";
 			this.addRecordButton.Size = new System.Drawing.Size(160, 35);
 			this.addRecordButton.TabIndex = 3;
@@ -252,7 +252,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// deleteRecordButton
 			// 
-			this.deleteRecordButton.Location = new System.Drawing.Point(45, 75);
+			this.deleteRecordButton.Location = new System.Drawing.Point(46, 67);
 			this.deleteRecordButton.Name = "deleteRecordButton";
 			this.deleteRecordButton.Size = new System.Drawing.Size(160, 35);
 			this.deleteRecordButton.TabIndex = 3;
@@ -268,7 +268,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// button2
 			// 
-			this.button2.Location = new System.Drawing.Point(45, 121);
+			this.button2.Location = new System.Drawing.Point(45, 108);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(160, 35);
 			this.button2.TabIndex = 3;
@@ -307,7 +307,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// newBookButton
 			// 
-			this.newBookButton.Location = new System.Drawing.Point(45, 203);
+			this.newBookButton.Location = new System.Drawing.Point(46, 190);
 			this.newBookButton.Name = "newBookButton";
 			this.newBookButton.Size = new System.Drawing.Size(160, 35);
 			this.newBookButton.TabIndex = 3;
@@ -341,26 +341,27 @@ namespace CW_ThoughtsOutLoud
 			// 
 			this.bookWorkingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.bookWorkingBox.Controls.Add(this.button2);
-			this.bookWorkingBox.Controls.Add(this.button1);
+			this.bookWorkingBox.Controls.Add(this.showAllButton);
 			this.bookWorkingBox.Controls.Add(this.newBookButton);
 			this.bookWorkingBox.Controls.Add(this.deleteRecordButton);
 			this.bookWorkingBox.Controls.Add(this.addRecordButton);
 			this.bookWorkingBox.Location = new System.Drawing.Point(999, 165);
 			this.bookWorkingBox.Name = "bookWorkingBox";
-			this.bookWorkingBox.Size = new System.Drawing.Size(250, 275);
+			this.bookWorkingBox.Size = new System.Drawing.Size(250, 251);
 			this.bookWorkingBox.TabIndex = 5;
 			this.bookWorkingBox.TabStop = false;
 			this.bookWorkingBox.Text = "Работа со справочником";
 			// 
-			// button1
+			// showAllButton
 			// 
-			this.button1.Location = new System.Drawing.Point(45, 162);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(160, 35);
-			this.button1.TabIndex = 3;
-			this.button1.Text = "Показать всё";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.NewBookButton_Click);
+			this.showAllButton.Enabled = false;
+			this.showAllButton.Location = new System.Drawing.Point(45, 149);
+			this.showAllButton.Name = "showAllButton";
+			this.showAllButton.Size = new System.Drawing.Size(160, 35);
+			this.showAllButton.TabIndex = 3;
+			this.showAllButton.Text = "Показать всё";
+			this.showAllButton.UseVisualStyleBackColor = true;
+			this.showAllButton.Click += new System.EventHandler(this.NewBookButton_Click);
 			// 
 			// MainForm
 			// 
@@ -420,7 +421,7 @@ namespace CW_ThoughtsOutLoud
 		private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
 		internal System.Windows.Forms.Button showDebugButton;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button showAllButton;
 	}
 }
 

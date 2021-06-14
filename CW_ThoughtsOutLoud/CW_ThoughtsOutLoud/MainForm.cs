@@ -16,6 +16,7 @@ namespace CW_ThoughtsOutLoud
 		internal AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
 		internal AddDateRecordForm addDateRecordWindow = new AddDateRecordForm();
 		internal AddCategoryRecordForm addCategoryRecordWindow = new AddCategoryRecordForm();
+		internal SearchDateRecordForm searchDateRecordWindow = new SearchDateRecordForm();
 		DebugForm debugWindow;
 
 		internal void ChangeDebugInfo(int index)
@@ -170,6 +171,7 @@ namespace CW_ThoughtsOutLoud
 			InitializeComponent();
 			addMainRecordWindow.Owner = this;
 			addDateRecordWindow.Owner = this;
+			searchDateRecordWindow.Owner = this;
 		}
 
 		private void OpenFileButton_Click(object sender, EventArgs e)
@@ -337,7 +339,24 @@ namespace CW_ThoughtsOutLoud
 
 		private void SearchRecordButton_Click(object sender, EventArgs e)
 		{
-
+			Form currentWindow = null;
+			switch (booksTabControl.SelectedIndex)
+			{
+				case 0:
+					currentGrid = mainGrid;
+					currentWindow = addMainRecordWindow;
+					break;
+				case 1:
+					currentGrid = dateNameGrid;
+					currentWindow = searchDateRecordWindow;
+					break;
+				case 2:
+					currentGrid = categoryColorGrid;
+					currentWindow = addCategoryRecordWindow;
+					break;
+				default: break;
+			}
+			currentWindow.ShowDialog();
 		}
 
 		private void NewBookButton_Click(object sender, EventArgs e)
