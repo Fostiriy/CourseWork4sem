@@ -49,7 +49,7 @@ namespace CW_ThoughtsOutLoud
 
 		private void ClearAllBooksWithSaving()
 		{
-			DialogResult result = MessageBox.Show("Сохранить данные хеш-таблиц в файл?", "Сохранение перед открытием нового файла",
+			DialogResult result = MessageBox.Show("Сохранить текущие данные в файл?", "Сохранение перед открытием нового файла",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 			if (result == DialogResult.Yes)
@@ -166,6 +166,14 @@ namespace CW_ThoughtsOutLoud
 				}
 			}
 			ChangeDebugInfo(0);
+		}
+
+		internal double ConvertToTreeKey(string keyString)
+		{
+			keyString = keyString.Replace(".", "");
+			keyString = keyString.Replace(":", "");
+
+			return double.Parse(keyString);
 		}
 
 

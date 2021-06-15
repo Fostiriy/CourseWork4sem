@@ -311,7 +311,7 @@ namespace CW_ThoughtsOutLoud
 			this.newBookButton.Name = "newBookButton";
 			this.newBookButton.Size = new System.Drawing.Size(160, 35);
 			this.newBookButton.TabIndex = 3;
-			this.newBookButton.Text = "Очистить";
+			this.newBookButton.Text = "Удалить все";
 			this.newBookButton.UseVisualStyleBackColor = true;
 			this.newBookButton.Click += new System.EventHandler(this.NewBookButton_Click);
 			// 
@@ -359,7 +359,7 @@ namespace CW_ThoughtsOutLoud
 			this.showAllButton.Name = "showAllButton";
 			this.showAllButton.Size = new System.Drawing.Size(160, 35);
 			this.showAllButton.TabIndex = 3;
-			this.showAllButton.Text = "Показать всё";
+			this.showAllButton.Text = "Показать все";
 			this.showAllButton.UseVisualStyleBackColor = true;
 			this.showAllButton.Click += new System.EventHandler(this.NewBookButton_Click);
 			// 

@@ -19,14 +19,6 @@ namespace CW_ThoughtsOutLoud
 			InitializeComponent();
 		}
 
-		private double ConvertToNumber(string numberString)
-		{
-			numberString = numberString.Replace(".", "");
-			numberString = numberString.Replace(":", "");
-
-			return double.Parse(numberString);
-		}
-
 		private void DateTreeRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			dateTreeGroupBox.Enabled = !dateTreeGroupBox.Enabled;
@@ -43,11 +35,11 @@ namespace CW_ThoughtsOutLoud
 
 			string date1 = inputDateFromTextBox.Text;
 			string time1 = inputTimeFromTextBox.Text;
-			double key1 = ConvertToNumber(date1 + time1);
+			double key1 = mainWindow.ConvertToTreeKey(date1 + time1);
 
 			string date2 = inputDateToTextBox.Text;
 			string time2 = inputTimeToTextBox.Text;
-			double key2 = ConvertToNumber(date2 + time2);
+			double key2 = mainWindow.ConvertToTreeKey(date2 + time2);
 
 			if (key1 <= key2)
 			{

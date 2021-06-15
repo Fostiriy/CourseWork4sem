@@ -36,17 +36,22 @@ namespace CW_ThoughtsOutLoud
 			this.inputDateToTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.dateTreeRadioButton = new System.Windows.Forms.RadioButton();
 			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.inputTimeFromTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.inputTimeToTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.dateTreeGroupBox = new System.Windows.Forms.GroupBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+			this.inputTimeFromTextBox = new System.Windows.Forms.MaskedTextBox();
+			this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+			this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
 			this.dateTreeGroupBox.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// inputDateFromTextBox
 			// 
 			this.inputDateFromTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputDateFromTextBox.Location = new System.Drawing.Point(1, 42);
+			this.inputDateFromTextBox.Location = new System.Drawing.Point(1, 26);
 			this.inputDateFromTextBox.Mask = "00/00/0000";
 			this.inputDateFromTextBox.Name = "inputDateFromTextBox";
 			this.inputDateFromTextBox.ResetOnSpace = false;
@@ -91,7 +96,7 @@ namespace CW_ThoughtsOutLoud
 			// inputDateToTextBox
 			// 
 			this.inputDateToTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputDateToTextBox.Location = new System.Drawing.Point(1, 82);
+			this.inputDateToTextBox.Location = new System.Drawing.Point(0, 79);
 			this.inputDateToTextBox.Mask = "00/00/0000";
 			this.inputDateToTextBox.Name = "inputDateToTextBox";
 			this.inputDateToTextBox.ResetOnSpace = false;
@@ -122,20 +127,10 @@ namespace CW_ThoughtsOutLoud
 			this.radioButton2.Text = "Поиск по диапазону категорий";
 			this.radioButton2.UseVisualStyleBackColor = true;
 			// 
-			// inputTimeFromTextBox
-			// 
-			this.inputTimeFromTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputTimeFromTextBox.Location = new System.Drawing.Point(182, 42);
-			this.inputTimeFromTextBox.Mask = "00:00:00";
-			this.inputTimeFromTextBox.Name = "inputTimeFromTextBox";
-			this.inputTimeFromTextBox.ResetOnSpace = false;
-			this.inputTimeFromTextBox.Size = new System.Drawing.Size(175, 34);
-			this.inputTimeFromTextBox.TabIndex = 16;
-			// 
 			// inputTimeToTextBox
 			// 
 			this.inputTimeToTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputTimeToTextBox.Location = new System.Drawing.Point(182, 82);
+			this.inputTimeToTextBox.Location = new System.Drawing.Point(183, 53);
 			this.inputTimeToTextBox.Mask = "00:00:00";
 			this.inputTimeToTextBox.Name = "inputTimeToTextBox";
 			this.inputTimeToTextBox.ResetOnSpace = false;
@@ -144,11 +139,11 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// dateTreeGroupBox
 			// 
-			this.dateTreeGroupBox.Controls.Add(this.inputTimeToTextBox);
+			this.dateTreeGroupBox.Controls.Add(this.dateTimePicker4);
+			this.dateTreeGroupBox.Controls.Add(this.dateTimePicker2);
+			this.dateTreeGroupBox.Controls.Add(this.dateTimePicker3);
+			this.dateTreeGroupBox.Controls.Add(this.dateTimePicker1);
 			this.dateTreeGroupBox.Controls.Add(this.inputDateLabel);
-			this.dateTreeGroupBox.Controls.Add(this.inputTimeFromTextBox);
-			this.dateTreeGroupBox.Controls.Add(this.inputDateFromTextBox);
-			this.dateTreeGroupBox.Controls.Add(this.inputDateToTextBox);
 			this.dateTreeGroupBox.Enabled = false;
 			this.dateTreeGroupBox.Location = new System.Drawing.Point(12, 42);
 			this.dateTreeGroupBox.Name = "dateTreeGroupBox";
@@ -158,11 +153,71 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.inputDateFromTextBox);
+			this.groupBox2.Controls.Add(this.inputTimeToTextBox);
+			this.groupBox2.Controls.Add(this.inputDateToTextBox);
+			this.groupBox2.Controls.Add(this.inputTimeFromTextBox);
 			this.groupBox2.Location = new System.Drawing.Point(12, 213);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(358, 125);
 			this.groupBox2.TabIndex = 18;
 			this.groupBox2.TabStop = false;
+			// 
+			// dateTimePicker2
+			// 
+			this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+			this.dateTimePicker2.Location = new System.Drawing.Point(182, 42);
+			this.dateTimePicker2.Name = "dateTimePicker2";
+			this.dateTimePicker2.ShowUpDown = true;
+			this.dateTimePicker2.Size = new System.Drawing.Size(120, 34);
+			this.dateTimePicker2.TabIndex = 0;
+			this.dateTimePicker2.Value = new System.DateTime(2021, 6, 15, 10, 13, 31, 0);
+			// 
+			// dateTimePicker1
+			// 
+			this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimePicker1.Location = new System.Drawing.Point(56, 42);
+			this.dateTimePicker1.Name = "dateTimePicker1";
+			this.dateTimePicker1.Size = new System.Drawing.Size(120, 34);
+			this.dateTimePicker1.TabIndex = 0;
+			this.dateTimePicker1.Value = new System.DateTime(2021, 6, 15, 10, 13, 31, 0);
+			// 
+			// inputTimeFromTextBox
+			// 
+			this.inputTimeFromTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputTimeFromTextBox.Location = new System.Drawing.Point(183, 13);
+			this.inputTimeFromTextBox.Mask = "00:00:00";
+			this.inputTimeFromTextBox.Name = "inputTimeFromTextBox";
+			this.inputTimeFromTextBox.ResetOnSpace = false;
+			this.inputTimeFromTextBox.Size = new System.Drawing.Size(175, 34);
+			this.inputTimeFromTextBox.TabIndex = 16;
+			// 
+			// dateTimePicker3
+			// 
+			this.dateTimePicker3.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimePicker3.Location = new System.Drawing.Point(56, 82);
+			this.dateTimePicker3.Name = "dateTimePicker3";
+			this.dateTimePicker3.Size = new System.Drawing.Size(120, 34);
+			this.dateTimePicker3.TabIndex = 0;
+			this.dateTimePicker3.Value = new System.DateTime(2021, 6, 15, 10, 13, 31, 0);
+			// 
+			// dateTimePicker4
+			// 
+			this.dateTimePicker4.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+			this.dateTimePicker4.Location = new System.Drawing.Point(182, 82);
+			this.dateTimePicker4.Name = "dateTimePicker4";
+			this.dateTimePicker4.ShowUpDown = true;
+			this.dateTimePicker4.Size = new System.Drawing.Size(120, 34);
+			this.dateTimePicker4.TabIndex = 0;
+			this.dateTimePicker4.Value = new System.DateTime(2021, 6, 15, 10, 13, 31, 0);
 			// 
 			// SearchMainRecordForm
 			// 
@@ -186,6 +241,8 @@ namespace CW_ThoughtsOutLoud
 			this.Load += new System.EventHandler(this.SearchMainRecordForm_Load);
 			this.dateTreeGroupBox.ResumeLayout(false);
 			this.dateTreeGroupBox.PerformLayout();
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -200,9 +257,13 @@ namespace CW_ThoughtsOutLoud
 		public System.Windows.Forms.MaskedTextBox inputDateToTextBox;
 		private System.Windows.Forms.RadioButton dateTreeRadioButton;
 		private System.Windows.Forms.RadioButton radioButton2;
-		public System.Windows.Forms.MaskedTextBox inputTimeFromTextBox;
 		public System.Windows.Forms.MaskedTextBox inputTimeToTextBox;
 		private System.Windows.Forms.GroupBox dateTreeGroupBox;
 		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		private System.Windows.Forms.DateTimePicker dateTimePicker2;
+		private System.Windows.Forms.DateTimePicker dateTimePicker4;
+		private System.Windows.Forms.DateTimePicker dateTimePicker3;
+		public System.Windows.Forms.MaskedTextBox inputTimeFromTextBox;
 	}
 }

@@ -118,44 +118,8 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: хеш-таблица с вставленным элементом с переданными данными
 		public bool Insert(TKey key, TData data)
 		{
-			bool result = true;
-
-			var hashCode = GetHashCode(key);
 			var newItem = new HTNode<TKey, TData>(key, data);
-
-			// проверка дупликатов
-			if (items[hashCode] == null || items[hashCode].wasDeleted)
-			{
-				items[hashCode] = newItem;
-			}
-			else if (items[hashCode].Key.Equals(newItem.Key))
-			{
-				Console.WriteLine("Ключ " + key + " уже есть в таблице");
-				result = false;
-			}
-			else
-			{
-				for (int i = hashCode; i < Size; i++)
-				{
-					if (items[i] == null || items[hashCode].wasDeleted)
-					{
-						items[i] = newItem;
-						return result;
-					}
-				}
-				for (int i = 0; i < hashCode; i++)
-				{
-					if (items[i] == null || items[hashCode].wasDeleted)
-					{
-						items[i] = newItem;
-						return result;
-					}
-				}
-				Rehash(Size * 2);
-				Insert(key, data);
-			}
-
-			return result;
+			return Insert(newItem);
 		}
 
 		private bool Insert(HTNode<TKey, TData> item)
@@ -164,7 +128,6 @@ namespace CW_ThoughtsOutLoud
 
 			var hashCode = GetHashCode(item.Key);
 
-			// проверка дупликатов
 			if (items[hashCode] == null || items[hashCode].wasDeleted)
 			{
 				items[hashCode] = item;
@@ -176,9 +139,9 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				for (int i = hashCode; i < Size; i++)
+				for (int i = hashCode + 1; i < Size; i++)
 				{
-					if (items[i] == null || items[hashCode].wasDeleted)
+					if (items[i] == null || items[i].wasDeleted)
 					{
 						items[i] = item;
 						return result;
@@ -186,7 +149,7 @@ namespace CW_ThoughtsOutLoud
 				}
 				for (int i = 0; i < hashCode; i++)
 				{
-					if (items[i] == null || items[hashCode].wasDeleted)
+					if (items[i] == null || items[i].wasDeleted)
 					{
 						items[i] = item;
 						return result;
@@ -232,11 +195,12 @@ namespace CW_ThoughtsOutLoud
 			}
 			else if (items[hashCode].Key.Equals(key))
 			{
+				ComparisonsNumber++;
 				return items[hashCode];
 			}
 			else
 			{
-				for (int i = hashCode; i < Size; i++)
+				for (int i = hashCode + 1; i < Size; i++)
 				{
 					ComparisonsNumber++;
 					if (items[i] == null)
@@ -248,19 +212,16 @@ namespace CW_ThoughtsOutLoud
 						return result;
 					}
 				}
-				if (result == null)
+				for (int i = 0; i < hashCode; i++)
 				{
-					for (int i = 0; i < hashCode; i++)
+					ComparisonsNumber++;
+					if (items[i] == null)
+						return result;
+					if (items[i].Key.Equals(key))
 					{
-						ComparisonsNumber++;
-						if (items[i] == null)
-							return result;
-						if (items[i].Key.Equals(key))
-						{
-							if (!items[i].wasDeleted)
-								result = items[i];
-							return result;
-						}
+						if (!items[i].wasDeleted)
+							result = items[i];
+						return result;
 					}
 				}
 			}
