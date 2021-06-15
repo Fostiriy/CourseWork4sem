@@ -48,7 +48,7 @@ namespace CW_ThoughtsOutLoud
 			this.addRecordButton = new System.Windows.Forms.Button();
 			this.deleteRecordButton = new System.Windows.Forms.Button();
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-			this.button2 = new System.Windows.Forms.Button();
+			this.searchRecordButton = new System.Windows.Forms.Button();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.showDebugButton = new System.Windows.Forms.Button();
 			this.openFileButton = new System.Windows.Forms.Button();
@@ -264,24 +264,24 @@ namespace CW_ThoughtsOutLoud
 			// 
 			this.openFileDialog.DefaultExt = "txt";
 			this.openFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
-			this.openFileDialog.Title = "Открыть файл-справочник";
+			this.openFileDialog.Title = "Открыть файл с данными";
 			// 
-			// button2
+			// searchRecordButton
 			// 
-			this.button2.Location = new System.Drawing.Point(45, 108);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(160, 35);
-			this.button2.TabIndex = 3;
-			this.button2.Text = "Найти...";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.SearchRecordButton_Click);
+			this.searchRecordButton.Location = new System.Drawing.Point(45, 108);
+			this.searchRecordButton.Name = "searchRecordButton";
+			this.searchRecordButton.Size = new System.Drawing.Size(160, 35);
+			this.searchRecordButton.TabIndex = 3;
+			this.searchRecordButton.Text = "Найти...";
+			this.searchRecordButton.UseVisualStyleBackColor = true;
+			this.searchRecordButton.Click += new System.EventHandler(this.SearchRecordButton_Click);
 			// 
 			// saveFileDialog
 			// 
 			this.saveFileDialog.DefaultExt = "txt";
 			this.saveFileDialog.FileName = "CW output";
 			this.saveFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
-			this.saveFileDialog.Title = "Сохранить справочник в файл";
+			this.saveFileDialog.Title = "Сохранить текущие данные в файл";
 			// 
 			// showDebugButton
 			// 
@@ -340,7 +340,7 @@ namespace CW_ThoughtsOutLoud
 			// bookWorkingBox
 			// 
 			this.bookWorkingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.bookWorkingBox.Controls.Add(this.button2);
+			this.bookWorkingBox.Controls.Add(this.searchRecordButton);
 			this.bookWorkingBox.Controls.Add(this.showAllButton);
 			this.bookWorkingBox.Controls.Add(this.newBookButton);
 			this.bookWorkingBox.Controls.Add(this.deleteRecordButton);
@@ -361,7 +361,7 @@ namespace CW_ThoughtsOutLoud
 			this.showAllButton.TabIndex = 3;
 			this.showAllButton.Text = "Показать все";
 			this.showAllButton.UseVisualStyleBackColor = true;
-			this.showAllButton.Click += new System.EventHandler(this.NewBookButton_Click);
+			this.showAllButton.Click += new System.EventHandler(this.ShowAllButton_Click);
 			// 
 			// MainForm
 			// 
@@ -401,7 +401,6 @@ namespace CW_ThoughtsOutLoud
 		private System.Windows.Forms.Button addRecordButton;
 		private System.Windows.Forms.Button deleteRecordButton;
 		private System.Windows.Forms.OpenFileDialog openFileDialog;
-		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
 		private System.Windows.Forms.Button openFileButton;
 		private System.Windows.Forms.Button newBookButton;
@@ -421,7 +420,8 @@ namespace CW_ThoughtsOutLoud
 		private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
 		internal System.Windows.Forms.Button showDebugButton;
-		private System.Windows.Forms.Button showAllButton;
+		internal System.Windows.Forms.Button showAllButton;
+		internal System.Windows.Forms.Button searchRecordButton;
 	}
 }
 

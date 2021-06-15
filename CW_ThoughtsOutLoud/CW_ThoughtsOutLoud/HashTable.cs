@@ -86,8 +86,8 @@ namespace CW_ThoughtsOutLoud
 				{
 					result[k] = $"Значение: {items[i].Data}\n" +
 						$"Ключ: {items[i].Key,-14} ({ConvertToNumber(items[i].Key)})\n" +
-						$"Хеш 1: {GetHashCode(items[i].Key)}\n" +
-						$"Хеш 2: {i}\n";
+						$"Индекс: {i}\n" +
+						$"Хеш: {GetHashCode(items[i].Key)}\n";
 					k++;
 				}
 			}

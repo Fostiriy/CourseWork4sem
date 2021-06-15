@@ -238,20 +238,27 @@ namespace CW_ThoughtsOutLoud
 
 			bool isFound = false;
 			result = root;
-			RBNode<TKey, TData> node = new RBNode<TKey, TData>(key);
+			var node = new RBNode<TKey, TData>(key);
+			RBNode<TKey, TData> nodeParent = result.parent;
 
 			while (!isFound)
 			{
 				if (result == Nil)
 				{
 					isFound = true;
-					result = result.parent.parent;
+					result = nodeParent.parent;
 					break;
 				}
 				if (node.IsLess(result))
+				{ 
+					nodeParent = result;
 					result = result.left;
+				}
 				else if (node.IsMore(result))
+				{
+					nodeParent = result;
 					result = result.right;
+				}
 				else
 					isFound = true;
 			}
@@ -277,7 +284,23 @@ namespace CW_ThoughtsOutLoud
 					while (temp != nodeTo)
 					{
 						result.PushBack(temp);
-						temp = temp.right;
+						if (temp.parent == root)
+						{
+							temp = root;
+							while (temp != nodeTo)
+							{
+								if (nodeTo.IsLess(temp))
+									temp = temp.left;
+								else if (nodeTo.IsMore(temp))
+									temp = temp.right;
+								else
+									temp = nodeTo;
+							}
+						}
+						else if (temp.parent.IsLess(nodeTo) || temp.parent.IsEqual(nodeTo))
+							temp = temp.parent;
+						else
+							temp = temp.right;
 					}
 					result.PushBack(temp);
 				}
@@ -372,7 +395,7 @@ namespace CW_ThoughtsOutLoud
 
 			if (current != Nil)
 			{
-				result += Info(current.right, n + 1);
+				result += Info(current.left, n + 1);
 
 				result += $"Ключ: {current.key}\n";
 				//if (current.color == Colour.Black)
@@ -381,7 +404,7 @@ namespace CW_ThoughtsOutLoud
 				//	result += $"Цвет: красный\n";
 				result += $"Индексы:\n{current.Data.ElementsInfo()}\n";
 
-				result += Info(current.left, n + 1);
+				result += Info(current.right, n + 1);
 			}
 
 			return result;

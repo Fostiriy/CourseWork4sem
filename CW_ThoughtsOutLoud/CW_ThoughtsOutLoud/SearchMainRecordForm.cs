@@ -27,12 +27,12 @@ namespace CW_ThoughtsOutLoud
 		private void SearchMainRecordForm_Load(object sender, EventArgs e)
 		{
 			mainWindow = (MainForm)Owner;
+			mainWindow.mainGridRows = new DataGridViewRow[mainWindow.currentGrid.Rows.Count];
+			mainWindow.currentGrid.Rows.CopyTo(mainWindow.mainGridRows, 0);
 		}
 
 		private void SearchRecordButton_Click(object sender, EventArgs e)
 		{
-			mainWindow.mainGridCopy = mainWindow.currentGrid;
-
 			if (dateTreeGroupBox.Enabled)
 			{
 				string date1 = inputDateFromTimePicker.Text;
@@ -58,12 +58,14 @@ namespace CW_ThoughtsOutLoud
 							}
 						}
 
-						mainWindow.gridToSearch = new DataGridView();
+						mainWindow.currentGrid.Rows.Clear();
 						foreach (var index in indexes)
 						{
-							mainWindow.gridToSearch.Rows.Add(mainWindow.currentGrid.Rows[index]);
+							mainWindow.currentGrid.Rows.Add(mainWindow.mainGridRows[index]);
 						}
-						mainWindow.currentGrid = mainWindow.gridToSearch;
+
+						mainWindow.showAllButton.Enabled = !mainWindow.showAllButton.Enabled;
+						mainWindow.searchRecordButton.Enabled = !searchRecordButton.Enabled;
 					}
 					else
 					{

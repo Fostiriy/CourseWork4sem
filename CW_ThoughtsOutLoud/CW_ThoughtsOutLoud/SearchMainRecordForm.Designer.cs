@@ -124,7 +124,7 @@ namespace CW_ThoughtsOutLoud
 			this.inputTimeToTimePicker.ShowUpDown = true;
 			this.inputTimeToTimePicker.Size = new System.Drawing.Size(120, 34);
 			this.inputTimeToTimePicker.TabIndex = 0;
-			this.inputTimeToTimePicker.Value = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
+			this.inputTimeToTimePicker.Value = new System.DateTime(2021, 1, 1, 23, 59, 59, 0);
 			// 
 			// inputTimeFromTimePicker
 			// 
@@ -148,7 +148,7 @@ namespace CW_ThoughtsOutLoud
 			this.inputDateToTimePicker.Name = "inputDateToTimePicker";
 			this.inputDateToTimePicker.Size = new System.Drawing.Size(120, 34);
 			this.inputDateToTimePicker.TabIndex = 0;
-			this.inputDateToTimePicker.Value = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
+			this.inputDateToTimePicker.Value = new System.DateTime(2021, 12, 31, 0, 0, 0, 0);
 			// 
 			// inputDateFromTimePicker
 			// 

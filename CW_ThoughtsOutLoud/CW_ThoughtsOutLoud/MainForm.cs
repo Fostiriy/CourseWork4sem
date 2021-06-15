@@ -12,8 +12,7 @@ namespace CW_ThoughtsOutLoud
 		internal RBTree<double, DataGridViewRow> dateTree = new RBTree<double, DataGridViewRow>();
 		internal string[] debugInfo = new string[4];
 		internal DataGridView currentGrid;
-		internal DataGridView gridToSearch;
-		internal DataGridView mainGridCopy;
+		internal DataGridViewRow[] mainGridRows;
 
 		internal AddMainRecordForm addMainRecordWindow = new AddMainRecordForm();
 		private AddDateRecordForm addDateRecordWindow = new AddDateRecordForm();
@@ -172,6 +171,8 @@ namespace CW_ThoughtsOutLoud
 		internal double ConvertToTreeKey(string keyString)
 		{
 			string[] components = keyString.Split('.', ':', ' ');
+			if (components[3].Length == 1)
+				components[3] = "0" + components[3];
 			string date = components[2] + components[1] + components[0];
 			string time = components[3] + components[4] + components[5];
 
@@ -466,6 +467,18 @@ namespace CW_ThoughtsOutLoud
 			else
 			{
 				e.Cancel = true;
+			}
+		}
+
+		private void ShowAllButton_Click(object sender, EventArgs e)
+		{
+			showAllButton.Enabled = !showAllButton.Enabled;
+			searchRecordButton.Enabled = !searchRecordButton.Enabled;
+
+			mainGrid.Rows.Clear();
+			foreach (var row in mainGridRows)
+			{
+				mainGrid.Rows.Add(row);
 			}
 		}
 	}
