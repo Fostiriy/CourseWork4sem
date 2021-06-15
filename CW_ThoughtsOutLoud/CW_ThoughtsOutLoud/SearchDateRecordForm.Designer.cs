@@ -133,7 +133,7 @@ namespace CW_ThoughtsOutLoud
 			this.Name = "SearchDateRecordForm";
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "SearchDateRecordForm";
+			this.Text = "Поиск в справочнике";
 			this.Load += new System.EventHandler(this.SearchDateRecordForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();

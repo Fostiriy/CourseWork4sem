@@ -190,7 +190,7 @@ namespace CW_ThoughtsOutLoud
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "SearchMainRecordForm";
+			this.Text = "Поиск в справочнике";
 			this.Load += new System.EventHandler(this.SearchMainRecordForm_Load);
 			this.dateTreeGroupBox.ResumeLayout(false);
 			this.dateTreeGroupBox.PerformLayout();
