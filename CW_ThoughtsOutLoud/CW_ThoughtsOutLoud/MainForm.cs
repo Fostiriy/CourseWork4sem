@@ -473,7 +473,7 @@ namespace CW_ThoughtsOutLoud
 		private void ShowAllButton_Click(object sender, EventArgs e)
 		{
 			showAllButton.Enabled = !showAllButton.Enabled;
-			searchRecordButton.Enabled = !searchRecordButton.Enabled;
+			bookWorkingBox.Enabled = !bookWorkingBox.Enabled;
 
 			mainGrid.Rows.Clear();
 			foreach (var row in mainGridRows)

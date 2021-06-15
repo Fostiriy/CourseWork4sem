@@ -220,89 +220,78 @@ namespace CW_ThoughtsOutLoud
 				return Nil;
 		}
 
-		public RBNode<TKey, TData> FindPrevOrEqual(TKey key)
-		{
-			var result = FindMinimum();
+		//public RBNode<TKey, TData> FindPrevOrEqual(TKey key)
+		//{
+		//	var result = FindMinimum();
 
-			if (key.CompareTo(result.key) <= 0)
-			{
-				return result;
-			}
+		//	if (key.CompareTo(result.key) <= 0)
+		//	{
+		//		return result;
+		//	}
 
-			result = FindMaximum();
+		//	result = FindMaximum();
 
-			if (key.CompareTo(result.key) >= 0)
-			{
-				return result;
-			}
+		//	if (key.CompareTo(result.key) >= 0)
+		//	{
+		//		return result;
+		//	}
 
-			bool isFound = false;
-			result = root;
-			var node = new RBNode<TKey, TData>(key);
-			RBNode<TKey, TData> nodeParent = result.parent;
+		//	bool isFound = false;
+		//	result = root;
+		//	var node = new RBNode<TKey, TData>(key);
+		//	RBNode<TKey, TData> nodeParent = result.parent;
 
-			while (!isFound)
-			{
-				if (result == Nil)
-				{
-					isFound = true;
-					result = nodeParent.parent;
-					break;
-				}
-				if (node.IsLess(result))
-				{ 
-					nodeParent = result;
-					result = result.left;
-				}
-				else if (node.IsMore(result))
-				{
-					nodeParent = result;
-					result = result.right;
-				}
-				else
-					isFound = true;
-			}
+		//	while (!isFound)
+		//	{
+		//		if (result == Nil)
+		//		{
+		//			isFound = true;
+		//			result = nodeParent.parent;
+		//			break;
+		//		}
+		//		if (node.IsLess(result))
+		//		{ 
+		//			nodeParent = result;
+		//			result = result.left;
+		//		}
+		//		else if (node.IsMore(result))
+		//		{
+		//			nodeParent = result;
+		//			result = result.right;
+		//		}
+		//		else
+		//			isFound = true;
+		//	}
 
-			if (isFound)
-				return result;
-			else
-				return Nil;
-		}
+		//	if (isFound)
+		//		return result;
+		//	else
+		//		return Nil;
+		//}
 
-		public SingleLinkedList<RBNode<TKey, TData>> Search(TKey key1, TKey key2)
+		public SingleLinkedList<RBNode<TKey, TData>> Search(TKey keyFrom, TKey keyTo)
 		{
 			SingleLinkedList<RBNode<TKey, TData>> result = new SingleLinkedList<RBNode<TKey, TData>>();
 
-			if (key1.CompareTo(key2) <= 0)
+			if (keyFrom.CompareTo(keyTo) <= 0)
 			{
-				if (FindMaximum().key.CompareTo(key1) >= 0 && FindMinimum().key.CompareTo(key2) <= 0)
+				if (FindMaximum().key.CompareTo(keyFrom) >= 0 && FindMinimum().key.CompareTo(keyTo) <= 0)
 				{
-					var nodeFrom = FindPrevOrEqual(key1);
-					var nodeTo = FindPrevOrEqual(key2);
-					if (nodeFrom == nodeTo)
-						result.PushBack(nodeFrom);
-					else
-					{
-						result.PushBack(nodeFrom);
-						PushLNR(root, nodeFrom, nodeTo, result);
-						result.PushBack(nodeTo);
-					}
+					PushLNR(root, keyFrom, keyTo, result);
 				}
 			}
 
 			return result;
 		}
 
-		private void PushLNR(RBNode<TKey, TData> current, 
-			RBNode<TKey, TData> nodeFrom, RBNode<TKey, TData> nodeTo,
-			SingleLinkedList<RBNode<TKey, TData>> result)
+		private void PushLNR(RBNode<TKey, TData> current, TKey keyFrom, TKey keyTo, SingleLinkedList<RBNode<TKey, TData>> result)
 		{
 			if (current != Nil)
 			{
-				PushLNR(current.left, nodeFrom, nodeTo, result);
-				if (current.IsMore(nodeFrom) && current.IsLess(nodeTo))
+				PushLNR(current.left, keyFrom, keyTo, result);
+				if (current.key.CompareTo(keyFrom) > 0 && current.key.CompareTo(keyTo) < 0)
 					result.PushBack(current);
-				PushLNR(current.right, nodeFrom, nodeTo, result);
+				PushLNR(current.right, keyFrom, keyTo, result);
 			}
 		}
 

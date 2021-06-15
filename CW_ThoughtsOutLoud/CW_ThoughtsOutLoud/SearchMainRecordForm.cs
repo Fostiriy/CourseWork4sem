@@ -65,7 +65,7 @@ namespace CW_ThoughtsOutLoud
 						}
 
 						mainWindow.showAllButton.Enabled = !mainWindow.showAllButton.Enabled;
-						mainWindow.searchRecordButton.Enabled = !searchRecordButton.Enabled;
+						mainWindow.bookWorkingBox.Enabled = !mainWindow.bookWorkingBox.Enabled;
 					}
 					else
 					{

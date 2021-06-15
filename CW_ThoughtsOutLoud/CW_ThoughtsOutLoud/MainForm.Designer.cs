@@ -242,7 +242,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// addRecordButton
 			// 
-			this.addRecordButton.Location = new System.Drawing.Point(45, 26);
+			this.addRecordButton.Location = new System.Drawing.Point(46, 31);
 			this.addRecordButton.Name = "addRecordButton";
 			this.addRecordButton.Size = new System.Drawing.Size(160, 35);
 			this.addRecordButton.TabIndex = 3;
@@ -252,7 +252,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// deleteRecordButton
 			// 
-			this.deleteRecordButton.Location = new System.Drawing.Point(46, 67);
+			this.deleteRecordButton.Location = new System.Drawing.Point(46, 72);
 			this.deleteRecordButton.Name = "deleteRecordButton";
 			this.deleteRecordButton.Size = new System.Drawing.Size(160, 35);
 			this.deleteRecordButton.TabIndex = 3;
@@ -268,7 +268,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// searchRecordButton
 			// 
-			this.searchRecordButton.Location = new System.Drawing.Point(45, 108);
+			this.searchRecordButton.Location = new System.Drawing.Point(46, 113);
 			this.searchRecordButton.Name = "searchRecordButton";
 			this.searchRecordButton.Size = new System.Drawing.Size(160, 35);
 			this.searchRecordButton.TabIndex = 3;
@@ -307,7 +307,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			// newBookButton
 			// 
-			this.newBookButton.Location = new System.Drawing.Point(46, 190);
+			this.newBookButton.Location = new System.Drawing.Point(46, 154);
 			this.newBookButton.Name = "newBookButton";
 			this.newBookButton.Size = new System.Drawing.Size(160, 35);
 			this.newBookButton.TabIndex = 3;
@@ -341,13 +341,12 @@ namespace CW_ThoughtsOutLoud
 			// 
 			this.bookWorkingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.bookWorkingBox.Controls.Add(this.searchRecordButton);
-			this.bookWorkingBox.Controls.Add(this.showAllButton);
 			this.bookWorkingBox.Controls.Add(this.newBookButton);
 			this.bookWorkingBox.Controls.Add(this.deleteRecordButton);
 			this.bookWorkingBox.Controls.Add(this.addRecordButton);
-			this.bookWorkingBox.Location = new System.Drawing.Point(999, 165);
+			this.bookWorkingBox.Location = new System.Drawing.Point(1000, 165);
 			this.bookWorkingBox.Name = "bookWorkingBox";
-			this.bookWorkingBox.Size = new System.Drawing.Size(250, 251);
+			this.bookWorkingBox.Size = new System.Drawing.Size(250, 220);
 			this.bookWorkingBox.TabIndex = 5;
 			this.bookWorkingBox.TabStop = false;
 			this.bookWorkingBox.Text = "Работа со справочником";
@@ -355,9 +354,10 @@ namespace CW_ThoughtsOutLoud
 			// showAllButton
 			// 
 			this.showAllButton.Enabled = false;
-			this.showAllButton.Location = new System.Drawing.Point(45, 149);
+			this.showAllButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.showAllButton.Location = new System.Drawing.Point(999, 391);
 			this.showAllButton.Name = "showAllButton";
-			this.showAllButton.Size = new System.Drawing.Size(160, 35);
+			this.showAllButton.Size = new System.Drawing.Size(251, 49);
 			this.showAllButton.TabIndex = 3;
 			this.showAllButton.Text = "Показать все";
 			this.showAllButton.UseVisualStyleBackColor = true;
@@ -370,6 +370,7 @@ namespace CW_ThoughtsOutLoud
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1262, 673);
 			this.Controls.Add(this.bookWorkingBox);
+			this.Controls.Add(this.showAllButton);
 			this.Controls.Add(this.fileWorkingBox);
 			this.Controls.Add(this.showDebugButton);
 			this.Controls.Add(this.booksTabControl);
@@ -406,7 +407,6 @@ namespace CW_ThoughtsOutLoud
 		private System.Windows.Forms.Button newBookButton;
 		private System.Windows.Forms.Button saveFileButton;
 		private System.Windows.Forms.GroupBox fileWorkingBox;
-		private System.Windows.Forms.GroupBox bookWorkingBox;
 		private System.Windows.Forms.DataGridView mainGrid;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -421,7 +421,8 @@ namespace CW_ThoughtsOutLoud
 		private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
 		internal System.Windows.Forms.Button showDebugButton;
 		internal System.Windows.Forms.Button showAllButton;
-		internal System.Windows.Forms.Button searchRecordButton;
+		internal System.Windows.Forms.GroupBox bookWorkingBox;
+		private System.Windows.Forms.Button searchRecordButton;
 	}
 }
 
