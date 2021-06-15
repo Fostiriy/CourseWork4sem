@@ -21,9 +21,9 @@ namespace CW_ThoughtsOutLoud
 
 		private void SearchRecordButton_Click(object sender, EventArgs e)
 		{
-			string date = inputDateTextBox.Text;
-			string time = inputTimeTextBox.Text;
-			string key = date + " " + time;
+			string date = inputDateTimePicker.Text;
+			string time = inputTimeTimePicker.Text;
+			string key = $"{date} {time}";
 			var foundNode = mainWindow.dateNameBook.Search(key);
 			if (foundNode != null)
 			{

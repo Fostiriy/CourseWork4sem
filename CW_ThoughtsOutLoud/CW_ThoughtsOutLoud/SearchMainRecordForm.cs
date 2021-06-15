@@ -33,46 +33,49 @@ namespace CW_ThoughtsOutLoud
 		{
 			mainWindow.mainGridCopy = mainWindow.currentGrid;
 
-			string date1 = inputDateFromTextBox.Text;
-			string time1 = inputTimeFromTextBox.Text;
-			double key1 = mainWindow.ConvertToTreeKey(date1 + time1);
-
-			string date2 = inputDateToTextBox.Text;
-			string time2 = inputTimeToTextBox.Text;
-			double key2 = mainWindow.ConvertToTreeKey(date2 + time2);
-
-			if (key1 <= key2)
+			if (dateTreeGroupBox.Enabled)
 			{
-				var nodesFound = mainWindow.dateTree.Search(key1, key2);
+				string date1 = inputDateFromTimePicker.Text;
+				string time1 = inputTimeFromTimePicker.Text;
+				double key1 = mainWindow.ConvertToTreeKey($"{date1} {time1}");
 
-				if (nodesFound != null)
+				string date2 = inputDateToTimePicker.Text;
+				string time2 = inputTimeToTimePicker.Text;
+				double key2 = mainWindow.ConvertToTreeKey($"{date2} {time2}");
+
+				if (key1 <= key2)
 				{
-					SingleLinkedList<int> indexes = new SingleLinkedList<int>();
-					foreach (var node in nodesFound)
+					var nodesFound = mainWindow.dateTree.Search(key1, key2);
+
+					if (nodesFound.Count != 0)
 					{
-						foreach (var row in node.Data)
+						SingleLinkedList<int> indexes = new SingleLinkedList<int>();
+						foreach (var node in nodesFound)
 						{
-							indexes.PushBack(row.Index);
+							foreach (var row in node.Data)
+							{
+								indexes.PushBack(row.Index);
+							}
 						}
+
+						mainWindow.gridToSearch = new DataGridView();
+						foreach (var index in indexes)
+						{
+							mainWindow.gridToSearch.Rows.Add(mainWindow.currentGrid.Rows[index]);
+						}
+						mainWindow.currentGrid = mainWindow.gridToSearch;
+					}
+					else
+					{
+						MessageBox.Show("Ничего не найдено.", "Результаты поиска", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					}
 
-					mainWindow.gridToSearch = new DataGridView();
-					foreach (var index in indexes)
-					{
-						mainWindow.gridToSearch.Rows.Add(mainWindow.currentGrid.Rows[index]);
-					}
-					mainWindow.currentGrid = mainWindow.gridToSearch;
 				}
 				else
 				{
-					MessageBox.Show("Ничего не найдено.", "Результаты поиска", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("Неверно задан диапазон. Дата и время первой строки должны предшествовать дате и времени второй строки" +
+						"или совпадать с ними.", "Ошибка в диапазоне", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
-
-			}
-			else
-			{
-				MessageBox.Show("Неверно задан диапазон. Дата и время первой строки должны предшествовать дате и времени второй строки" +
-					"или совпадать с ними.", "Ошибка в диапазоне", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 	}

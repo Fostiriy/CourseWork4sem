@@ -19,65 +19,15 @@ namespace CW_ThoughtsOutLoud
 			InitializeComponent();
 		}
 
-		private bool IsDateCorrect(string date)
-		{
-			bool result = false;
-
-			if (!date.Contains(' '))
-			{
-				string[] components = date.Split('.');
-				int day = int.Parse(components[0]);
-				int month = int.Parse(components[1]);
-				int year = int.Parse(components[2]);
-				if (day >= 1 && day <= 31)
-				{
-					if (month >= 1 && month <= 12)
-					{
-						if (year >= 1900 && month <= 2021)
-						{
-							result = true;
-						}
-					}
-				}
-			}
-
-			return result;
-		}
-
-		private bool IsTimeCorrect(string time)
-		{
-			bool result = false;
-
-			if (!time.Contains(' '))
-			{
-				string[] components = time.Split(':');
-				int hours = int.Parse(components[0]);
-				int minutes = int.Parse(components[1]);
-				int seconds = int.Parse(components[2]);
-				if (hours >= 0 && hours <= 23)
-				{
-					if (minutes >= 0 && minutes <= 59)
-					{
-						if (seconds >= 0 && seconds <= 59)
-						{
-							result = true;
-						}
-					}
-				}
-			}
-
-			return result;
-		}
-
 		private void AddRecordButton_Click(object sender, EventArgs e)
 		{
 			string name = inputNameTextBox.Text.Trim();
-			string date = inputDateTextBox.Text;
-			string time = inputTimeTextBox.Text;
+			string date = inputDateTimePicker.Text;
+			string time = inputTimeTimePicker.Text;
 
-			if (name != string.Empty && IsDateCorrect(date) && IsTimeCorrect(time))
+			if (name != string.Empty)
 			{
-				string key = date + " " + time;
+				string key = $"{date} {time}";
 
 				if (mainWindow.dateNameBook.Insert(key, name))
 				{

@@ -170,10 +170,11 @@ namespace CW_ThoughtsOutLoud
 
 		internal double ConvertToTreeKey(string keyString)
 		{
-			keyString = keyString.Replace(".", "");
-			keyString = keyString.Replace(":", "");
+			string[] components = keyString.Split('.', ':', ' ');
+			string date = components[2] + components[1] + components[0];
+			string time = components[3] + components[4] + components[5];
 
-			return double.Parse(keyString);
+			return double.Parse(date + time);
 		}
 
 
@@ -279,10 +280,7 @@ namespace CW_ThoughtsOutLoud
 					if (currentRow != null)
 					{
 						string date = currentRow.Cells[1].Value.ToString();
-						date = date.Replace(" ", "");
-						date = date.Replace(".", "");
-						date = date.Replace(":", "");
-						keyDate = double.Parse(date);
+						keyDate = ConvertToTreeKey(date);
 					}
 					break;
 				case 2:
@@ -331,10 +329,7 @@ namespace CW_ThoughtsOutLoud
 				if (currentGrid == mainGrid)
 				{
 					string date = currentRow.Cells[1].Value.ToString();
-					date = date.Replace(" ", "");
-					date = date.Replace(".", "");
-					date = date.Replace(":", "");
-					keyDate = double.Parse(date);
+					keyDate = ConvertToTreeKey(date);
 					dateTree.Delete(keyDate, currentRow);
 					ChangeDebugInfo(2);
 
@@ -450,7 +445,7 @@ namespace CW_ThoughtsOutLoud
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 			if (result == DialogResult.Yes)
 			{
-				result = MessageBox.Show("Сохранить данные хеш-таблиц в файл?", "Завершение работы программы",
+				result = MessageBox.Show("Сохранить текущие данные в файл?", "Завершение работы программы",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 				if (result == DialogResult.Yes)

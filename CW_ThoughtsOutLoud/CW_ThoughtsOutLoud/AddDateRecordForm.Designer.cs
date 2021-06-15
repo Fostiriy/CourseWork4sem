@@ -34,9 +34,9 @@ namespace CW_ThoughtsOutLoud
 			this.inputNameLabel = new System.Windows.Forms.Label();
 			this.inputDateLabel = new System.Windows.Forms.Label();
 			this.inputTimeLabel = new System.Windows.Forms.Label();
-			this.inputDateTextBox = new System.Windows.Forms.MaskedTextBox();
-			this.inputTimeTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.cancelButton = new System.Windows.Forms.Button();
+			this.inputDateTimePicker = new System.Windows.Forms.DateTimePicker();
+			this.inputTimeTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.SuspendLayout();
 			// 
 			// addRecordButton
@@ -88,27 +88,6 @@ namespace CW_ThoughtsOutLoud
 			this.inputTimeLabel.TabIndex = 2;
 			this.inputTimeLabel.Text = "Введите время:";
 			// 
-			// inputDateTextBox
-			// 
-			this.inputDateTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputDateTextBox.Location = new System.Drawing.Point(145, 97);
-			this.inputDateTextBox.Mask = "00/00/0000";
-			this.inputDateTextBox.Name = "inputDateTextBox";
-			this.inputDateTextBox.ResetOnSpace = false;
-			this.inputDateTextBox.Size = new System.Drawing.Size(175, 34);
-			this.inputDateTextBox.TabIndex = 1;
-			this.inputDateTextBox.ValidatingType = typeof(System.DateTime);
-			// 
-			// inputTimeTextBox
-			// 
-			this.inputTimeTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputTimeTextBox.Location = new System.Drawing.Point(145, 137);
-			this.inputTimeTextBox.Mask = "00:00:00";
-			this.inputTimeTextBox.Name = "inputTimeTextBox";
-			this.inputTimeTextBox.ResetOnSpace = false;
-			this.inputTimeTextBox.Size = new System.Drawing.Size(175, 34);
-			this.inputTimeTextBox.TabIndex = 2;
-			// 
 			// cancelButton
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -121,6 +100,30 @@ namespace CW_ThoughtsOutLoud
 			this.cancelButton.Text = "Отмена";
 			this.cancelButton.UseVisualStyleBackColor = true;
 			// 
+			// inputDateTimePicker
+			// 
+			this.inputDateTimePicker.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputDateTimePicker.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.inputDateTimePicker.Location = new System.Drawing.Point(145, 95);
+			this.inputDateTimePicker.MaxDate = new System.DateTime(2999, 12, 31, 0, 0, 0, 0);
+			this.inputDateTimePicker.Name = "inputDateTimePicker";
+			this.inputDateTimePicker.Size = new System.Drawing.Size(175, 34);
+			this.inputDateTimePicker.TabIndex = 5;
+			this.inputDateTimePicker.Value = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
+			// 
+			// inputTimeTimePicker
+			// 
+			this.inputTimeTimePicker.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputTimeTimePicker.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputTimeTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+			this.inputTimeTimePicker.Location = new System.Drawing.Point(145, 135);
+			this.inputTimeTimePicker.Name = "inputTimeTimePicker";
+			this.inputTimeTimePicker.ShowUpDown = true;
+			this.inputTimeTimePicker.Size = new System.Drawing.Size(175, 34);
+			this.inputTimeTimePicker.TabIndex = 6;
+			this.inputTimeTimePicker.Value = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
+			// 
 			// AddDateRecordForm
 			// 
 			this.AcceptButton = this.addRecordButton;
@@ -128,8 +131,8 @@ namespace CW_ThoughtsOutLoud
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(332, 253);
-			this.Controls.Add(this.inputTimeTextBox);
-			this.Controls.Add(this.inputDateTextBox);
+			this.Controls.Add(this.inputTimeTimePicker);
+			this.Controls.Add(this.inputDateTimePicker);
 			this.Controls.Add(this.inputTimeLabel);
 			this.Controls.Add(this.inputDateLabel);
 			this.Controls.Add(this.inputNameLabel);
@@ -157,8 +160,8 @@ namespace CW_ThoughtsOutLoud
 		private System.Windows.Forms.Label inputDateLabel;
 		private System.Windows.Forms.Label inputTimeLabel;
 		public System.Windows.Forms.TextBox inputNameTextBox;
-		public System.Windows.Forms.MaskedTextBox inputDateTextBox;
-		public System.Windows.Forms.MaskedTextBox inputTimeTextBox;
 		protected internal System.Windows.Forms.Button cancelButton;
+		private System.Windows.Forms.DateTimePicker inputDateTimePicker;
+		private System.Windows.Forms.DateTimePicker inputTimeTimePicker;
 	}
 }
