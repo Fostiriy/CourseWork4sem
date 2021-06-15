@@ -275,38 +275,35 @@ namespace CW_ThoughtsOutLoud
 
 			if (key1.CompareTo(key2) <= 0)
 			{
-				var nodeFrom = FindPrevOrEqual(key1);
-				var nodeTo = FindPrevOrEqual(key2);
-
-				if (nodeFrom != Nil && nodeTo != Nil)
+				if (FindMaximum().key.CompareTo(key1) >= 0 && FindMinimum().key.CompareTo(key2) <= 0)
 				{
-					var temp = nodeFrom;
-					while (temp != nodeTo)
+					var nodeFrom = FindPrevOrEqual(key1);
+					var nodeTo = FindPrevOrEqual(key2);
+					if (nodeFrom == nodeTo)
+						result.PushBack(nodeFrom);
+					else
 					{
-						result.PushBack(temp);
-						if (temp.parent == root)
-						{
-							temp = root;
-							while (temp != nodeTo)
-							{
-								if (nodeTo.IsLess(temp))
-									temp = temp.left;
-								else if (nodeTo.IsMore(temp))
-									temp = temp.right;
-								else
-									temp = nodeTo;
-							}
-						}
-						else if (temp.parent.IsLess(nodeTo) || temp.parent.IsEqual(nodeTo))
-							temp = temp.parent;
-						else
-							temp = temp.right;
+						result.PushBack(nodeFrom);
+						PushLNR(root, nodeFrom, nodeTo, result);
+						result.PushBack(nodeTo);
 					}
-					result.PushBack(temp);
 				}
 			}
 
 			return result;
+		}
+
+		private void PushLNR(RBNode<TKey, TData> current, 
+			RBNode<TKey, TData> nodeFrom, RBNode<TKey, TData> nodeTo,
+			SingleLinkedList<RBNode<TKey, TData>> result)
+		{
+			if (current != Nil)
+			{
+				PushLNR(current.left, nodeFrom, nodeTo, result);
+				if (current.IsMore(nodeFrom) && current.IsLess(nodeTo))
+					result.PushBack(current);
+				PushLNR(current.right, nodeFrom, nodeTo, result);
+			}
 		}
 
 		// Нахождение узла с минимальным ключом в дереве

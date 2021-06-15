@@ -183,11 +183,13 @@ namespace CW_ThoughtsOutLoud
 			this.Controls.Add(this.radioButton2);
 			this.Controls.Add(this.cancelButton);
 			this.Controls.Add(this.searchRecordButton);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "SearchMainRecordForm";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "SearchMainRecordForm";
 			this.Load += new System.EventHandler(this.SearchMainRecordForm_Load);
 			this.dateTreeGroupBox.ResumeLayout(false);
