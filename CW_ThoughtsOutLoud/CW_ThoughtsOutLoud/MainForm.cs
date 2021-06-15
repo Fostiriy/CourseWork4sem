@@ -65,6 +65,10 @@ namespace CW_ThoughtsOutLoud
 			mainGrid.Rows.Clear();
 			dateNameGrid.Rows.Clear();
 			categoryColorGrid.Rows.Clear();
+
+			addMainRecordWindow.dateComboBox.Items.Clear();
+			addMainRecordWindow.categoryComboBox.Items.Clear();
+
 			dateTree.Clear();
 			// дерево Егора
 			dateNameBook.Clear();
@@ -138,11 +142,8 @@ namespace CW_ThoughtsOutLoud
 
 								if (dateNameBook.Search(key1) != null && categoryColorBook.Search(key2) != null) // Егору поменять на свой справочник
 								{
-									string keyDate = key1.Replace(" ", "");
-									keyDate = keyDate.Replace(".", "");
-									keyDate = keyDate.Replace(":", "");
 									int gridIndex = mainGrid.Rows.Add(data1, key1, key2, data2);
-									dateTree.Insert(double.Parse(keyDate), mainGrid.Rows[gridIndex]);
+									dateTree.Insert(ConvertToTreeKey(key1), mainGrid.Rows[gridIndex]);
 									// Дерево Егора
 									
 									line = istream.ReadLine();
@@ -306,6 +307,7 @@ namespace CW_ThoughtsOutLoud
 						{
 							SingleLinkedList<DataGridViewRow> deletedIndexes = dateTree.Delete(keyDate);
 							ChangeDebugInfo(2);
+
 							foreach (DataGridViewRow row in deletedIndexes)
 							{
 								mainGrid.Rows.RemoveAt(row.Index);
@@ -317,6 +319,7 @@ namespace CW_ThoughtsOutLoud
 					{
 						string date = currentRow.Cells[1].Value.ToString();
 						dateNameBook.Remove(date);
+						addMainRecordWindow.dateComboBox.Items.Remove(date);
 						ChangeDebugInfo(0);
 					}
 				}
@@ -414,10 +417,12 @@ namespace CW_ThoughtsOutLoud
 				if (dateHT != null)
 				{
 					dateHT.Clear();
+					addMainRecordWindow.dateComboBox.Items.Clear();
 					ChangeDebugInfo(0);
 				}
 
 				// И дерево, и ХТ Егора тоже чистятся
+				//addMainRecordWindow.categoryComboBox.Items.Clear();
 				//ChangeDebugInfo(1);
 
 			}

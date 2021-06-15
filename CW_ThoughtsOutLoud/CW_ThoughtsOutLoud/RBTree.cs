@@ -220,14 +220,56 @@ namespace CW_ThoughtsOutLoud
 				return Nil;
 		}
 
+		public RBNode<TKey, TData> FindPrevOrEqual(TKey key)
+		{
+			var result = FindMinimum();
+
+			if (key.CompareTo(result.key) <= 0)
+			{
+				return result;
+			}
+
+			result = FindMaximum();
+
+			if (key.CompareTo(result.key) >= 0)
+			{
+				return result;
+			}
+
+			bool isFound = false;
+			result = root;
+			RBNode<TKey, TData> node = new RBNode<TKey, TData>(key);
+
+			while (!isFound)
+			{
+				if (result == Nil)
+				{
+					isFound = true;
+					result = result.parent.parent;
+					break;
+				}
+				if (node.IsLess(result))
+					result = result.left;
+				else if (node.IsMore(result))
+					result = result.right;
+				else
+					isFound = true;
+			}
+
+			if (isFound)
+				return result;
+			else
+				return Nil;
+		}
+
 		public SingleLinkedList<RBNode<TKey, TData>> Search(TKey key1, TKey key2)
 		{
 			SingleLinkedList<RBNode<TKey, TData>> result = new SingleLinkedList<RBNode<TKey, TData>>();
 
 			if (key1.CompareTo(key2) <= 0)
 			{
-				var nodeFrom = Find(key1);
-				var nodeTo = Find(key2);
+				var nodeFrom = FindPrevOrEqual(key1);
+				var nodeTo = FindPrevOrEqual(key2);
 
 				if (nodeFrom != Nil && nodeTo != Nil)
 				{
@@ -268,6 +310,34 @@ namespace CW_ThoughtsOutLoud
 
 			while (temp.left != Nil)
 				temp = temp.left;
+
+			return temp;
+		}
+
+		// Нахождение узла с минимальным ключом в дереве
+		// Формальные параметры: пусто
+		// Входные данные: дерево
+		// Выходные данные: узел с минимальным ключом
+		public RBNode<TKey, TData> FindMaximum()
+		{
+			RBNode<TKey, TData> node = FindMaximum(root);
+			Console.WriteLine("Maximal node {0} in the tree was found.", node.key);
+			return node;
+		}
+
+		// Нахождение узла с минимальным ключом в поддереве
+		// Формальные параметры: узел-корень node поддерева
+		// Входные данные: дерево
+		// Выходные данные: узел с минимальным ключом в поддереве
+		public RBNode<TKey, TData> FindMaximum(RBNode<TKey, TData> node)
+		{
+			RBNode<TKey, TData> temp = node;
+
+			if (temp == Nil)
+				return Nil;
+
+			while (temp.right != Nil)
+				temp = temp.right;
 
 			return temp;
 		}
