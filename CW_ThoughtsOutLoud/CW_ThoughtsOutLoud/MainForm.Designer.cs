@@ -88,7 +88,7 @@ namespace CW_ThoughtsOutLoud
 			this.mainTabPage.Padding = new System.Windows.Forms.Padding(3);
 			this.mainTabPage.Size = new System.Drawing.Size(985, 640);
 			this.mainTabPage.TabIndex = 0;
-			this.mainTabPage.Text = "Общая информация";
+			this.mainTabPage.Text = "Все метаданные";
 			this.mainTabPage.UseVisualStyleBackColor = true;
 			// 
 			// mainGrid
