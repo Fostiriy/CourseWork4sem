@@ -56,6 +56,7 @@ namespace CW_ThoughtsOutLoud
 			// 
 			this.inputNameTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.inputNameTextBox.Location = new System.Drawing.Point(12, 45);
+			this.inputNameTextBox.MaxLength = 128;
 			this.inputNameTextBox.Name = "inputNameTextBox";
 			this.inputNameTextBox.Size = new System.Drawing.Size(308, 34);
 			this.inputNameTextBox.TabIndex = 0;
