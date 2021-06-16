@@ -1,7 +1,7 @@
-﻿/* Красно-чёрное дерево с повторяющимися ключами. 
- * В элементе дерева хранится data: день 2 цифры, месяц 2 цифры.
- * При удалении брать min справа. 
- */
+﻿//Красно - чёрное дерево с повторяющимися ключами. 
+//В элементе дерева хранится data: день 2 цифры, месяц 2 цифры.
+//При удалении берётся min справа элемент. 
+
 
 using System;
 using System.Collections.Generic;
@@ -219,55 +219,6 @@ namespace CW_ThoughtsOutLoud
 			else
 				return Nil;
 		}
-
-		//public RBNode<TKey, TData> FindPrevOrEqual(TKey key)
-		//{
-		//	var result = FindMinimum();
-
-		//	if (key.CompareTo(result.key) <= 0)
-		//	{
-		//		return result;
-		//	}
-
-		//	result = FindMaximum();
-
-		//	if (key.CompareTo(result.key) >= 0)
-		//	{
-		//		return result;
-		//	}
-
-		//	bool isFound = false;
-		//	result = root;
-		//	var node = new RBNode<TKey, TData>(key);
-		//	RBNode<TKey, TData> nodeParent = result.parent;
-
-		//	while (!isFound)
-		//	{
-		//		if (result == Nil)
-		//		{
-		//			isFound = true;
-		//			result = nodeParent.parent;
-		//			break;
-		//		}
-		//		if (node.IsLess(result))
-		//		{ 
-		//			nodeParent = result;
-		//			result = result.left;
-		//		}
-		//		else if (node.IsMore(result))
-		//		{
-		//			nodeParent = result;
-		//			result = result.right;
-		//		}
-		//		else
-		//			isFound = true;
-		//	}
-
-		//	if (isFound)
-		//		return result;
-		//	else
-		//		return Nil;
-		//}
 
 		public SingleLinkedList<RBNode<TKey, TData>> Search(TKey keyFrom, TKey keyTo)
 		{
@@ -682,10 +633,6 @@ namespace CW_ThoughtsOutLoud
 			Y.parent = X.parent;
 		}
 
-		// Удаляет узел из дерева по правилу удаления в бинарном дереве
-		// Формальные параметры: поля структуры ключа day и month
-		// Входные данные: дерево
-		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
 		public SingleLinkedList<TData> Delete(TKey key, TData data)
 		{
 			RBNode<TKey, TData> Z = Find(key, data);

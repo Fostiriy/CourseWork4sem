@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace CW_ThoughtsOutLoud
 {
 	// Класс узла
-	public class Node<Tdata>
+	public class ListNode<Tdata>
 	{
-		public Node<Tdata> Next;
+		public ListNode<Tdata> Next;
 		public Tdata Data;
 
-		public Node(Tdata value)
+		public ListNode(Tdata value)
 		{
 			Data = value;
 		}
@@ -23,7 +23,7 @@ namespace CW_ThoughtsOutLoud
 	public class SingleLinkedList<Tdata> : IEnumerable<Tdata>
 	{
 		// Голова и счётчик количества узлов
-		private Node<Tdata> head;
+		private ListNode<Tdata> head;
 		public int Count { get; private set; } = 0;
 
 		// Очищает список
@@ -33,7 +33,7 @@ namespace CW_ThoughtsOutLoud
 		public string Info()
 		{
 			string result = string.Empty;
-			Node<Tdata> current = head;
+			ListNode<Tdata> current = head;
 			while (current != null)
 			{
 				result += current.Data + " -> ";
@@ -48,7 +48,7 @@ namespace CW_ThoughtsOutLoud
 		public string ElementsInfo()
 		{
 			string result = string.Empty;
-			Node<Tdata> current = head;
+			ListNode<Tdata> current = head;
 			while (current != null)
 			{
 				result += $"{current.Data}\n";
@@ -59,12 +59,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает адрес нужного узла по ключу
-		public Node<Tdata> Find(Tdata key)
+		public ListNode<Tdata> Find(Tdata key)
 		{
 			if (Count == 0)
 				return null;
 
-			Node<Tdata> current = head;
+			ListNode<Tdata> current = head;
 			while (!current.Data.Equals(key))
 			{
 				current = current.Next;
@@ -76,12 +76,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает адрес нужного узла по индексу
-		public Node<Tdata> FindByIndex(int index)
+		public ListNode<Tdata> FindByIndex(int index)
 		{
 			if (index > Count || index < 0)
 				return null;
 
-			Node<Tdata> node = head;
+			ListNode<Tdata> node = head;
 			int k = 0;
 
 			while (k < index)
@@ -94,11 +94,11 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает последний узел, содержащий значение key
-		public Node<Tdata> FindLast(Tdata key)
+		public ListNode<Tdata> FindLast(Tdata key)
 		{
-			Node<Tdata> result_node = null;
+			ListNode<Tdata> result_node = null;
 
-			for (Node<Tdata> node = head; node != null; node = node.Next)
+			for (ListNode<Tdata> node = head; node != null; node = node.Next)
 			{
 				if (node.Data.Equals(key))
 					result_node = node;
@@ -108,14 +108,14 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает адрес последнего узла (хвоста)
-		private Node<Tdata> FindTail()
+		private ListNode<Tdata> FindTail()
 		{
 			if (Count == 0)
 			{
 				return null;
 			}
 
-			Node<Tdata> current = head;
+			ListNode<Tdata> current = head;
 			while (current.Next != null)
 			{
 				current = current.Next;
@@ -132,14 +132,14 @@ namespace CW_ThoughtsOutLoud
 		// Добавление узла в конец списка
 		public void PushBack(Tdata item)
 		{
-			Node<Tdata> newNode = new Node<Tdata>(item);
+			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
 			if (Count == 0)
 			{
 				head = newNode;
 			}
 			else
 			{
-				Node<Tdata> tail = FindTail();
+				ListNode<Tdata> tail = FindTail();
 				tail.Next = newNode;
 			}
 
@@ -149,7 +149,7 @@ namespace CW_ThoughtsOutLoud
 		// Добавление узла в начало списка
 		public void PushFront(Tdata item)
 		{
-			Node<Tdata> newNode = new Node<Tdata>(item);
+			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
 
 			if (Count != 0)
 			{
@@ -161,12 +161,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Добавление узла после указанного узла
-		public void AddAfter(Node<Tdata> node, Tdata item)
+		public void AddAfter(ListNode<Tdata> node, Tdata item)
 		{
 			if (node == null)
 				return; // ничего не делаем, если адрес пустой
 
-			Node<Tdata> newNode = new Node<Tdata>(item);
+			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
 
 			newNode.Next = node.Next;
 			node.Next = newNode;
@@ -174,7 +174,7 @@ namespace CW_ThoughtsOutLoud
 			Count++;
 		}
 
-		private void AddAfter(Node<Tdata> nodeAfter, Node<Tdata> node)
+		private void AddAfter(ListNode<Tdata> nodeAfter, ListNode<Tdata> node)
 		{
 			if (nodeAfter == null)
 				return; // ничего не делаем, если адрес пустой
@@ -186,12 +186,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Добавление узла перед указанным узлом
-		public void AddBefore(Node<Tdata> node, Tdata item)
+		public void AddBefore(ListNode<Tdata> node, Tdata item)
 		{
 			if (node == null)
 				return; // ничего не делаем, если адрес пустой
 
-			Node<Tdata> newNode = new Node<Tdata>(item);
+			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
 
 			if (head == node)
 			{
@@ -200,7 +200,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				Node<Tdata> current = head;
+				ListNode<Tdata> current = head;
 
 				while (current.Next != node)
 					current = current.Next;
@@ -214,11 +214,11 @@ namespace CW_ThoughtsOutLoud
 		// Добавляет элементы переданного массива в конец
 		public void PushBackRange(Tdata[] array)
 		{
-			Node<Tdata> tail = FindTail();
+			ListNode<Tdata> tail = FindTail();
 
 			for (int i = 0; i < array.Length; i++)
 			{
-				Node<Tdata> newNode = new Node<Tdata>(array[i]);
+				ListNode<Tdata> newNode = new ListNode<Tdata>(array[i]);
 				if (Count == 0)
 					head = newNode;
 				else
@@ -255,7 +255,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				Node<Tdata> current = head;
+				ListNode<Tdata> current = head;
 				while (current.Next.Next != null)
 				{
 					current = current.Next;
@@ -268,7 +268,7 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Удаление произвольного узла
-		public void RemoveNode(Node<Tdata> node)
+		public void RemoveNode(ListNode<Tdata> node)
 		{
 			if (head == node)
 			{
@@ -276,7 +276,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				Node<Tdata> current = head;
+				ListNode<Tdata> current = head;
 				while (current.Next != node)
 				{
 					current = current.Next;
@@ -306,7 +306,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				Node<Tdata> current = head;
+				ListNode<Tdata> current = head;
 
 				if (head.Data.Equals(item))
 				{
@@ -338,8 +338,8 @@ namespace CW_ThoughtsOutLoud
 			if (Count == 1 && !head.Data.Equals(item))
 				return false;
 
-			Node<Tdata> current = head;
-			Node<Tdata> node = null;
+			ListNode<Tdata> current = head;
+			ListNode<Tdata> node = null;
 
 			while (current.Next != null)
 			{
@@ -369,7 +369,7 @@ namespace CW_ThoughtsOutLoud
 		public int RemoveAll(Tdata item)
 		{
 			int k = Count; // Количество элементов в переданном списке
-			Node<Tdata> current = head;
+			ListNode<Tdata> current = head;
 
 			if (k > 2)
 			{
@@ -400,9 +400,9 @@ namespace CW_ThoughtsOutLoud
 			if (Count <= 1)
 				return;
 
-			Node<Tdata> prev = null;
-			Node<Tdata> current = head;
-			Node<Tdata> next = current.Next;
+			ListNode<Tdata> prev = null;
+			ListNode<Tdata> current = head;
+			ListNode<Tdata> next = current.Next;
 
 			while (next != null)
 			{
@@ -418,7 +418,7 @@ namespace CW_ThoughtsOutLoud
 		// Реализация foreach
 		IEnumerator<Tdata> IEnumerable<Tdata>.GetEnumerator()
 		{
-			Node<Tdata> pointer = head;
+			ListNode<Tdata> pointer = head;
 			while (pointer != null)
 			{
 				yield return pointer.Data;
@@ -429,7 +429,7 @@ namespace CW_ThoughtsOutLoud
 		// Реализация foreach
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			Node<Tdata> pointer = head;
+			ListNode<Tdata> pointer = head;
 			while (pointer != null)
 			{
 				yield return pointer.Data;

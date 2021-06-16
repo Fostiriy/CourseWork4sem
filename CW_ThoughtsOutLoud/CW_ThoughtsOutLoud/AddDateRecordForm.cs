@@ -37,7 +37,7 @@ namespace CW_ThoughtsOutLoud
 				}
 				else
 				{
-					MessageBox.Show("Запись с таким ключом уже есть в справочнике", "Повторное добавление",
+					MessageBox.Show("Запись с таким ключом уже есть в справочнике.", "Повторное добавление",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}

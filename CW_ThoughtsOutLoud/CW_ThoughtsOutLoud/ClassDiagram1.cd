@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CW_ThoughtsOutLoud.HashTable&lt;TKey, TData&gt;">
+    <Position X="5.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEAAAAAAgCAAAAgABAAAAAAAAIACAgAAAEBgAAg=</HashCode>
+      <FileName>HashTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CW_ThoughtsOutLoud.HTNode&lt;TKey, TData&gt;">
+    <Position X="5.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAQAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>HashTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CW_ThoughtsOutLoud.ListNode&lt;Tdata&gt;">
+    <Position X="8.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>SingleLinkedList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CW_ThoughtsOutLoud.RBNode&lt;TKey, TData&gt;">
+    <Position X="3.25" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAQAEAAAAAEAIABCAAAAAAAAAgAA=</HashCode>
+      <FileName>RBTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CW_ThoughtsOutLoud.RBTree&lt;TKey, TData&gt;">
+    <Position X="1.25" Y="0.75" Width="1.75" />
+    <Members>
+      <Method Name="DeleteAndDisplay" Hidden="true" />
+      <Method Name="InfoLikeTree" Hidden="true" />
+      <Method Name="InsertAndDisplay" Hidden="true" />
+      <Method Name="TraversalLNR" Hidden="true" />
+      <Method Name="TraversalLRN" Hidden="true" />
+      <Method Name="TraversalNLR" Hidden="true" />
+      <Method Name="TraversalRNL" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAIEgAACCACAAAgAggAAEIAAEoAQAACICAgEBiAAQ=</HashCode>
+      <FileName>RBTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CW_ThoughtsOutLoud.SingleLinkedList&lt;Tdata&gt;">
+    <Position X="8.25" Y="0.75" Width="2" />
+    <Members>
+      <Method Name="AddAfter" Hidden="true" />
+      <Method Name="AddBefore" Hidden="true" />
+      <Method Name="FindByIndex" Hidden="true" />
+      <Method Name="PushBackRange" Hidden="true" />
+      <Method Name="PushFront" Hidden="true" />
+      <Method Name="RemoveAll" Hidden="true" />
+      <Method Name="Reverse" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>IASIAAAAgAAAAAEAAAAADAQAEAAYAAAEIEECAEBQCAA=</HashCode>
+      <FileName>SingleLinkedList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="CW_ThoughtsOutLoud.Colour">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RBTree.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

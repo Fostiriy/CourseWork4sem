@@ -263,6 +263,7 @@ namespace CW_ThoughtsOutLoud
 			// openFileDialog
 			// 
 			this.openFileDialog.DefaultExt = "txt";
+			this.openFileDialog.FileName = "inputData";
 			this.openFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
 			this.openFileDialog.Title = "Открыть файл с данными";
 			// 
@@ -279,7 +280,7 @@ namespace CW_ThoughtsOutLoud
 			// saveFileDialog
 			// 
 			this.saveFileDialog.DefaultExt = "txt";
-			this.saveFileDialog.FileName = "CW output";
+			this.saveFileDialog.FileName = "outputData";
 			this.saveFileDialog.InitialDirectory = "C:\\Users\\fosti\\source\\repos\\Fostiriy\\University\\CW_ThoughtsOutLoud";
 			this.saveFileDialog.Title = "Сохранить текущие данные в файл";
 			// 
