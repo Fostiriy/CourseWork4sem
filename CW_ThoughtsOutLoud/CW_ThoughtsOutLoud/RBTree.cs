@@ -312,7 +312,7 @@ namespace CW_ThoughtsOutLoud
 
 			if (root == Nil)
 			{
-				result += "The tree is empty.\n";
+				result += "Дерево пусто.\n";
 			}
 			else
 			{
@@ -332,15 +332,9 @@ namespace CW_ThoughtsOutLoud
 
 			if (current != Nil)
 			{
-				result += Info(current.left, n + 1);
-
 				result += $"Ключ: {current.key}\n";
-				//if (current.color == Colour.Black)
-				//	result += $"Цвет: чёрный\n";
-				//else
-				//	result += $"Цвет: красный\n";
 				result += $"Индексы:\n{current.Data.ElementsInfo()}\n";
-
+				result += Info(current.left, n + 1);
 				result += Info(current.right, n + 1);
 			}
 

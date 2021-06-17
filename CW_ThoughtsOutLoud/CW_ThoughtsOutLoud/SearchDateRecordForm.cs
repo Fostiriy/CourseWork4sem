@@ -29,6 +29,15 @@ namespace CW_ThoughtsOutLoud
 			{
 				searchInfoRichTextBox.Text = $"Запись была найдена!\nЕё значение: {foundNode.Data}.\n";
 				searchInfoRichTextBox.Text += $"Количество сравнений при поиске: {mainWindow.dateNameBook.ComparisonsNumber}.\n";
+				int rowFoundIndex = 0;
+				foreach (DataGridViewRow row in mainWindow.currentGrid.Rows)
+				{
+					if (row.Cells[1].Value.ToString() == key)
+					{
+						rowFoundIndex = row.Index;
+					}
+				}
+				mainWindow.currentGrid.Rows[rowFoundIndex].Selected = true;
 			}
 			else
 			{
