@@ -1,39 +1,49 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CW_ThoughtsOutLoud
 {
 	// Класс узла
-	public class ListNode<Tdata>
+	public class ListNode<TData>
 	{
-		public ListNode<Tdata> Next;
-		public Tdata Data;
+		// Ссылка на следующий узел списка
+		public ListNode<TData> Next;
+		// Значение узла
+		public TData Data;
 
-		public ListNode(Tdata value)
+		// Конструктор узла по значение
+		// Формальные параметры: значение data
+		// Входные данные: пусто
+		// Выходные данные: узел списка
+		public ListNode(TData data)
 		{
-			Data = value;
+			Data = data;
 		}
 	}
 
 	// Класс односвязного списка
-	public class SingleLinkedList<Tdata> : IEnumerable<Tdata>
+	public class SingleLinkedList<TData> : IEnumerable<TData>
 	{
-		// Голова и счётчик количества узлов
-		private ListNode<Tdata> head;
+		// Голова списка
+		private ListNode<TData> head;
+		// Количество узлов в списке
 		public int Count { get; private set; } = 0;
 
 		// Очищает список
+		// Формальные параметры: список
+		// Входные данные: пусто
+		// Выходные данные: пустой список
 		public void Clear() => head = null;
 
 		// Возвращает строку, содержащую значения узлов списка по порядку
+		// Формальные параметры: список
+		// Входные данные: пусто
+		// Выходные данные: список, строка со значениями узлов
 		public string Info()
 		{
 			string result = string.Empty;
-			ListNode<Tdata> current = head;
+			ListNode<TData> current = head;
 			while (current != null)
 			{
 				result += current.Data + " -> ";
@@ -44,11 +54,14 @@ namespace CW_ThoughtsOutLoud
 			return result;
 		}
 
-		// Возвращает строку, содержащую значения узлов списка по порядку
+		// Возвращает строку, содержащую значения узлов списка на отдельных строках
+		// Формальные параметры: список
+		// Входные данные: пусто
+		// Выходные данные: список, строка со значениями узлов
 		public string ElementsInfo()
 		{
 			string result = string.Empty;
-			ListNode<Tdata> current = head;
+			ListNode<TData> current = head;
 			while (current != null)
 			{
 				result += $"{current.Data}\n";
@@ -58,13 +71,16 @@ namespace CW_ThoughtsOutLoud
 			return result;
 		}
 
-		// Возвращает адрес нужного узла по ключу
-		public ListNode<Tdata> Find(Tdata key)
+		// Возвращает адрес нужного узла по значению
+		// Формальные параметры: значение key
+		// Входные данные: список
+		// Выходные данные: список, узел списка
+		public ListNode<TData> Find(TData key)
 		{
 			if (Count == 0)
 				return null;
 
-			ListNode<Tdata> current = head;
+			ListNode<TData> current = head;
 			while (!current.Data.Equals(key))
 			{
 				current = current.Next;
@@ -76,12 +92,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает адрес нужного узла по индексу
-		public ListNode<Tdata> FindByIndex(int index)
+		public ListNode<TData> FindByIndex(int index)
 		{
 			if (index > Count || index < 0)
 				return null;
 
-			ListNode<Tdata> node = head;
+			ListNode<TData> node = head;
 			int k = 0;
 
 			while (k < index)
@@ -94,11 +110,14 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает последний узел, содержащий значение key
-		public ListNode<Tdata> FindLast(Tdata key)
+		// Формальные параметры: значение key
+		// Входные данные: список
+		// Выходные данные: список, узел списка
+		public ListNode<TData> FindLast(TData key)
 		{
-			ListNode<Tdata> result_node = null;
+			ListNode<TData> result_node = null;
 
-			for (ListNode<Tdata> node = head; node != null; node = node.Next)
+			for (ListNode<TData> node = head; node != null; node = node.Next)
 			{
 				if (node.Data.Equals(key))
 					result_node = node;
@@ -108,14 +127,17 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает адрес последнего узла (хвоста)
-		private ListNode<Tdata> FindTail()
+		// Формальные параметры: пусто
+		// Входные данные: список
+		// Выходные данные: список, хвост списка
+		private ListNode<TData> FindTail()
 		{
 			if (Count == 0)
 			{
 				return null;
 			}
 
-			ListNode<Tdata> current = head;
+			ListNode<TData> current = head;
 			while (current.Next != null)
 			{
 				current = current.Next;
@@ -124,22 +146,29 @@ namespace CW_ThoughtsOutLoud
 			return current;
 		}
 
-		public bool Contains(Tdata key)
+		// Возвращает true, если в списке есть узел с переданным значением, иначе false
+		// Формальные параметры: значение key
+		// Входные данные: список
+		// Выходные данные: список, true или false
+		public bool Contains(TData key)
 		{
 			return (Find(key) != null);
 		}
 
 		// Добавление узла в конец списка
-		public void PushBack(Tdata item)
+		// Формальные параметры: значение key
+		// Входные данные: спсок
+		// Выходные данные: список
+		public void PushBack(TData key)
 		{
-			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
+			ListNode<TData> newNode = new ListNode<TData>(key);
 			if (Count == 0)
 			{
 				head = newNode;
 			}
 			else
 			{
-				ListNode<Tdata> tail = FindTail();
+				ListNode<TData> tail = FindTail();
 				tail.Next = newNode;
 			}
 
@@ -147,9 +176,9 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Добавление узла в начало списка
-		public void PushFront(Tdata item)
+		public void PushFront(TData item)
 		{
-			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
+			ListNode<TData> newNode = new ListNode<TData>(item);
 
 			if (Count != 0)
 			{
@@ -161,12 +190,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Добавление узла после указанного узла
-		public void AddAfter(ListNode<Tdata> node, Tdata item)
+		public void AddAfter(ListNode<TData> node, TData item)
 		{
 			if (node == null)
 				return; // ничего не делаем, если адрес пустой
 
-			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
+			ListNode<TData> newNode = new ListNode<TData>(item);
 
 			newNode.Next = node.Next;
 			node.Next = newNode;
@@ -174,7 +203,7 @@ namespace CW_ThoughtsOutLoud
 			Count++;
 		}
 
-		private void AddAfter(ListNode<Tdata> nodeAfter, ListNode<Tdata> node)
+		private void AddAfter(ListNode<TData> nodeAfter, ListNode<TData> node)
 		{
 			if (nodeAfter == null)
 				return; // ничего не делаем, если адрес пустой
@@ -186,12 +215,12 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Добавление узла перед указанным узлом
-		public void AddBefore(ListNode<Tdata> node, Tdata item)
+		public void AddBefore(ListNode<TData> node, TData item)
 		{
 			if (node == null)
 				return; // ничего не делаем, если адрес пустой
 
-			ListNode<Tdata> newNode = new ListNode<Tdata>(item);
+			ListNode<TData> newNode = new ListNode<TData>(item);
 
 			if (head == node)
 			{
@@ -200,7 +229,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				ListNode<Tdata> current = head;
+				ListNode<TData> current = head;
 
 				while (current.Next != node)
 					current = current.Next;
@@ -212,13 +241,13 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Добавляет элементы переданного массива в конец
-		public void PushBackRange(Tdata[] array)
+		public void PushBackRange(TData[] array)
 		{
-			ListNode<Tdata> tail = FindTail();
+			ListNode<TData> tail = FindTail();
 
 			for (int i = 0; i < array.Length; i++)
 			{
-				ListNode<Tdata> newNode = new ListNode<Tdata>(array[i]);
+				ListNode<TData> newNode = new ListNode<TData>(array[i]);
 				if (Count == 0)
 					head = newNode;
 				else
@@ -230,6 +259,9 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Удаление первого узла
+		// Формальные параметры: пусто
+		// Входные данные: список
+		// Выходные данные: список
 		public void RemoveFirst()
 		{
 			if (Count == 0)
@@ -242,6 +274,9 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Удаление последнего узла
+		// Формальные параметры: пусто
+		// Входные данные: список
+		// Выходные данные: список
 		public void RemoveLast()
 		{
 			if (Count == 0)
@@ -255,7 +290,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				ListNode<Tdata> current = head;
+				ListNode<TData> current = head;
 				while (current.Next.Next != null)
 				{
 					current = current.Next;
@@ -268,7 +303,10 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Удаление произвольного узла
-		public void RemoveNode(ListNode<Tdata> node)
+		// Формальные параметры: узел node
+		// Входные данные: список
+		// Выходные данные: список
+		public void RemoveNode(ListNode<TData> node)
 		{
 			if (head == node)
 			{
@@ -276,7 +314,7 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				ListNode<Tdata> current = head;
+				ListNode<TData> current = head;
 				while (current.Next != node)
 				{
 					current = current.Next;
@@ -289,13 +327,16 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает true при удалении первого вхождения указанного элемента, иначе false
-		public bool Remove(Tdata item)
+		// Формальные параметры: значение key
+		// Входные данные: список
+		// Выходные данные: список, true или false
+		public bool Remove(TData key)
 		{
 			if (Count == 0)
 				throw new Exception("Список пуст");
 			if (Count == 1)
 			{
-				if (head.Data.Equals(item))
+				if (head.Data.Equals(key))
 				{
 					head = null;
 					Count--;
@@ -306,9 +347,9 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				ListNode<Tdata> current = head;
+				ListNode<TData> current = head;
 
-				if (head.Data.Equals(item))
+				if (head.Data.Equals(key))
 				{
 					head = head.Next;
 					Count--;
@@ -317,7 +358,7 @@ namespace CW_ThoughtsOutLoud
 
 				while (current.Next != null)
 				{
-					if (current.Next.Data.Equals(item))
+					if (current.Next.Data.Equals(key))
 					{
 						current.Next = current.Next.Next;
 						Count--;
@@ -330,7 +371,7 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Возвращает true при удалении последнего вхождения указанного элемента, иначе false
-		public bool RemoveLast(Tdata item)
+		public bool RemoveLast(TData item)
 		{
 			if (Count == 0)
 				throw new Exception("Список пуст");
@@ -338,8 +379,8 @@ namespace CW_ThoughtsOutLoud
 			if (Count == 1 && !head.Data.Equals(item))
 				return false;
 
-			ListNode<Tdata> current = head;
-			ListNode<Tdata> node = null;
+			ListNode<TData> current = head;
+			ListNode<TData> node = null;
 
 			while (current.Next != null)
 			{
@@ -366,10 +407,10 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Удаляет все элементы, равные переданному элементу и возвращает количество этих элементов
-		public int RemoveAll(Tdata item)
+		public int RemoveAll(TData item)
 		{
 			int k = Count; // Количество элементов в переданном списке
-			ListNode<Tdata> current = head;
+			ListNode<TData> current = head;
 
 			if (k > 2)
 			{
@@ -400,9 +441,9 @@ namespace CW_ThoughtsOutLoud
 			if (Count <= 1)
 				return;
 
-			ListNode<Tdata> prev = null;
-			ListNode<Tdata> current = head;
-			ListNode<Tdata> next = current.Next;
+			ListNode<TData> prev = null;
+			ListNode<TData> current = head;
+			ListNode<TData> next = current.Next;
 
 			while (next != null)
 			{
@@ -416,9 +457,9 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Реализация foreach
-		IEnumerator<Tdata> IEnumerable<Tdata>.GetEnumerator()
+		IEnumerator<TData> IEnumerable<TData>.GetEnumerator()
 		{
-			ListNode<Tdata> pointer = head;
+			ListNode<TData> pointer = head;
 			while (pointer != null)
 			{
 				yield return pointer.Data;
@@ -429,7 +470,7 @@ namespace CW_ThoughtsOutLoud
 		// Реализация foreach
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			ListNode<Tdata> pointer = head;
+			ListNode<TData> pointer = head;
 			while (pointer != null)
 			{
 				yield return pointer.Data;

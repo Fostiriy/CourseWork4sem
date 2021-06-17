@@ -1,13 +1,4 @@
-﻿//Красно - чёрное дерево с повторяющимися ключами. 
-//В элементе дерева хранится data: день 2 цифры, месяц 2 цифры.
-//При удалении берётся min справа элемент. 
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace CW_ThoughtsOutLoud
 {
@@ -80,7 +71,8 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: True или False
 		public bool IsEqual(RBNode<TKey, TData> node2) => key.CompareTo(node2.key) == 0;
 	}
-
+	
+	// Класс Красно-чёрного дерева, удаление min справа
 	class RBTree<TKey, TData> where TKey : IComparable
 	{
 		// Узел-корень дерева
