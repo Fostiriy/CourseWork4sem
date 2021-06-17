@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace CW_ThoughtsOutLoud
 {
-	public enum Colour // Перечислимый тип, отвечающий за цвет узла
+	// Перечислимый тип, отвечающий за цвет узла
+	public enum Colour 
 	{
 		Red, // Красный цвет
 		Black // Чёрный цвет
@@ -20,21 +21,21 @@ namespace CW_ThoughtsOutLoud
 	// Класс узла дерева
 	public class RBNode<TKey, TData> where TKey:IComparable 
 	{
-		// Поле цвета
+		// Цвет узла
 		internal Colour color;
-		// Поле-узел слева
+		// Ссылка на узел слева
 		public RBNode<TKey, TData> left;
-		// Поле-узел справа
+		// Ссылка на узел справа
 		public RBNode<TKey, TData> right;
-		// Поле-узел, являющийся родителем
+		// Ссылка на узел, являющийся родителем
 		public RBNode<TKey, TData> parent;
-		// Счётчик вставок узла с данным ключом в дерево
+		// Список значений узла
 		public SingleLinkedList<TData> Data { get; } = new SingleLinkedList<TData>();
-		// Поле данных
+		// Уникальное значение узла - его ключ
 		public TKey key;
 
-		// Конструктор узла
-		// Формальные параметры: ключ - числа day и month
+		// Конструктор узла по ключу
+		// Формальные параметры: ключ
 		// Входные данные: пусто
 		// Выходные данные: узел с заданным ключом
 		public RBNode(TKey key)
@@ -42,13 +43,17 @@ namespace CW_ThoughtsOutLoud
 			this.key = key;
 		}
 
+		// Конструктор узла по ключу и значению
+		// Формальные параметры: ключ, значение
+		// Входные данные: пусто
+		// Выходные данные: узел с заданным ключом и списком значений с переданным значением
 		public RBNode(TKey key, TData data)
 		{
 			this.key = key;
 			Data.PushBack(data);
 		}
 
-		// Конструктор узла
+		// Конструктор узла по цвету
 		// Формальные параметры: цвет узла color
 		// Входные данные: пусто
 		// Выходные данные: узел с заданным цветом
@@ -78,10 +83,15 @@ namespace CW_ThoughtsOutLoud
 
 	class RBTree<TKey, TData> where TKey : IComparable
 	{
-		private RBNode<TKey, TData> root; // Узел-корень дерева
-		private readonly RBNode<TKey, TData> nil; // Пустой узел-лист дерева
+		// Узел-корень дерева
+		private RBNode<TKey, TData> root;
+		// Пустой узел-лист дерева
+		private readonly RBNode<TKey, TData> nil;
 		public RBNode<TKey, TData> Nil => nil;
-
+		// Счётчик сравнений для операции поиска по диапазону
+		public int ComparisonsNumber { get; private set; }
+		// Список количества сравнений при поиске по диапазону
+		public SingleLinkedList<int> ComparisonsList { get; private set; }
 
 		// Конструктор дерева
 		// Формальные параметры: пусто
@@ -166,10 +176,10 @@ namespace CW_ThoughtsOutLoud
 				Y.parent = X;
 		}
 
-		// Нахождение узла с заданным ключом в дереве
-		// Формальные параметры: поля структуры ключа day и month
+		// Нахождение узла с заданным ключом и значением в дереве
+		// Формальные параметры: ключ key, значение data
 		// Входные данные: дерево
-		// Выходные данные: узел с заданным ключом
+		// Выходные данные: узел с заданным ключом и списком, содержащим значение
 		public RBNode<TKey, TData> Find(TKey key, TData data)
 		{
 			bool isFound = false;
@@ -196,6 +206,10 @@ namespace CW_ThoughtsOutLoud
 				return Nil;
 		}
 
+		// Нахождение узла с заданным ключом в дереве
+		// Формальные параметры: ключ key
+		// Входные данные: дерево
+		// Выходные данные: узел с заданным ключом
 		public RBNode<TKey, TData> Find(TKey key)
 		{
 			bool isFound = false;
@@ -223,6 +237,8 @@ namespace CW_ThoughtsOutLoud
 		public SingleLinkedList<RBNode<TKey, TData>> Search(TKey keyFrom, TKey keyTo)
 		{
 			SingleLinkedList<RBNode<TKey, TData>> result = new SingleLinkedList<RBNode<TKey, TData>>();
+			ComparisonsList = new SingleLinkedList<int>();
+			ComparisonsNumber = 0;
 
 			if (keyFrom.CompareTo(keyTo) <= 0)
 			{
@@ -240,8 +256,12 @@ namespace CW_ThoughtsOutLoud
 			if (current != Nil)
 			{
 				PushLNR(current.left, keyFrom, keyTo, result);
+				ComparisonsNumber++;
 				if (current.key.CompareTo(keyFrom) > 0 && current.key.CompareTo(keyTo) < 0)
+				{
+					ComparisonsList.PushBack(ComparisonsNumber);
 					result.PushBack(current);
+				}
 				PushLNR(current.right, keyFrom, keyTo, result);
 			}
 		}

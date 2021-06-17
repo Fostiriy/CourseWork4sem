@@ -480,6 +480,7 @@ namespace CW_ThoughtsOutLoud
 			{
 				mainGrid.Rows.Add(row);
 			}
+			ChangeDebugInfo(2);
 		}
 	}
 }

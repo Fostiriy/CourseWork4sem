@@ -69,8 +69,12 @@ namespace CW_ThoughtsOutLoud
 					}
 					else
 					{
-						MessageBox.Show("Ничего не найдено.", "Результаты поиска", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						MessageBox.Show($"Ничего не найдено. Количество сравнений при поиске: {mainWindow.dateTree.ComparisonsNumber}", 
+							"Результаты поиска", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					}
+
+					mainWindow.debugInfo[2] = "Количество сравнений в дереве по порядку (не для строк таблицы, а для узлов дерева):\n"
+						+ mainWindow.dateTree.ComparisonsList.Info();
 
 				}
 				else
