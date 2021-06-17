@@ -234,6 +234,10 @@ namespace CW_ThoughtsOutLoud
 				return Nil;
 		}
 
+		// Нахождение списка узлов, ключ которых лежит в заданнам диапазоне
+		// Формальные параметры: нижняя граница поиска ключ keyFrom, верхняя граница поиска ключ keyTo
+		// Входные данные: дерево, счётчик сравнений, список сравнений
+		// Выходные данные: список узлов, ключ которых лежит в заданнам диапазоне, счётчик сравнений, список сравнений
 		public SingleLinkedList<RBNode<TKey, TData>> Search(TKey keyFrom, TKey keyTo)
 		{
 			SingleLinkedList<RBNode<TKey, TData>> result = new SingleLinkedList<RBNode<TKey, TData>>();
@@ -251,7 +255,15 @@ namespace CW_ThoughtsOutLoud
 			return result;
 		}
 
-		private void PushLNR(RBNode<TKey, TData> current, TKey keyFrom, TKey keyTo, SingleLinkedList<RBNode<TKey, TData>> result)
+		// Рекурсивное заполнение списка узлов, ключ которых лежит в заданном диапазоне,
+		// основанное на симметричном обходе, начиная с переданного узла
+		// Формальные параметры: нижняя граница поиска ключ keyFrom, верхняя граница поиска ключ keyTo,
+		// список узлов result
+		// Входные данные: дерево, счётчик сравнений, список сравнений
+		// Выходные данные: список узлов, ключ которых лежит в заданнам диапазоне,
+		// счётчик сравнений, список количества сравнений 
+		private void PushLNR(RBNode<TKey, TData> current, TKey keyFrom, TKey keyTo, 
+			SingleLinkedList<RBNode<TKey, TData>> result)
 		{
 			if (current != Nil)
 			{
@@ -294,10 +306,10 @@ namespace CW_ThoughtsOutLoud
 			return temp;
 		}
 
-		// Нахождение узла с минимальным ключом в дереве
+		// Нахождение узла с максимальным ключом в дереве
 		// Формальные параметры: пусто
 		// Входные данные: дерево
-		// Выходные данные: узел с минимальным ключом
+		// Выходные данные: узел с максимальным ключом
 		public RBNode<TKey, TData> FindMaximum()
 		{
 			RBNode<TKey, TData> node = FindMaximum(root);
@@ -305,10 +317,10 @@ namespace CW_ThoughtsOutLoud
 			return node;
 		}
 
-		// Нахождение узла с минимальным ключом в поддереве
+		// Нахождение узла с максимальным ключом в поддереве
 		// Формальные параметры: узел-корень node поддерева
 		// Входные данные: дерево
-		// Выходные данные: узел с минимальным ключом в поддереве
+		// Выходные данные: узел с максимальным ключом в поддереве
 		public RBNode<TKey, TData> FindMaximum(RBNode<TKey, TData> node)
 		{
 			RBNode<TKey, TData> temp = node;
@@ -325,7 +337,7 @@ namespace CW_ThoughtsOutLoud
 		// Выводит значения полей узлов дерева на экран с учётом связей
 		// Формальные параметры: пусто
 		// Входные данные: дерево
-		// Выходные данные: значения узлов дерева по порядку
+		// Выходные данные: значения узлов дерева в порядке прямого обхода КЛП
 		public string Info()
 		{
 			string result = string.Empty;
@@ -336,17 +348,17 @@ namespace CW_ThoughtsOutLoud
 			}
 			else
 			{
-				result += Info(root, 0);
+				result += Info(root);
 			}
 
 			return result;
 		}
 
 		// Выводит значения полей узлов поддерева на экран с учётом связей
-		// Формальные параметры: узел-корень поддерева, число пробелов n
+		// Формальные параметры: узел-корень поддерева
 		// Входные данные: дерево
-		// Выходные данные: значения узлов поддерева по порядку
-		private string Info(RBNode<TKey, TData> current, int n)
+		// Выходные данные: значения узлов поддерева в порядке прямого обхода КЛП
+		private string Info(RBNode<TKey, TData> current)
 		{
 			string result = string.Empty;
 
@@ -354,8 +366,8 @@ namespace CW_ThoughtsOutLoud
 			{
 				result += $"Ключ: {current.key}\n";
 				result += $"Индексы:\n{current.Data.ElementsInfo()}\n";
-				result += Info(current.left, n + 1);
-				result += Info(current.right, n + 1);
+				result += Info(current.left);
+				result += Info(current.right);
 			}
 
 			return result;
@@ -517,8 +529,8 @@ namespace CW_ThoughtsOutLoud
 		}
 
 
-		// Добавляет новый узел в дерево по правилу вставки в бинарное дерево
-		// Формальные параметры: поля структуры ключа day и month
+		// Добавляет новый узел по ключу и значению в дерево по правилу вставки в бинарное дерево
+		// Формальные параметры: ключ key, значение data
 		// Входные данные: дерево
 		// Выходные данные: дерево с новым узлом, удовлетворяющее свойствам КЧ дерева
 		public void Insert(TKey key, TData data)
@@ -554,18 +566,6 @@ namespace CW_ThoughtsOutLoud
 			Z.color = Colour.Red; // colour the new node red
 
 			InsertFixUp(Z); // call method to check for violations and fix
-		}
-
-		// Добавляет новый узел в дерево по правилу вставки в бинарное дерево и выводит дерево на экран
-		// Формальные параметры: поля структуры ключа day и month
-		// Входные данные: дерево
-		// Выходные данные: дерево с новым узлом, удовлетворяющее свойствам КЧ дерева,
-		//					и его изображение на экране
-		public void InsertAndDisplay(TKey key, TData data)
-		{
-			Console.WriteLine("Inserting {0} with data {1}", key, data);
-			this.Insert(key, data);
-			this.Info();
 		}
 
 		// Проверяет, нарушены ли свойства КЧ дерева после вставки узла, и исправляет нарушения
@@ -647,6 +647,12 @@ namespace CW_ThoughtsOutLoud
 			Y.parent = X.parent;
 		}
 
+		// Удаляет при нахождении узел из дерева по правилу удаления в бинарном дереве
+		// или удаляет лишь значение data из списка значений узла
+		// и возвращает список значений узла
+		// Формальные параметры: ключ key, значение data
+		// Входные данные: дерево
+		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
 		public SingleLinkedList<TData> Delete(TKey key, TData data)
 		{
 			RBNode<TKey, TData> Z = Find(key, data);
@@ -654,6 +660,11 @@ namespace CW_ThoughtsOutLoud
 			return Z.Data;
 		}
 
+		// Удаляет при нахождении узел из дерева по правилу удаления в бинарном дереве
+		// и возвращает список значений узла
+		// Формальные параметры: ключ key
+		// Входные данные: дерево
+		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
 		public SingleLinkedList<TData> Delete(TKey key)
 		{
 			RBNode<TKey, TData> Z = Find(key);
@@ -662,9 +673,9 @@ namespace CW_ThoughtsOutLoud
 		}
 
 		// Удаляет узел из дерева по правилу удаления в бинарном дереве или удаляет лишь индекс data
-		// Формальные параметры: узел Z дерева
+		// Формальные параметры: узел Z дерева, значение data
 		// Входные данные: дерево
-		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
+		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
 		public void Delete(RBNode<TKey, TData> Z, TData data)
 		{
 			RBNode<TKey, TData> Y = Z;
@@ -724,7 +735,7 @@ namespace CW_ThoughtsOutLoud
 		// Удаляет узел из дерева по правилу удаления в бинарном дереве
 		// Формальные параметры: узел Z дерева
 		// Входные данные: дерево
-		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева
+		// Выходные данные: дерево, удовлетворяющее свойствам КЧ дерева
 		public void Delete(RBNode<TKey, TData> Z)
 		{
 			RBNode<TKey, TData> Y = Z;
@@ -774,20 +785,6 @@ namespace CW_ThoughtsOutLoud
 
 			if (SavedColor == Colour.Black)
 				DeleteFixUp(X);
-		}
-
-		// Удаляет узел из дерева по правилу удаления в бинарном дереве
-		// Формальные параметры: поля структуры ключа day и month
-		// Входные данные: дерево
-		// Выходные данные: дерево без узла, удовлетворяющее свойствам КЧ дерева,
-		//					и его изображение на экране
-		public SingleLinkedList<TData> DeleteAndDisplay(TKey key, TData data)
-		{
-			Console.WriteLine("Deleting {0} with data {1}", key, data);
-			var result = this.Delete(key, data);
-			this.Info();
-
-			return result;
 		}
 
 		// Проверяет, нарушены ли свойства КЧ дерева после удаления узла, и исправляет нарушения
