@@ -14,8 +14,8 @@
       <FileName>HashTable.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CW_ThoughtsOutLoud.ListNode&lt;Tdata&gt;">
-    <Position X="8.25" Y="5.5" Width="1.5" />
+  <Class Name="CW_ThoughtsOutLoud.ListNode&lt;TData&gt;">
+    <Position X="8.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>SingleLinkedList.cs</FileName>
@@ -31,32 +31,33 @@
   <Class Name="CW_ThoughtsOutLoud.RBTree&lt;TKey, TData&gt;">
     <Position X="1.25" Y="0.75" Width="1.75" />
     <Members>
-      <Method Name="DeleteAndDisplay" Hidden="true" />
       <Method Name="InfoLikeTree" Hidden="true" />
-      <Method Name="InsertAndDisplay" Hidden="true" />
       <Method Name="TraversalLNR" Hidden="true" />
       <Method Name="TraversalLRN" Hidden="true" />
       <Method Name="TraversalNLR" Hidden="true" />
       <Method Name="TraversalRNL" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAIEgAACCACAAAgAggAAEIAAEoAQAACICAgEBiAAQ=</HashCode>
+      <HashCode>AAAAAEgAACCACAAAgAggAAEIAQEoAQAACICAAEBiAAw=</HashCode>
       <FileName>RBTree.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CW_ThoughtsOutLoud.SingleLinkedList&lt;Tdata&gt;">
+  <Class Name="CW_ThoughtsOutLoud.SingleLinkedList&lt;TData&gt;">
     <Position X="8.25" Y="0.75" Width="2" />
     <Members>
       <Method Name="AddAfter" Hidden="true" />
       <Method Name="AddBefore" Hidden="true" />
       <Method Name="FindByIndex" Hidden="true" />
+      <Method Name="FindLast" Hidden="true" />
+      <Method Name="IEnumerable.GetEnumerator" Hidden="true" />
+      <Method Name="IEnumerable&lt;TData&gt;.GetEnumerator" Hidden="true" />
       <Method Name="PushBackRange" Hidden="true" />
       <Method Name="PushFront" Hidden="true" />
       <Method Name="RemoveAll" Hidden="true" />
       <Method Name="Reverse" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>IASIAAAAgAAAAAEAAAAADAQAEAAYAAAEIEECAEBQCAA=</HashCode>
+      <HashCode>IASIAAAAgAAAAAEAIAAABAQAEAAYAAAEIEECAEBQCAA=</HashCode>
       <FileName>SingleLinkedList.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

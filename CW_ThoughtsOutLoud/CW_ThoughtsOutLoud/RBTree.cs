@@ -357,6 +357,7 @@ namespace CW_ThoughtsOutLoud
 			if (current != Nil)
 			{
 				result += $"Ключ: {current.key}\n";
+				result += $"Цвет: {current.color}\n";
 				result += $"Индексы:\n{current.Data.ElementsInfo()}\n";
 				result += Info(current.left);
 				result += Info(current.right);
