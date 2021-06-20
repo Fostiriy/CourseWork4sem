@@ -46,11 +46,7 @@ namespace CW_ThoughtsOutLoud
 				&& key2 != string.Empty && data2 != string.Empty)
 			{
 				int gridIndex = mainWindow.currentGrid.Rows.Add(data1, key1, key2, data2);
-				key1 = key1.Replace(" ", "");
-				key1 = key1.Replace("\t", "");
-				key1 = key1.Replace(".", "");
-				key1 = key1.Replace(":", "");
-				mainWindow.dateTree.Insert(double.Parse(key1), mainWindow.currentGrid.Rows[gridIndex]);
+				mainWindow.dateTree.Insert(mainWindow.ConvertToTreeKey(key1), mainWindow.currentGrid.Rows[gridIndex]);
 				mainWindow.ChangeDebugInfo(2);
 			}
 			else

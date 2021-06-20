@@ -29,7 +29,7 @@ namespace CW_ThoughtsOutLoud
 			{
 				searchInfoRichTextBox.Text = $"Запись была найдена!\nЕё значение: {foundNode.Data}.\n";
 				searchInfoRichTextBox.Text += $"Количество сравнений при поиске: {mainWindow.dateNameBook.ComparisonsNumber}.\n";
-				int rowFoundIndex = 0;
+				int rowFoundIndex = -1;
 				foreach (DataGridViewRow row in mainWindow.currentGrid.Rows)
 				{
 					if (row.Cells[1].Value.ToString() == key)
@@ -37,11 +37,15 @@ namespace CW_ThoughtsOutLoud
 						rowFoundIndex = row.Index;
 					}
 				}
-				mainWindow.currentGrid.Rows[rowFoundIndex].Selected = true;
+				if (rowFoundIndex != -1)
+				{
+					mainWindow.currentGrid.Rows[rowFoundIndex].Selected = true;
+				}
 			}
 			else
 			{
-				searchInfoRichTextBox.Text = "Записи с таким ключом нет в справочнике.";
+				searchInfoRichTextBox.Text = "Записи с таким ключом нет в справочнике.\n";
+				searchInfoRichTextBox.Text += $"Количество сравнений при поиске: {mainWindow.dateNameBook.ComparisonsNumber}.\n";
 			}
 		}
 

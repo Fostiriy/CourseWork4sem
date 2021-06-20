@@ -87,12 +87,23 @@ namespace CW_ThoughtsOutLoud
 
 			for (int i = 0; i < Size; i++)
 			{
-				if (items[i] != null && !items[i].wasDeleted)
+				if (items[i] != null)
 				{
-					result[k] = $"Значение: {items[i].Data}\n" +
-						$"Ключ: {items[i].Key,-14} ({ConvertToNumber(items[i].Key)})\n" +
-						$"Индекс: {i}\n" +
-						$"Хеш: {GetHashCode(items[i].Key)}\n";
+					if (!items[i].wasDeleted)
+					{
+						result[k] = $"Значение: {items[i].Data}\n" +
+							$"Ключ: {items[i].Key,-14} ({ConvertToNumber(items[i].Key)})\n" +
+							$"Индекс: {i}\n" +
+							$"Хеш: {GetHashCode(items[i].Key)}\n";
+						
+					}
+					else
+					{
+						result[k] = $"Удалено!\n/Значение: {items[i].Data}/\n" +
+							$"/Ключ: {items[i].Key,-14} ({ConvertToNumber(items[i].Key)})/\n" +
+							$"/Индекс: {i}/\n" +
+							$"/Хеш: {GetHashCode(items[i].Key)}/\n";
+					}
 					k++;
 				}
 			}
@@ -207,18 +218,20 @@ namespace CW_ThoughtsOutLoud
 		// Выходные данные: элемент хеш-таблицы, содержащий заданный ключ
 		public HTNode<TKey, TData> Search(TKey key)
 		{
-			ComparisonsNumber = 0;
+			ComparisonsNumber = 1;
 			var hashCode = GetHashCode(key);
 			HTNode<TKey, TData> result = null;
 
 			if (items[hashCode] == null)
 			{
-				Console.WriteLine("Элемента с ключом {0} нет в массиве", key);
+				Console.WriteLine($"Элемента с ключом {key} нет в хеш-таблице.");
 			}
 			else if (items[hashCode].Key.Equals(key))
 			{
-				ComparisonsNumber++;
-				return items[hashCode];
+				if (!items[hashCode].wasDeleted)
+				{
+					result = items[hashCode];
+				}
 			}
 			else
 			{

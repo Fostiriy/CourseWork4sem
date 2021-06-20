@@ -261,7 +261,7 @@ namespace CW_ThoughtsOutLoud
 			{
 				PushLNR(current.left, keyFrom, keyTo, result);
 				ComparisonsNumber++;
-				if (current.key.CompareTo(keyFrom) > 0 && current.key.CompareTo(keyTo) < 0)
+				if (current.key.CompareTo(keyFrom) >= 0 && current.key.CompareTo(keyTo) <= 0)
 				{
 					ComparisonsList.PushBack(ComparisonsNumber);
 					result.PushBack(current);

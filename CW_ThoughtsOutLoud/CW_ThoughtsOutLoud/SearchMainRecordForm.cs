@@ -66,20 +66,18 @@ namespace CW_ThoughtsOutLoud
 
 						mainWindow.showAllButton.Enabled = !mainWindow.showAllButton.Enabled;
 						mainWindow.bookWorkingBox.Enabled = !mainWindow.bookWorkingBox.Enabled;
+						mainWindow.debugInfo[2] = "Количество сравнений в дереве по порядку (не для строк таблицы, а для узлов дерева):\n"
+						+ mainWindow.dateTree.ComparisonsList.Info();
 					}
 					else
 					{
 						MessageBox.Show($"Ничего не найдено. Количество сравнений при поиске: {mainWindow.dateTree.ComparisonsNumber}", 
 							"Результаты поиска", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					}
-
-					mainWindow.debugInfo[2] = "Количество сравнений в дереве по порядку (не для строк таблицы, а для узлов дерева):\n"
-						+ mainWindow.dateTree.ComparisonsList.Info();
-
 				}
 				else
 				{
-					MessageBox.Show("Неверно задан диапазон. Дата и время первой строки должны предшествовать дате и времени второй строки" +
+					MessageBox.Show("Неверно задан диапазон. Дата и время первой строки должны предшествовать дате и времени второй строки " +
 						"или совпадать с ними.", "Ошибка в диапазоне", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
