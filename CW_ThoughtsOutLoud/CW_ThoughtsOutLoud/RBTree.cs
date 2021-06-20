@@ -259,14 +259,16 @@ namespace CW_ThoughtsOutLoud
 		{
 			if (current != Nil)
 			{
-				PushLNR(current.left, keyFrom, keyTo, result);
+				if (current.left.key.CompareTo(keyFrom) >= 0)
+					PushLNR(current.left, keyFrom, keyTo, result);
 				ComparisonsNumber++;
 				if (current.key.CompareTo(keyFrom) >= 0 && current.key.CompareTo(keyTo) <= 0)
 				{
 					ComparisonsList.PushBack(ComparisonsNumber);
 					result.PushBack(current);
 				}
-				PushLNR(current.right, keyFrom, keyTo, result);
+				if (current.right.key.CompareTo(keyTo) <= 0)
+					PushLNR(current.right, keyFrom, keyTo, result);
 			}
 		}
 
