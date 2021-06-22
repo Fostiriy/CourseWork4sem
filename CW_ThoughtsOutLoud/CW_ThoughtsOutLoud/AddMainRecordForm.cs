@@ -45,6 +45,19 @@ namespace CW_ThoughtsOutLoud
 			if (key1 != string.Empty && data1 != string.Empty
 				&& key2 != string.Empty && data2 != string.Empty)
 			{
+				var nodeFound = mainWindow.dateTree.Find(mainWindow.ConvertToTreeKey(key1));
+				if (nodeFound != mainWindow.dateTree.Nil)
+				{
+					foreach (DataGridViewRow row in nodeFound.Data)
+					{
+						if (row.Cells[2].Value.ToString() == key2)
+						{
+							MessageBox.Show("Такая запись уже есть в справочнике!", "Добавление дубликата",
+								MessageBoxButtons.OK, MessageBoxIcon.Error);
+							return;
+						}
+					}
+				}
 				int gridIndex = mainWindow.currentGrid.Rows.Add(data1, key1, key2, data2);
 				mainWindow.dateTree.Insert(mainWindow.ConvertToTreeKey(key1), mainWindow.currentGrid.Rows[gridIndex]);
 				mainWindow.ChangeDebugInfo(2);

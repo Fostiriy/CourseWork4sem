@@ -134,13 +134,28 @@ namespace CW_ThoughtsOutLoud
 								string[] info = line.Split('|');
 
 								string data1 = info[0].Trim('\t', ' ');
-								string key1 = info[1];
+								string key1 = info[1].Trim('\t', ' ');
 
 								string key2 = info[2].Trim('\t', ' ');
 								string data2 = info[3].Trim('\t', ' ');
 
 								if (dateNameBook.Search(key1) != null && categoryColorBook.Search(key2) != null) // Егору поменять на свой справочник
 								{
+									var nodeFound = dateTree.Find(ConvertToTreeKey(key1));
+									if (nodeFound != dateTree.Nil)
+									{
+										foreach (DataGridViewRow row in nodeFound.Data)
+										{
+											if (row.Cells[2].Value.ToString() == key2)
+											{
+												MessageBox.Show("Такая запись уже есть в справочнике!", "Добавление дубликата",
+													MessageBoxButtons.OK, MessageBoxIcon.Error);
+												mainGrid.Rows.Clear();
+												dateTree.Clear();
+												return;
+											}
+										}
+									}
 									int gridIndex = mainGrid.Rows.Add(data1, key1, key2, data2);
 									dateTree.Insert(ConvertToTreeKey(key1), mainGrid.Rows[gridIndex]);
 									// Дерево Егора
